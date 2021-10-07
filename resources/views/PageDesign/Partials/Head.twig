@@ -1,0 +1,965 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="plentymarkets"/>
+
+{% if ceresConfig.global.favicon is empty %}
+    {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
+{% else %}
+    {% set favicon = ceresConfig.global.favicon %}
+{% endif %}
+
+<link rel="icon" type="img/ico" href="{{ favicon }}">
+
+{% set canonicalUrl = services.url.getCanonicalURL() %}
+{% set languageUrls = services.url.getLanguageURLs() %}
+
+{% if canonicalUrl is not null %}
+    <link rel="canonical" href="{{ canonicalUrl  ~ services.url.getCanonicalQueryString() }}">
+{% endif %}
+
+{% if services.url.isCanonical() %}
+    {% for language, url in languageUrls %}
+        <link rel="alternate" hreflang="{{ language }}" href="{{ url }}"/>
+    {% endfor %}
+{% endif %}
+
+{% if services.template.isHome() or services.template.getCurrentTemplate() == 'tpl.category.item' %}
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/tiny-slider@2.9.3/dist/tiny-slider.min.js"></script>
+    <!--[if (lt IE 9)]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.helper.ie8.js"></script><![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+{% endif %}
+
+<style data-font="Custom-Font">
+    {% set customFont =
+        {
+            regular: config('Ceres.custom-font-regular'),
+            bold: config('Ceres.custom-font-bold'),
+            italic: config('Ceres.custom-font-italic'),
+            boldItalic: config('Ceres.custom-font-bold-italic')
+        }
+    %}
+
+    {% if customFont.regular %}
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.regular }}");
+    }
+
+    {% endif %}
+    {% if customFont.bold %}
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.bold }}");
+        font-weight: bold;
+    }
+
+    {% endif %}
+    {% if customFont.italic %}
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.italic }}");
+        font-style: italic;
+    }
+
+    {% endif %}
+    {% if customFont.boldItalic %}
+    @font-face {
+        font-family: "Custom-Font";
+        src: url("{{ customFont.boldItalic }}");
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    {% endif %}
+
+    {# FIX: do not display icons until fontawesome is loaded #}
+    .icons-loading .fa {
+        visibility: hidden !important;
+    }
+</style>
+
+{% set iconCSS = plugin_path("Ceres") ~ "/css/ceres-icons.css" %}
+{# asynchronously load icons.css #}
+<link rel="preload" href="{{ iconCSS }}" as="style" onload="this.onload=null;this.rel='stylesheet';">
+{# fallback for disabled javascript #}
+<noscript>
+    <link rel="stylesheet" href="{{ iconCSS }}">
+</noscript>
+
+{% set defaultCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".css?v=" ~ buildHash %}
+{% set defaultSCSS = plugin_path("Ceres") ~ "/css/" ~ assetName ~ ".scss?v=" ~ buildHash %}
+
+<link rel="preload" as="style" href="{{ defaultCSS }}">
+{% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
+    <link rel="stylesheet"
+          href="{{ defaultCSS }}"{% if isShopBuilder %} data-sass-root="{{ plugin_path('Ceres') }}" data-sass-original="{{ defaultSCSS }}"{% endif %}>
+{% endif %}
+
+{% if isShopBuilder %}
+    <link rel="stylesheet" href="{{ plugin_path("Ceres") }}/css/ceres-shopbuilder.css?v={{ buildHash }}">
+{% endif %}
+
+{# add preload polyfill #}
+<script type="application/javascript">
+    /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+    /* This file is meant as a standalone workflow for
+    - testing support for link[rel=preload]
+    - enabling async CSS loading in browsers that do not support rel=preload
+    - applying rel preload css once loaded, whether supported or not.
+    */
+    (function (w) {
+        "use strict";
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {
+            };
+        }
+        // define on the loadCSS obj
+        var rp = loadCSS.relpreload = {};
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret;
+            try {
+                ret = w.document.createElement("link").relList.supports("preload");
+            } catch (e) {
+                ret = false;
+            }
+            return function () {
+                return ret;
+            };
+        })();
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || "all";
+
+            function enableStylesheet() {
+                // unbind listeners
+                if (link.addEventListener) {
+                    link.removeEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.detachEvent("onload", enableStylesheet);
+                }
+                link.setAttribute("onload", null);
+                link.media = finalMedia;
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener("load", enableStylesheet);
+            } else if (link.attachEvent) {
+                link.attachEvent("onload", enableStylesheet);
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = "stylesheet";
+                link.media = "only x";
+            });
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000);
+        };
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return;
+            }
+            var links = w.document.getElementsByTagName("link");
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i];
+                // qualify links to those with rel=preload and as=style attrs
+                if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                    // prevent rerunning on link
+                    link.setAttribute("data-loadcss", true);
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link);
+                }
+            }
+        };
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly();
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500);
+            if (w.addEventListener) {
+                w.addEventListener("load", function () {
+                    rp.poly();
+                    w.clearInterval(run);
+                });
+            } else if (w.attachEvent) {
+                w.attachEvent("onload", function () {
+                    rp.poly();
+                    w.clearInterval(run);
+                });
+            }
+        }
+
+
+        // commonjs
+        if (typeof exports !== "undefined") {
+            exports.loadCSS = loadCSS;
+        } else {
+            w.loadCSS = loadCSS;
+        }
+    }(typeof global !== "undefined" ? global : this));
+
+    if (document.fonts) {
+        document.fonts.addEventListener("loadingdone", function (evt) {
+            if (document.fonts.check("1em FontAwesome")) {
+                document.documentElement.classList.remove('icons-loading');
+            }
+        });
+
+        window.addEventListener("load", function (evt) {
+            if (document.fonts.check("1em FontAwesome")) {
+                document.documentElement.classList.remove('icons-loading');
+            }
+        });
+    } else {
+        document.documentElement.classList.remove('icons-loading');
+    }
+</script>
+<script type="text/javascript">
+    var speedKit = {
+        appName: 'morgenland',
+        whitelist: [
+            /* START Default Whitelist + Third Party Content */
+            {
+                host: [
+                    /morgenland\-teppiche\.de$/,
+                    "cdn02.plentymarkets.com",
+                    "x.klarnacdn.net",
+                    "fonts.gstatic.com",
+                    "static-eu.payments-amazon.com",
+                    "d23yuld0pofhhw.cloudfront.net"
+                ]
+            },
+            {
+                url: [
+                    "cdn02.plentymarkets.com/6wg68w8zahno/plugin/94/amazonloginandpay/css/amz-main.min.css",
+                    "cdn02.plentymarkets.com/6wg68w8zahno/plugin/94/amazonloginandpay/js/amz-main.min.js",
+                    "www.googletagmanager.com/gtm.js",
+                    "www.google-analytics.com/analytics.js"
+                ]
+            }
+            /* END Default Whitelist */
+        ],
+        blacklist: [
+            /* START Default Blacklist */
+            {
+                url: /\.pdf/
+            },
+            {
+                contentType: [
+                    "video"
+                ]
+            },
+            /* END Default Blacklist */
+        ],
+    };
+    !function (e, n, t, r, i, a, o) {
+        "use strict";
+        var s = "baqend-speedkit", d = s + "-store", c = s + "-user-id", u = s + "-session-id",
+            p = s + "-session-index", l = s + "-ab-test-id", f = s + "-session-timestamp", g = s + "-group",
+            v = s + "-ab-test-info", h = s + "-secondary-ab-test-info", m = s + "-rum-opt-out",
+            S = "/com.baqend.speedkit.cookie", w = "/com.baqend.speedkit.config", y = "/com.baqend.speedkit.screen",
+            b = "/com.baqend.speedkit.denied", E = "init-cache";
+
+        function C(e, n, t, r) {
+            return Promise.resolve(e).then(function (e) {
+                return new Promise(function (i, a) {
+                    var o = e.transaction(n, t), s = Promise.resolve(r(o.objectStore(n)));
+                    o.oncomplete = function () {
+                        return s.then(i)
+                    }, o.onabort = o.onerror = function () {
+                        return a(o.error)
+                    }
+                })
+            })
+        }
+
+        function I(e, n, t) {
+            return C(e, n, "readwrite", t)
+        }
+
+        var N, P, k, T, D, O = function () {
+            function e() {
+                this.dbp = null, this.dbp = this.openDb()
+            }
+
+            return e.prototype.get = function (e) {
+                return (n = this.db(), t = d, r = function (n) {
+                    return n.get(e)
+                }, C(n, t, "readonly", r)).then(function (e) {
+                    return e.result || null
+                });
+                var n, t, r
+            }, e.prototype.set = function (e, n) {
+                return I(this.db(), d, function (t) {
+                    return t.put(n, e) && void 0
+                })
+            }, e.prototype.clear = function () {
+                return Promise.all([(e = this.db(), n = d, I(e, n, function (e) {
+                    return e.clear()
+                }).then(function () {
+                }))]).then(function () {
+                });
+                var e, n
+            }, e.prototype.disconnect = function () {
+                var e = this;
+                return this.dbp ? this.dbp.then(function (n) {
+                    e.dbp = null, n.close()
+                }) : Promise.resolve()
+            }, e.prototype.db = function () {
+                return this.dbp || (this.dbp = this.openDb()), this.dbp
+            }, e.prototype.openDb = function () {
+                var e = this, n = indexedDB.open(s, 1);
+                return n.onupgradeneeded = function (e) {
+                    var t = e.oldVersion, r = n.result;
+                    t < 1 && r.createObjectStore(d)
+                }, this.openRequest(n).then(function (n) {
+                    return n.onclose = function () {
+                        e.dbp = null
+                    }, n.onerror = function () {
+                        e.dbp = null
+                    }, n.onversionchange = function (t) {
+                        t.newVersion || (e.dbp = null, n.close())
+                    }, n
+                })
+            }, e.prototype.openRequest = function (e) {
+                return new Promise(function (n, t) {
+                    e.onsuccess = function () {
+                        return n(e.result)
+                    }, e.onerror = function () {
+                        return t(e.error)
+                    }, e.onblocked = function () {
+                        return t(e.error)
+                    }
+                })
+            }, e
+        }();
+        !function () {
+            function e() {
+                this.map = new Map
+            }
+
+            e.prototype.get = function (e) {
+                return Promise.resolve(this.map.get(e) || null)
+            }, e.prototype.set = function (e, n) {
+                return this.map.set(e, n), Promise.resolve()
+            }, e.prototype.clear = function () {
+                return this.map.clear(), Promise.resolve()
+            }
+        }();
+
+        function L(n) {
+            "complete" !== e.readyState ? window.addEventListener("load", n) : n()
+        }
+
+        function R(e, t) {
+            if (n.sendBeacon) n.sendBeacon(e, t); else {
+                var r = new XMLHttpRequest;
+                r.open("POST", e, !0), r.send(t)
+            }
+        }
+
+        function B(e) {
+            return parseFloat((1 - e).toFixed(2))
+        }
+
+        function x(t) {
+            var i = !!r.secondaryGroup, a = i ? t.group + "-" + r.secondaryGroup : t.group,
+                o = i ? t.splitTestId + "-" + r.secondaryTestId : t.splitTestId, s = new FormData;
+            if (s.append("id", t.navigateId), s.append("executionTime", "" + t.executionTime), s.append("url", location.href), s.append("userId", "" + t.userId), s.append("sessionId", "" + t.sessionId), s.append("sessionIndex", "" + t.sessionIndex), s.append("swSupported", "" + t.swSupported), s.append("disabled", "" + t.disabled), s.append("swResponse", "" + t.lastNavigate.swResponse), s.append("userAgent", "" + n.userAgent), s.append("browser", t.lastNavigate.browser + " " + t.lastNavigate.browserVersion), s.append("referrer", "" + e.referrer), s.append("testId", "" + o), s.append("group", "" + a), s.append("cacheHit", "" + t.lastNavigate.cacheHit), s.append("firstLoad", "" + t.lastNavigate.firstLoad), s.append("responseSource", "" + t.lastNavigate.responseSource), s.append("responseCause", "" + t.lastNavigate.responseCause), s.append("controllingSW", "" + t.controllingServiceWorker), "number" == typeof t.split) {
+                var d = "A" === t.group && "number" == typeof r.secondarySplit ? "B" === r.secondaryGroup ? B(r.secondarySplit) : r.secondarySplit : 1;
+                s.append("split", "" + t.split * d)
+            }
+            t.lastNavigate.splitTestId !== t.splitTestId && s.append("actualTestId", "" + t.lastNavigate.splitTestId), t.lastNavigate.group !== t.group && s.append("actualGroup", "" + t.lastNavigate.group), t.lastNavigate.disconnectCause !== N.None && t.lastNavigate.disconnectCause !== N.DashboardDisabled && s.append("disconnectCause", "" + t.lastNavigate.disconnectCause), function (e) {
+                if (void 0 !== window.performance) {
+                    var n = performance.timing;
+                    e.append("navigationStart", "" + n.navigationStart), e.append("unloadEventStart", "" + n.unloadEventStart), e.append("unloadEventEnd", "" + n.unloadEventEnd), e.append("domainLookupStart", "" + n.domainLookupStart), e.append("domainLookupEnd", "" + n.domainLookupEnd), e.append("connectStart", "" + n.connectStart), e.append("secureConnectionStart", "" + (n.secureConnectionStart || -1)), e.append("connectEnd", "" + n.connectEnd), e.append("redirectStart", "" + n.redirectStart), e.append("redirectEnd", "" + n.redirectEnd), e.append("requestStart", "" + n.requestStart), e.append("fetchStart", "" + n.fetchStart), e.append("responseStart", "" + n.responseStart), e.append("responseEnd", "" + n.responseEnd), e.append("domLoading", "" + n.domLoading), e.append("domContentLoadedEventStart", "" + n.domContentLoadedEventStart), e.append("domContentLoadedEventEnd", "" + n.domContentLoadedEventEnd), e.append("domComplete", "" + n.domComplete), e.append("domInteractive", "" + n.domInteractive), e.append("loadEventStart", "" + n.loadEventStart), e.append("loadEventEnd", "" + n.loadEventEnd)
+                }
+                if ("undefined" != typeof PerformancePaintTiming) {
+                    var t = performance.getEntriesByType("paint");
+                    if (t && t.length) {
+                        var r = t.find(function (e) {
+                            return "first-paint" === e.name
+                        }), i = t.find(function (e) {
+                            return "first-contentful-paint" === e.name
+                        });
+                        e.append("firstPaint", "" + (r ? Math.round(r.startTime) : -1)), e.append("firstContentfulPaint", "" + (i ? Math.round(i.startTime) : -1))
+                    }
+                } else if (void 0 !== window.performance) {
+                    var a = performance.timing.navigationStart, o = performance.timing.msFirstPaint;
+                    o && (e.append("firstPaint", "" + (o - a)), e.append("firstContentfulPaint", "" + (o - a)))
+                }
+            }(s), function (e, n) {
+                null !== e.lastNavigate.fromOrigin && n.append("fromOrigin", "" + e.lastNavigate.fromOrigin);
+                null !== e.lastNavigate.backendCacheHit && n.append("backendCacheHit", "" + e.lastNavigate.backendCacheHit);
+                e.lastNavigate.cdnCacheHit && n.append("cdnCacheHit", "" + e.lastNavigate.cdnCacheHit);
+                e.lastNavigate.cdnBackendTime && n.append("cdnBackendTime", "" + e.lastNavigate.cdnBackendTime);
+                e.lastNavigate.cdnPoP && n.append("cdnPoP", "" + e.lastNavigate.cdnPoP)
+            }(t, s), function (e, n) {
+                var t = e.lastNavigate ? e.lastNavigate.timings : null;
+                if (!t) return;
+                t.eventStart && n.append("speedKitEventStart", "" + t.eventStart);
+                t.handleStart && n.append("speedKitHandleStart", "" + t.handleStart);
+                t.handleEnd && n.append("speedKitHandleEnd", "" + t.handleEnd);
+                t.cacheStart && n.append("speedKitCacheStart", "" + t.cacheStart);
+                t.cacheEnd && n.append("speedKitCacheEnd", "" + t.cacheEnd);
+                t.fetchStart && n.append("speedKitFetchStart", "" + t.fetchStart);
+                t.fetchEnd && n.append("speedKitFetchEnd", "" + t.fetchEnd)
+            }(t, s), R(r.appURL + "/db/speedKit.Metric", s)
+        }
+
+        function K(e) {
+            var n, t = !1, r = !1, i = !1, a = !0, o = function () {
+                t && r && i && a && (a = !1, x(e))
+            }, s = function () {
+                a && (a = !1, x(e))
+            };
+            L(function () {
+                setTimeout(function () {
+                    t = !0, o()
+                })
+            }), function (e, n) {
+                "complete" !== e.readyState ? window.addEventListener("speed-kit-completed", n, {once: !0}) : n()
+            }(e, function () {
+                r = !0, o()
+            }), n = function () {
+                i = !0, o()
+            }, "undefined" != typeof PerformancePaintTiming && performance.getEntriesByType("paint").length > 0 ? n() : "undefined" == typeof PerformanceObserver || "undefined" == typeof PerformancePaintTiming ? n() : new PerformanceObserver(n).observe({entryTypes: ["paint"]}), window.addEventListener("beforeunload", s), window.addEventListener("unload", s)
+        }
+
+        function M(n) {
+            "complete" !== n.readyState && setTimeout(function () {
+                var t, r, i, a;
+                n.readyState = "complete", t = "speed-kit-completed", r = window, void 0 === i && (i = {}), "function" == typeof CustomEvent ? a = new CustomEvent(t, {detail: i}) : (a = e.createEvent("CustomEvent")).initCustomEvent(t, !0, !0, i), r.dispatchEvent(a)
+            })
+        }
+
+        function F(e, n, t, r) {
+            void 0 === r && (r = 1e3);
+            var i = !1;
+            return t && setTimeout(function () {
+                return i ? null : t()
+            }, r), new Promise(function (t, r) {
+                var a = new MessageChannel, o = a.port1, s = a.port2;
+                o.onmessage = function (e) {
+                    i = !0, t(e.data)
+                }, o.onmessageerror = function (e) {
+                    return r(e.data)
+                }, e.postMessage(n, [s])
+            })
+        }
+
+        function H(n, t) {
+            F(n, {type: "get-navigate-info", clientURL: location.href}, function () {
+                var n = e.querySelector("html.speed-kit-dynamic-loaded, html.speed-kit-dynamic-loading");
+                t.lastNavigate.responseSource = n ? D.AssetAPI : D.Origin, t.lastNavigate.responseCause = k.NoSwResponse, M(t)
+            }).then(function (e) {
+                !function (e, n) {
+                    if (!n) return;
+                    if ("reason" in n) return e.lastNavigate.applicationState = n.applicationState, e.lastNavigate.errorMessage = n.reason, void (n.applicationState === P.FAILED ? e.lastNavigate.responseCause = k.SwFailed : e.lastNavigate.swResponse = !0);
+                    if ("wasCacheHit" in n) return e.wasServed = !0, void (e.wasCacheHit = n.wasCacheHit);
+                    e.wasServed = n.responseSource !== D.Origin, e.wasCacheHit = n.cacheHit, e.lastNavigate = n, e.lastNavigate.applicationState = P.RUNNING, e.lastNavigate.firstLoad = !1, e.lastNavigate.swResponse = !0, e.lastNavigate.responseCause = n.responseCause, e.lastNavigate.responseSource = n.responseSource, e.lastNavigate.originStatus = n.originStatus, e.lastNavigate.fromOrigin = void 0 === n.fromOrigin ? null : n.fromOrigin, e.lastNavigate.backendCacheHit = void 0 === n.backendCacheHit ? null : n.backendCacheHit, e.lastNavigate.disconnectCause = n.disconnectCause
+                }(t, e), M(t)
+            })
+        }
+
+        function U(e) {
+            return fetch(r.appURL + "/config/VAPIDPublicKey").then(function (e) {
+                return e.arrayBuffer()
+            }).then(function (e) {
+                return {applicationServerKey: e, userVisibleOnly: !0}
+            }).then(function (n) {
+                return e.subscribe(n)
+            }).then(function (e) {
+                var n = {subscription: e, devicetype: "WebPush"};
+                return fetch(r.appURL + "/db/Device/register", {
+                    method: "POST",
+                    credentials: "include",
+                    body: JSON.stringify(n),
+                    headers: {"Content-Type": "application/json"}
+                })
+            }).then(function (e) {
+                return 200 === e.status
+            }, function () {
+                return !1
+            })
+        }
+
+        function A() {
+            return "Notification" in window ? Notification.requestPermission().then(function (e) {
+                return "denied" === e ? "denied" : "granted" !== e ? "undecided" : n[t].ready.then(function (e) {
+                    var n = e.pushManager;
+                    return function (e) {
+                        return e.getSubscription().then(function (e) {
+                            return !!e
+                        })
+                    }(n).then(function (e) {
+                        return !!e || U(n)
+                    })
+                }).then(function (e) {
+                    return e ? "registered" : "unregistered"
+                })
+            }) : Promise.resolve("unsupported")
+        }
+
+        function G(e) {
+            return void 0 === e && (e = 25), function (e) {
+                var n = [];
+                n.length = e;
+                var t = 0;
+                for (; t < e;) n[t] = 0, t += 1;
+                return n
+            }(e).map(function () {
+                return Math.floor(62 * Math.random())
+            }).map(function (e) {
+                return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"[e]
+            }).join("")
+        }
+
+        function q(e, n) {
+            if ("undefined" != typeof Storage) try {
+                localStorage.setItem(e, n)
+            } catch (t) {
+            }
+        }
+
+        function W(n, t) {
+            q(n, t), e.cookie = n + "=" + t + "; expires=Thu, 31 Dec 2036 12:00:00 UTC; path=/"
+        }
+
+        function V(e) {
+            var n = null;
+            if ("undefined" != typeof Storage) try {
+                n = localStorage.getItem(e)
+            } catch (t) {
+            }
+            return n
+        }
+
+        function j(n) {
+            var t = V(n), r = function (n) {
+                var t = new RegExp(n + "=([^,;]*)"), r = e.cookie.match(t);
+                if (!r || !r[1]) return null;
+                return r[1]
+            }(n), i = t || r;
+            return i && t !== r && W(n, i), i
+        }
+
+        function J() {
+            if (r.rumTracking) {
+                var e = j(c);
+                if (e) return e;
+                var n = G();
+                return W(c, n), n
+            }
+            return ""
+        }
+
+        function z(e, n, t) {
+            if (r.rumTracking) {
+                var i = new FormData, a = r.secondaryGroup ? r.group + "-" + r.secondaryGroup : r.group;
+                i.append("navigate", window.SpeedKit.navigateId), i.append("action", "" + e), i.append("label", "" + n), i.append("value", "" + t), i.append("userId", "" + J()), i.append("sessionId", "" + window.SpeedKit.sessionId), i.append("group", "" + a), R(r.appURL + "/db/speedKit.CustomEvent", i)
+            }
+        }
+
+        function X() {
+            if (r.rumTracking) {
+                var e = G(), n = 0;
+                if ((i = j(f)) && (Date.now() - parseInt(i, 10)) / 1e3 <= r.sessionLifetime) {
+                    e = j(u);
+                    var t = "" + (j(p) || -1);
+                    n = parseInt(t, 10) + 1
+                }
+                return W(u, e), W(p, "" + n), W(f, Date.now().toString()), [e, n]
+            }
+            var i;
+            return ["", 0]
+        }
+
+        !function (e) {
+            e.SWException = "SWException", e.BloomfilterException = "BloomfilterException", e.DashboardDisabled = "DashboardDisabled", e.ServerError = "ServerError", e.None = "None"
+        }(N || (N = {})), function (e) {
+            e.INSTALLING = "installing", e.RUNNING = "running", e.FAILED = "failed"
+        }(P || (P = {})), function (e) {
+            e.Blacklist = "Blacklist", e.CacheHit = "CacheHit", e.ClientError = "ClientError", e.CORSRedirect = "CORSRedirect", e.CriticalResource = "CriticalResource", e.Delayed = "Delayed", e.Disabled = "Disabled", e.Disconnected = "Disconnected", e.DynamicBlock = "DynamicBlock", e.DynamicBlockPreload = "DynamicBlockPreload", e.Error = "Error", e.Fallback = "Fallback", e.Fetchlist = "Fetchlist", e.FirstLoad = "FirstLoad", e.GroupChange = "GroupChange", e.IgnoredAfterPOSTNavigate = "IgnoredAfterPOSTNavigate", e.InternalServerError = "InternalServerError", e.LoopDetected = "LoopDetected", e.NavigationPreload = "NavigationPreload", e.NonSKGroup = "NonSKGroup", e.NoSwInstalled = "NoSwInstalled", e.NoSwResponse = "NoSwResponse", e.Offline = "Offline", e.Onboarding = "Onboarding", e.SafeScript = "SafeScript", e.SwFailed = "SwFailed", e.SwUnsupported = "SwUnsupported", e.Unknown = "Unknown", e.Immutable = "Immutable"
+        }(k || (k = {})), function (e) {
+            e.CacheMiss = "CacheMiss", e.ExpiredResponse = "ExpiredResponse", e.InvalidCacheSketch = "InvalidCacheSketch", e.ReloadCacheMode = "ReloadCacheMode", e.UrlInCacheSketch = "UrlInCacheSketch"
+        }(T || (T = {})), function (e) {
+            e.AssetAPI = "AssetAPI", e.Shield = "Shield", e.Storage = "Storage", e.Edge = "Edge", e.Collapsed = "Collapsed", e.PendingAsset = "PendingAsset", e.Stream = "Stream", e.MissingCachingHeader = "MissingCachingHeader", e.Generated = "Generated", e.Origin = "Origin", e.SwCache = "SwCache"
+        }(D || (D = {}));
+        var Q = function () {
+            function e() {
+                var e = this;
+                this.plugins = new Map, this.isBeaconSent = !1, window.addEventListener("beforeunload", function () {
+                    e.send(!0)
+                }), window.addEventListener("unload", function () {
+                    e.send(!0)
+                })
+            }
+
+            return e.prototype.notify = function (e) {
+                var n = this;
+                setTimeout(function () {
+                    n.plugins.get(e).complete = !0, n.send(!1)
+                }, 0)
+            }, e.prototype.register = function (e) {
+                for (var n = 0, t = e; n < t.length; n++) {
+                    var r = t[n], i = r.plugin, a = {complete: !1, name: r.name};
+                    if (this.plugins.get(i)) return;
+                    this.plugins.set(i, a), i.init(this)
+                }
+            }, e.prototype.gatherData = function () {
+                var e = {};
+                return this.plugins.forEach(function (n, t) {
+                    e[n.name] = t.getData()
+                }), e
+            }, e.prototype.allComplete = function () {
+                var e = !0;
+                return this.plugins.forEach(function (n) {
+                    n.complete || (e = !1)
+                }), e
+            }, e.prototype.send = function (e) {
+                if (!this.isBeaconSent && 0 !== this.plugins.size) {
+                    var n = this.allComplete();
+                    if (e || n) {
+                        var t = this.gatherData(),
+                            i = new Blob([JSON.stringify(t)], {type: "application/json; charset=UTF-8"}),
+                            a = new FormData;
+                        a.append("metaData", i), a.append("url", location.href), a.append("navigate", SpeedKit.navigateId), a.append("userId", SpeedKit.userId), a.append("sessionId", SpeedKit.sessionId), a.append("group", SpeedKit.group), R(r.appURL + "/db/speedKit.MetricMetadata", a), this.isBeaconSent = !0
+                    }
+                }
+            }, e
+        }();
+
+        function Y(e) {
+            var r = n[t];
+            r && r.ready.then(function (n) {
+                r.controller && r.controller.postMessage({type: "update-device", data: e})
+            })
+        }
+
+        function Z(e) {
+            var r = n[t].controller;
+            r && r.postMessage({type: "bypass-deactivation", data: e})
+        }
+
+        function _() {
+            var e = n[t];
+            e && e.controller && e.controller.postMessage({type: "connect"})
+        }
+
+        function $() {
+            var e = n[t];
+            e && e.controller && e.controller.postMessage({type: "disconnect"})
+        }
+
+        function ee(r) {
+            var i = n[t].controller;
+            i && i.postMessage({event: r, type: "send-cookies", data: e.cookie})
+        }
+
+        function ne(e, n) {
+            var t = n === h, i = function (e, n) {
+                var t = "undefined" !== e.testId, i = "undefined" !== e.group,
+                    a = n ? r.secondaryTestId : r.splitTestId, o = t && e.testId !== a;
+                if (i && !o) return e.group;
+                var s = n ? r.secondaryGroup : r.group, d = n ? r.secondarySplit : r.split;
+                return function (e, n) {
+                    if (void 0 === e) return Math.random() < n ? "A" : "B";
+                    return e
+                }(s, d)
+            }(e, t);
+            return function (e, n, t) {
+                r = t, i = encodeURIComponent(JSON.stringify(e)), a = encodeURIComponent(JSON.stringify(n)), a !== i && a && W(r, a);
+                var r, i, a
+            }(e, {group: i, testId: t ? r.secondaryTestId : r.splitTestId}, n), i
+        }
+
+        function te(e) {
+            var t = e.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [], r = null;
+            if (/trident/i.test(t[1])) return r = /\brv[ :]+(\d+)/g.exec(e) || [], ["IE", parseInt(r[1], 10) || 0];
+            var i = function (e) {
+                if (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/.test(e)) {
+                    var n = e.match(/(OS |os |OS)(\d+)/i) || [];
+                    return ["SafariWebView", parseInt(n[2], 10) || 0]
+                }
+                return null
+            }(e) || function (e, n) {
+                if ("Chrome" === n[1]) {
+                    var t = null;
+                    if (null != (t = e.match(/\bEdg\/(\d+)/) || e.match(/\bEdge\/(\d+)/))) return ["Edge", parseInt(t[1], 10)];
+                    if (null != (t = e.match(/\bOPR\/(\d+)/))) return ["Opera", parseInt(t[1], 10)]
+                }
+                return null
+            }(e, t);
+            if (null !== i) return i;
+            var a = t[2] ? [t[1], parseInt(t[2], 10)] : [n.appName, parseInt(n.appVersion, 10)];
+            return -1 === e.indexOf("Android") && null != (r = e.match(/version\/(\d+)/i)) && a.splice(1, 1, parseInt(r[1], 10)), a
+        }
+
+        function re() {
+            return null === j(c)
+        }
+
+        function ie(e, i, a, o) {
+            var s = function (e, r) {
+                return !!n[t] && !!n[t].getRegistrations && function (e, n) {
+                    return "Chrome" === e ? n >= 61 : "Firefox" !== e || 59 !== n
+                }(e, r)
+            }(e, i) && !a, d = re(), c = "B" === r.group || "B" === r.secondaryGroup;
+            return s ? !c && r.disabled ? [D.Origin, k.Disabled] : d ? [D.Origin, k.FirstLoad] : !c && o ? [D.Origin, k.GroupChange] : n[t].controller ? [D.Origin, k.Unknown] : [D.Origin, c ? k.NonSKGroup : k.NoSwInstalled] : [D.Origin, k.SwUnsupported]
+        }
+
+        function ae(e, n, t) {
+            return e.put("" + n, new Response(null, {
+                status: 200,
+                statusText: (r = t, JSON.stringify(r, function (e, n) {
+                    return n instanceof RegExp ? "regexp:/" + (t = n).source + "/" + (t.flags || "") : n;
+                    var t
+                }))
+            }));
+            var r
+        }
+
+        function oe() {
+            return n[t].register(r.sw, {scope: r.scope || "/"}).then(function (n) {
+                window.addEventListener("unload", function () {
+                    return ee("unload")
+                }), function (n) {
+                    L(function () {
+                        window.setTimeout(function () {
+                            if (n.active) {
+                                var t = window.performance.getEntriesByType ? window.performance.getEntriesByType("resource") : [],
+                                    i = t.map(function (e) {
+                                        var n = e.name, t = e.initiatorType;
+                                        return {name: n, url: t}
+                                    });
+                                F(n.active, {type: "prewarm-fetch", data: i}).then(function (t) {
+                                    var i;
+                                    if (t.applicationState === P.FAILED) return i = n.active, caches.open(s).then(function (n) {
+                                        var t = window.devicePixelRatio, i = window.screen.width,
+                                            a = [[location.origin, e.cookie]];
+                                        return Promise.all([ae(n, y, {
+                                            dpr: t,
+                                            width: i
+                                        }), ae(n, w, r), ae(n, S, {origins: a})])
+                                    }).then(function () {
+                                        return i.postMessage({type: E})
+                                    })
+                                })
+                            }
+                        }, 1e3)
+                    })
+                }(n), function (e) {
+                    e.navigationPreload && function (e) {
+                        if (e.active) return Promise.resolve(e.active);
+                        var n = e.waiting || e.installing;
+                        return new Promise(function (e) {
+                            return n.onstatechange = function () {
+                                "activated" === n.state && e(n)
+                            }
+                        })
+                    }(e).then(function () {
+                        r.navigationPreload ? e.navigationPreload.enable() : e.navigationPreload.disable()
+                    })
+                }(n), r.customDevice && Y(r.customDevice)
+            })
+        }
+
+        function se(e) {
+            return e === k.SwUnsupported
+        }
+
+        function de(n) {
+            if ("undefined" != typeof Storage) try {
+                localStorage.removeItem(n)
+            } catch (t) {
+            }
+            e.cookie = n + "=; expires=" + (new Date).toUTCString() + "; path=/;"
+        }
+
+        function ce(e) {
+            var n = j(e);
+            if (n) return function (e) {
+                try {
+                    return JSON.parse(decodeURIComponent(e))
+                } catch (n) {
+                    return {group: "undefined", testId: "undefined"}
+                }
+            }(n);
+            if (e === h) return {group: "undefined", testId: "undefined"};
+            var t = j(l), r = j(g), i = {group: r || "undefined", testId: t || "undefined"};
+            return (t || r) && W(v, encodeURIComponent(JSON.stringify(i))), i
+        }
+
+        function ue() {
+            pe().catch(function (e) {
+                return z("fillDatabaseError", e, Date.now()), ge().then(function () {
+                    return pe()
+                })
+            }).then(function () {
+                return oe()
+            }).catch(function () {
+                return fe()
+            })
+        }
+
+        function pe() {
+            var n = new O, t = window.devicePixelRatio, i = window.screen.width;
+            return Promise.all([n.set(w, r), n.set(y, {
+                dpr: t,
+                width: i
+            }), n.set(S, {origins: [[location.origin, e.cookie]]}), le(n)]).then(function () {
+                return n.disconnect()
+            })
+        }
+
+        function le(e) {
+        }
+
+        function fe() {
+            return n[t].getRegistrations().then(function (e) {
+                return e.forEach(function (e) {
+                    return e.unregister()
+                })
+            }).catch(function () {
+                return null
+            }).then(function () {
+                return ge()
+            })
+        }
+
+        function ge() {
+            return Promise.all([caches.keys().then(function (e) {
+                var n = e.filter(function (e) {
+                    return new RegExp("^" + s + "-.*").test(e)
+                });
+                return Promise.all(n.map(function (e) {
+                    return caches.delete(e)
+                }))
+            }), (e = new O, e.clear().then(function () {
+                return e.disconnect()
+            }))]);
+            var e
+        }
+
+        !function () {
+            if (window[i]) return;
+            window[i] = !0;
+            var a = window.location.href.match(/speed-kit-rum-opt-out=([01])/);
+            a && q(m, a[1]);
+            var o = function () {
+                W(b, "false");
+                var e = null === j(b);
+                return de(b), e
+            }(), s = ce(v), d = ce(h);
+            !function (e, t) {
+                r.sw = r.sw || "/sw.js", r.sessionLifetime = r.sessionLifetime || 1800, r.group = null == r.split ? "A" : ne(e, v), null != r.secondarySplit && "A" === r.group && (r.secondaryGroup = ne(t, h));
+                null != r.split && r.group && (r.sw = (i = r.sw, a = "gr", o = r.group, s = i.indexOf("?") > -1 ? "&" : "?", "" + i + s + a + "=" + o));
+                var i, a, o, s;
+                if (r.rumTracking) {
+                    var d = "1" === V(m) || window.deactivateSpeedKitRUM;
+                    r.rumTracking = !d
+                }
+                r.disabled = r.disabled || "B" === r.group || "B" === r.secondaryGroup || n.userAgent.toLowerCase().indexOf("wv)") > -1 || !!window.deactivateSpeedKit, r.appURL = "https://" + (r.appDomain || "{}.app.baqend.com".replace("{}", r.appName)) + "/v1", r.customVariation && r.customVariation.forEach(function (e) {
+                    e.variationFunction = "function" == typeof e.variationFunction ? e.variationFunction.toString() : e.variationFunction
+                })
+            }(s, d);
+            var l = function (e) {
+                var t = function (e) {
+                    var t = X(), i = {
+                        track: z,
+                        subscribe: A,
+                        bypassDeactivation: Z,
+                        activate: _,
+                        deactivate: $,
+                        sessionId: t[0],
+                        sessionIndex: t[1],
+                        split: "number" == typeof r.split ? "B" === r.group ? B(r.split) : r.split : 1,
+                        updateDevice: Y,
+                        swSupported: !1,
+                        disabled: !1,
+                        wasServed: !1,
+                        wasCacheHit: !1,
+                        lastNavigate: e,
+                        readyState: "loading",
+                        userId: J(),
+                        splitTestId: r.splitTestId,
+                        group: r.group,
+                        navigateId: "/db/speedKit.Metric/" + G(32),
+                        controllingServiceWorker: n.serviceWorker && n.serviceWorker.controller ? n.serviceWorker.controller.scriptURL : null,
+                        executionTime: Date.now(),
+                        pluginController: new Q
+                    }, a = window.SpeedKit || {};
+                    return Object.keys(a).forEach(function (e) {
+                        i[e] = a[e]
+                    }), window.SpeedKit = i, window.SpeedKit
+                }(e);
+                return t.swSupported = !se(t.lastNavigate.responseCause), t.disabled = "B" !== r.group && "B" !== r.secondaryGroup && !!r.disabled, t
+            }(function (e, t, r) {
+                var i = window.location.href, a = te(n.userAgent), o = a[0], s = a[1],
+                    d = ie(o, s, e, "B" === t.group || "B" === r.group), c = d[0];
+                return {
+                    url: i,
+                    browser: o,
+                    browserVersion: s,
+                    responseCause: d[1],
+                    responseSource: c,
+                    fromOrigin: !0,
+                    cacheHit: !1,
+                    cdnCacheHit: null,
+                    cdnBackendTime: null,
+                    cdnPoP: null,
+                    firstLoad: re(),
+                    splitTestId: t.testId,
+                    group: t.group,
+                    swResponse: !1,
+                    backendCacheHit: !1
+                }
+            }(o, s, d));
+            r.rumTracking || [c, u, p, f].forEach(function (e) {
+                return de(e)
+            });
+            r.rumTracking && !o && K(l);
+            if (se(l.lastNavigate.responseCause)) return void M(l);
+            var g = n[t].controller;
+            g ? (H(g, l), ee("load")) : M(l);
+            if (r.disabled) return void fe();
+            if (!g) return ue();
+            S = !1, L(function () {
+                S || (S = !0, ue())
+            }), w = function () {
+                setTimeout(function () {
+                    S || (S = !0, ue())
+                }, 1e3)
+            }, "loading" === e.readyState ? e.addEventListener("DOMContentLoaded", w) : setTimeout(w, 0);
+            var S, w
+        }()
+    }(document, navigator, "serviceWorker", "undefined" != typeof speedKit ? speedKit : config, "SNIPPET_LOADED");
+</script>
+
+{{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
+
+<!-- Extend the existing style with a template -->
+{{ LayoutContainer.show("Ceres::Template.Style") }}
+
+{{ get_shop_builder_styles() }}

@@ -1,0 +1,14 @@
+{
+  "sections":
+  [
+    {
+      "name": "MultilingualismConfig.labels",
+      "prefix": "headline"
+    }
+  ],
+  "ignoredTranslationFiles":
+  [
+    "Config.properties",
+    "MultilingualismConfig.properties"
+  ]
+}

@@ -1,0 +1,14 @@
+{% import "Ceres::Category.Macros.CategoryTree" as Tree %}
+
+<ul class="mainmenu p-0 m-0 d-none d-sm-none d-md-none d-lg-flex d-xl-flex">
+    {{ Tree.get_nav_bar(
+        categories,
+        "",
+        ceresConfig.header.megamenuLevels,
+        {
+            "1": ceresConfig.header.megamenuItemsStage1,
+            "2": ceresConfig.header.megamenuItemsStage2,
+            "3": ceresConfig.header.megamenuItemsStage3
+        }
+    ) }} 
+</ul>

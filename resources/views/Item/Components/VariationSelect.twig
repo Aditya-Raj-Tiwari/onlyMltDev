@@ -1,0 +1,162 @@
+<script type="x/template" data-component="variation-select">
+    <div>
+        <div v-if="attributes.length || (Object.keys(possibleUnits).length > 1 && isContentVisible)" class="row">
+            <div class="col-12" v-for="attribute in attributes">
+                <!-- dropdown -->
+                <div class="custom-dropdown" v-if="attribute.type === 'dropdown'">
+                    <label class="hide_if-follow" v-if="addPleaseSelectOption || !hasSelection">
+                        <div class="text-muted" v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip"
+                             data-placement="top" :title="attribute.name">
+                            {{ trans("devMlt::SingleItem.Cat9") }}
+                        </div>
+                    </label>
+                    <label class="hide_if-follow" v-else-if="currentSelection.attributes.length > 0">
+                        <div v-for="value in attribute.values"
+                        >
+                            <div v-for="attributes_in_current_variation in currentSelection.attributes"
+                                 v-if="value.attributeValueId === attributes_in_current_variation.attributeValueId"
+                            >
+                                ${ value.name }
+                            </div>
+                        </div>
+                    </label>
+                    <label class="hide_if" else>
+                        {{ trans("devMlt::SingleItem.Cat9") }}
+                    </label>
+                    {# bug fix for the section of Dropdown #}
+                    <div class="custom-dropdown-list" ref="attributesContaner"
+                         v-if="attribute.type === 'dropdown' && attribute.values.length > 0">
+                        <div v-for="(value, index) in attribute.values" class="d-block w-100">
+                            <input type="radio" class="d-none" :id="value.attributeValueId"
+                                   :name="attribute.attributeId" :value="value.attributeValueId"
+                                   :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]"
+                                   @change="selectAttribute(attribute.attributeId, $event.target.value)">
+                            <label class="d-flex justify-content-between w-100" :for="value.attributeValueId"
+                                   v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)"
+                            >${
+                                value.name }
+                                {# <div class="price-variation">{% set itemid = item.documents[0].data.item.id %} #}
+                                {# {% for variation in services.item.getVariationIds(itemid) %} #}
+                                {# {% set itemData = services.item.getVariation(variation) %} #}
+                                {# <div #}
+                                {# v-if="{{ loop.index0 }} == index"> #}
+                                {# {% if itemData.documents[0].data.prices.rrp.price.formatted|length > 0 %} #}
+                                {# <span style="color: #FF5650"> #}
+                                {# {{ itemData.documents[0].data.prices.default.price.formatted }} #}
+                                {# </span> #}
+                                {# <span style="text-decoration: line-through;margin-left: 10px"> #}
+                                {# {{ itemData.documents[0].data.prices.rrp.price.formatted }} #}
+                                {# </span> #}
+                                {# {% else %} #}
+                                {# <span> #}
+                                {# {{ itemData.documents[0].data.prices.default.price.formatted }} #}
+                                {# </span> #}
+                                {# {% endif %} #}
+                                {# </div> #}
+
+                                {# {% endfor %} #}
+                                {# </div> #}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- /dropdown -->
+
+                <!-- for farbe of the variation -->
+                <div v-else-if="attribute.type === 'box' || attribute.type === 'image'">
+                    <span class="text-muted">${ attribute.name }:</span> <b>${ getSelectedAttributeValueName(attribute)
+                        }</b>
+                    <div class="v-s-boxes py-3" :class="{ 'images': attribute.type === 'image' }">
+                        <div class="d-none"
+                             v-if="addPleaseSelectOption"
+                             @click="selectAttribute(attribute.attributeId, -1)"
+                             :class="{ 'active': selectedAttributes[attribute.attributeId] === -1, 'invalid': !isAttributeSelectionValid(attribute.attributeId, -1) }">
+                            <span class="mx-3"></span>
+                        </div>
+                        <div class="d-none"
+                             v-if="hasEmptyOption"
+                             @click="selectAttribute(attribute.attributeId, null)"
+                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null) }">
+                            <span class="mx-3"></span>
+                        </div>
+                        <div class="owl-carousel owl-theme">
+                            <div class="v-s-box bg-white"
+                                 v-for="value in attribute.values"
+                                 @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
+                                 :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId) }"
+                                 v-tooltip="!isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)"
+                                 data-html="true" data-toggle="tooltip" data-placement="top"
+                                 :data-original-title="getInvalidOptionTooltip(attribute.attributeId, value.attributeValueId)">
+                                <span class="mx-3" v-if="attribute.type === 'box'">${ value.name }</span>
+                                <img class="p-1 item" v-else :src="value.imageUrl" :alt="value.name">
+                            </div>
+                        </div>
+                        <script2>
+                            $('.v-s-boxes .owl-carousel').owlCarousel({
+                            loop:false,
+                            margin:3,
+                            nav:true,
+                            responsive:{
+                            0:{
+                            items:7
+                            },
+                            600:{
+                            items:9
+                            },
+                            1000:{
+                            items:9
+                            }
+                            }
+                            })
+                        </script2>
+                    </div>
+                </div>
+                <!-- /for farbe of the variation -->
+            </div>
+
+            <!-- units -->
+            <div class="col-12 variation-select" v-if="Object.keys(possibleUnits).length > 1 && isContentVisible">
+                <div class="input-unit">
+                    <select class="custom-select" @change="selectUnit($event.target.value)">
+                        <option
+                                v-for="(unit, unitId) in possibleUnits"
+                                :value="unitId"
+                                :selected="parseInt(unitId) === selectedUnit">
+                            <template v-if="isUnitSelectionValid(unitId)">
+                                ${ unit }
+                            </template>
+                            <template v-else>
+                                ${ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": unit }) }
+                            </template>
+                        </option>
+                    </select>
+                    <label>${ $translate("Ceres::Template.singleItemContent") }</label>
+                </div>
+            </div>
+            <!-- /units -->
+        </div>
+
+        <div v-else>
+            <slot></slot>
+        </div>
+    </div>
+</script>
+
+<script>
+    $('.owl-carousel-farbe').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 5
+            }
+        }
+    })
+</script>

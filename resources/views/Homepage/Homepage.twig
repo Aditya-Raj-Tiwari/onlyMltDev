@@ -1,0 +1,1105 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{# promo teppich empfehlung #}
+{% set slide1pos = config("devMlt.devMlt.slide1pos") %}
+{% set slide2pos = config("devMlt.devMlt.slide2pos") %}
+{% set slide3pos = config("devMlt.devMlt.slide3pos") %}
+{% set slide4pos = config("devMlt.devMlt.slide4pos") %}
+
+
+
+{% set slide1active = config("devMlt.devMlt.slide1active") %}
+{% set slide1img = config("devMlt.devMlt.slide1img") %}
+{% set slide1date = config("devMlt.devMlt.slide1date") %}
+{% set slide1bgcolor = config("devMlt.devMlt.slide1bgcolor") %}
+{% set slide1title1 = config("devMlt.devMlt.slide1title1") %}
+{% set slide1title12 = config("devMlt.devMlt.slide1title12") %}
+{% set slide1title2 = config("devMlt.devMlt.slide1title2") %}
+{% set slide1btncaption = config("devMlt.devMlt.slide1btncaption") %}
+{% set slide1btnurl = config("devMlt.devMlt.slide1btnurl") %}
+{% set slide1textfontcolor = config("devMlt.devMlt.slide1textfontcolor") %}
+
+{% set slide2active = config("devMlt.devMlt.slide2active") %}
+{% set slide2img = config("devMlt.devMlt.slide2img") %}
+{% set slide2date = config("devMlt.devMlt.slide2date") %}
+{% set slide2bgcolor = config("devMlt.devMlt.slide2bgcolor") %}
+{% set slide2title1 = config("devMlt.devMlt.slide2title1") %}
+{% set slide2title12 = config("devMlt.devMlt.slide2title12") %}
+{% set slide2title2 = config("devMlt.devMlt.slide2title2") %}
+{% set slide2btncaption = config("devMlt.devMlt.slide2btncaption") %}
+{% set slide2btnurl = config("devMlt.devMlt.slide2btnurl") %}
+{% set slide2textfontcolor = config("devMlt.devMlt.slide2textfontcolor") %}
+
+{% set slide3active = config("devMlt.devMlt.slide3active") %}
+{% set slide3img = config("devMlt.devMlt.slide3img") %}
+{% set slide3date = config("devMlt.devMlt.slide3date") %}
+{% set slide3bgcolor = config("devMlt.devMlt.slide3bgcolor") %}
+{% set slide3title1 = config("devMlt.devMlt.slide3title1") %}
+{% set slide3title12 = config("devMlt.devMlt.slide3title12") %}
+{% set slide3title2 = config("devMlt.devMlt.slide3title2") %}
+{% set slide3btncaption = config("devMlt.devMlt.slide3btncaption") %}
+{% set slide3btnurl = config("devMlt.devMlt.slide3btnurl") %}
+{% set slide3textfontcolor = config("devMlt.devMlt.slide3textfontcolor") %}
+
+{% set slide4active = config("devMlt.devMlt.slide4active") %}
+{% set slide4img = config("devMlt.devMlt.slide4img") %}
+{% set slide4date = config("devMlt.devMlt.slide4date") %}
+{% set slide4bgcolor = config("devMlt.devMlt.slide4bgcolor") %}
+{% set slide4title1 = config("devMlt.devMlt.slide4title1") %}
+{% set slide4title12 = config("devMlt.devMlt.slide4title12") %}
+{% set slide4title2 = config("devMlt.devMlt.slide4title2") %}
+{% set slide4btncaption = config("devMlt.devMlt.slide4btncaption") %}
+{% set slide4btnurl = config("devMlt.devMlt.slide4btnurl") %}
+{% set slide4textfontcolor = config("devMlt.devMlt.slide4textfontcolor") %}
+
+{% set slide5active = config("devMlt.devMlt.slide5active") %}
+{% set slide5img = config("devMlt.devMlt.slide5img") %}
+{% set slide5date = config("devMlt.devMlt.slide5date") %}
+{% set slide5bgcolor = config("devMlt.devMlt.slide5bgcolor") %}
+{% set slide5title1 = config("devMlt.devMlt.slide5title1") %}
+{% set slide5title2 = config("devMlt.devMlt.slide5title2") %}
+{% set slide5btncaption = config("devMlt.devMlt.slide5btncaption") %}
+{% set slide5btnurl = config("devMlt.devMlt.slide5btnurl") %}
+{% set slide5textfontcolor = config("devMlt.devMlt.slide5textfontcolor") %}
+
+
+{# flash sale #}
+{% set flash1itemid = config("devMlt.devMlt.flash1itemid") %}
+{% set flash1itemtime = config("devMlt.devMlt.flash1itemtime") %}
+{% set flash2itemid = config("devMlt.devMlt.flash2itemid") %}
+{% set rchours = "0" %}
+{% set rcminutes = "0" %}
+{% set rcseconds = "0" %}
+{% set difference = date(flash1itemtime|date("Y-m-d")).diff(date("now"|date("Y-m-d") )) %}
+{% set leftDays = difference.days %}
+{% set rchours1 = "0" %}
+{% set rcminutes1 = "0" %}
+{% set rcseconds1 = "0" %}
+
+
+{# recomendation category #}
+{% set wrap_color = config("devMlt.devMlt.wrap_color") %}
+{% set text_color = config("devMlt.devMlt.text_color") %}
+{% set button_rec_color = config("devMlt.devMlt.button_rec_color") %}
+{% set button_text_rec_color = config("devMlt.devMlt.button_text_rec_color") %}
+{% set text_header_color = config("devMlt.devMlt.text_header_color") %}
+{% set text_two_color = config("devMlt.devMlt.text_two_color") %}
+{% set recomendationButtonLink = config("devMlt.devMlt.recomendationButtonLink") %}
+{% set recomendationHeadingOne = config("devMlt.devMlt.recomendationHeadingOne") %}
+{% set recomendationHeadingTwo = config("devMlt.devMlt.recomendationHeadingTwo") %}
+{% set recomendationText = config("devMlt.devMlt.recomendationText") %}
+{% set recomendationLink = config("devMlt.devMlt.recomendationLink") %}
+{% set recomendationImageLink = config("devMlt.devMlt.recomendationImageLink") %}
+
+
+{# empfehlungen #}
+{% set recomendationHeading1 = config("devMlt.devMlt.recomendationHeading1") %}
+{% set recomendationText1 = config("devMlt.devMlt.recomendationText1") %}
+{% set recomendationImageLink1 = config("devMlt.devMlt.recomendationImageLink1") %}
+{% set recomendationButtonText1 = config("devMlt.devMlt.recomendationButtonText1") %}
+{% set recomendationLink1 = config("devMlt.devMlt.recomendationLink1") %}
+{% set recomendationHeading2 = config("devMlt.devMlt.recomendationHeading2") %}
+{% set recomendationText2 = config("devMlt.devMlt.recomendationText2") %}
+{% set recomendationImageLink2 = config("devMlt.devMlt.recomendationImageLink2") %}
+{% set recomendationButtonText2 = config("devMlt.devMlt.recomendationButtonText2") %}
+{% set recomendationLink2 = config("devMlt.devMlt.recomendationLink2") %}
+{% set recomendationHeading3 = config("devMlt.devMlt.recomendationHeading3") %}
+{% set recomendationText3 = config("devMlt.devMlt.recomendationText3") %}
+{% set recomendationImageLink3 = config("devMlt.devMlt.recomendationImageLink3") %}
+{% set recomendationButtonText3 = config("devMlt.devMlt.recomendationButtonText3") %}
+{% set recomendationLink3 = config("devMlt.devMlt.recomendationLink3") %}
+
+
+
+{% set recommendation4title = config("devMlt.devMlt.recommendation4title") %}
+{% set recommendation4img1 = config("devMlt.devMlt.recommendation4img1") %}
+{% set recommendation4title1 = config("devMlt.devMlt.recommendation4title1") %}
+{% set recommendation4txt1 = config("devMlt.devMlt.recommendation4txt1") %}
+{% set recommendation4btn1 = config("devMlt.devMlt.recommendation4btn1") %}
+{% set recommendation4url1 = config("devMlt.devMlt.recommendation4url1") %}
+{% set recommendation4img2 = config("devMlt.devMlt.recommendation4img2") %}
+{% set recommendation4title2 = config("devMlt.devMlt.recommendation4title2") %}
+{% set recommendation4txt2 = config("devMlt.devMlt.recommendation4txt2") %}
+{% set recommendation4btn2 = config("devMlt.devMlt.recommendation4btn2") %}
+{% set recommendation4url2 = config("devMlt.devMlt.recommendation4url2") %}
+{% set recommendation4img3 = config("devMlt.devMlt.recommendation4img3") %}
+{% set recommendation4title3 = config("devMlt.devMlt.recommendation4title3") %}
+{% set recommendation4txt3 = config("devMlt.devMlt.recommendation4txt3") %}
+{% set recommendation4btn3 = config("devMlt.devMlt.recommendation4btn3") %}
+{% set recommendation4url3 = config("devMlt.devMlt.recommendation4url3") %}
+
+{% set seotext = config("devMlt.devMlt.seotext") %}
+
+{# best seller #}
+{% set enableBestSeller = config("devMlt.devMlt.enableBestSeller") %}
+
+{% set showNameInputs = false | json_encode %}
+{% set showPrivacyPolicyCheckbox = true | json_encode %}
+{% set emailFolder = 1 | json_encode %}
+
+{% set recomendationSliderText = config("devMlt.devMlt.recomendationSliderText") %}
+{% set recomendationSliderLink = config("devMlt.devMlt.recomendationSliderLink") %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% if category is defined and category is not null %}
+            {# Override default behaviour: Use empty title if no explicit meta title is defined #}
+            {% block title          category.details[0].metaTitle | default('') %}
+        {% else %}
+            {% block description    trans('Ceres::Template.homepageMetaDescription') %}
+            {% block robots         ceresConfig.meta.robotsHome %}
+        {% endif %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+    {% set shopBuilderTemplate = "" %}
+    {% if category is defined and category is not null %}
+
+        {% set shopBuilderTemplate = shop_builder_category_template(category.id) %}
+    {% endif %}
+    <div class="mob_features_view text-uppercase">
+        <div class="d-flex">
+            {{ trans("devMlt::Template.HomepagePromo1") }}
+            {{ trans("devMlt::Homepage.Wohnraum1Title1") }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                 stroke="#7b7b7b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            {{ trans("devMlt::Template.TopBarAdv1") }}
+        </div>
+        <div class="d-flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                 stroke="#7b7b7b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            {{ trans("devMlt::Template.TopBarAdv2") }}
+        </div>
+    </div>
+    <div id="wrap" style="background: {{ slide1bgcolor }}">
+        <div class="container-max">
+            <div class="carousel">
+                {% include "devMlt::Homepage.HomepageSlides.Slide1" %}
+                {% include "devMlt::Homepage.HomepageSlides.Slide2" %}
+                {% include "devMlt::Homepage.HomepageSlides.Slide3" %}
+                {% include "devMlt::Homepage.HomepageSlides.Slide4" %}
+                {% include "devMlt::Homepage.HomepageSlides.Slide5" %}
+            </div>
+        </div>
+    </div>
+    <script2>
+        var $carousel_1 = $('#wrap .carousel').flickity({
+        lazy: true,
+        imagesLoaded: true,
+        wrapAround: true,
+        prevNextButtons: true,
+        fade: true,
+        autoPlay: 3010,
+        pauseAutoPlayOnHover: false
+        });
+        $(document).ready(function () {
+        var $carouselStatus = $('.carousel-status');
+        var flkty = $carousel_1.data('flickity');
+        var carouselStatus = document.querySelector('.carousel-status');
+
+        function updateStatus() {
+        $(".flickity-slider .content ~ a").removeClass('animateNow');
+        var cellNumber = flkty.selectedIndex + 1;
+        if (cellNumber == 1) {
+
+        $(".carousel button[aria-label^='Next']").css("display", "block");
+
+        $(".carousel button[aria-label^='Previous']").css("display", "block");
+        if ('{{ slide1pos }}' == '1') {
+        document.getElementById("wrap").style.background = '{{ slide1bgcolor }}';
+        } else if ('{{ slide1pos }}' == '2') {
+        document.getElementById("wrap").style.background = '{{ slide2bgcolor }}';
+        } else if ('{{ slide1pos }}' == '3') {
+        document.getElementById("wrap").style.background = '{{ slide3bgcolor }}';
+        } else if ('{{ slide1pos }}' == '4') {
+        document.getElementById("wrap").style.background = '{{ slide4bgcolor }}';
+        }
+        } else if (cellNumber == '2') {
+        if ('{{ slide2pos }}' == '1') {
+        document.getElementById("wrap").style.background = '{{ slide1bgcolor }}';
+        } else if ('{{ slide2pos }}' == '2') {
+        document.getElementById("wrap").style.background = '{{ slide2bgcolor }}';
+        } else if ('{{ slide2pos }}' == '3') {
+        document.getElementById("wrap").style.background = '{{ slide3bgcolor }}';
+        } else if ('{{ slide2pos }}' == '4') {
+        document.getElementById("wrap").style.background = '{{ slide4bgcolor }}';
+        }
+        } else if (cellNumber == 3) {
+        if ('{{ slide3pos }}' == '1') {
+        document.getElementById("wrap").style.background = '{{ slide1bgcolor }}';
+        } else if ('{{ slide3pos }}' == '2') {
+        document.getElementById("wrap").style.background = '{{ slide2bgcolor }}';
+        } else if ('{{ slide3pos }}' == '3') {
+        document.getElementById("wrap").style.background = '{{ slide3bgcolor }}';
+        } else if ('{{ slide3pos }}' == '4') {
+        document.getElementById("wrap").style.background = '{{ slide4bgcolor }}';
+        }
+        } else if (cellNumber == 4) {
+        if ('{{ slide4pos }}' == '1') {
+        document.getElementById("wrap").style.background = '{{ slide1bgcolor }}';
+        } else if ('{{ slide4pos }}' == '2') {
+        document.getElementById("wrap").style.background = '{{ slide2bgcolor }}';
+        } else if ('{{ slide4pos }}' == '3') {
+        document.getElementById("wrap").style.background = '{{ slide3bgcolor }}';
+        } else if ('{{ slide4pos }}' == '4') {
+        document.getElementById("wrap").style.background = '{{ slide4bgcolor }}';
+        }
+        }
+        }
+        function addAnim(){
+        $(".flickity-slider .content ~ a").addClass('animateNow');
+        }
+        function removeAnim() {
+        $(".flickity-slider .content ~ a").removeClass('animateNow');
+        $carousel_1.flickity('playPlayer')
+        }
+
+        $carousel_1.on('scroll.flickity', removeAnim);
+        updateStatus();
+        $carousel_1.on('settle.flickity', addAnim);
+        $carousel_1.on('select.flickity', removeAnim);
+        $carousel_1.on('change.flickity', updateStatus);
+        $("#wrap").addClass("pageloaded");
+
+        });
+    </script2>
+
+
+
+    <div class="container-max">
+        <div id="promo--1" class="row mt-5 pb-md-5 elem to-fade-in fade-in pb-4">
+            <div class="col-12 pb-2">
+                <span class="h3 font-weight-bold">{{ trans("devMlt::Template.HomepagePromo1") }}</span>
+            </div>
+            <div id="promo-homepage-1" class="col-12 owl-carousel owl-theme">
+                <div class="item">
+                    <a href="{{ services.category.getURLById(78) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/gabbbeh_teppiche-1.jpg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(78) }}">{{ trans("devMlt::Homepage.TeppichStil1UberSchrift") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(76) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/moderne_teppiche-1.jpg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(76) }}">{{ trans("devMlt::Homepage.TeppichStil2UberSchrift") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(1177) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/vintage_teppiche-1.jpg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(1177) }}">{{ trans("devMlt::Homepage.TeppichStil3UberSchrift") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(87) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/orient_teppiche-1.jpg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(87) }}">{{ trans("devMlt::Homepage.TeppichStil4UberSchrift") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(79) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/hochflor_teppiche-1.jpg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(79) }}">{{ trans("devMlt::Homepage.TeppichStil5UberSchrift") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(161) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/webteppiche-2.jpg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(161) }}">{{ trans("devMlt::Homepage.TeppichStil6UberSchrift") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(190) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/perserteppiche-2.jpg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(190) }}">{{ trans("devMlt::Homepage.TeppichStil7UberSchrift") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(1173) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/orient_webteppiche-2.jpg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(1173) }}">{{ trans("devMlt::Homepage.TeppichStil8UberSchrift") }}</a>
+                </div>
+                {% if recomendationSliderText|length > 1 %}
+                    <div class="item last-carousel-item hide_item ml-2 fade-in">
+                        <p class="text_last_item">
+                            <a href="{{ recomendationSliderLink }}">{{ recomendationSliderText }}</a>
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="owl-nav">
+                <div class="owl-prev">prev</div>
+                <div class="owl-next">next</div>
+            </div>
+            <script2>
+                $('#promo-homepage-1').owlCarousel({
+                loop: false,
+                margin: 20,
+                slideBy: 1,
+                nav: true,
+                dots: false,
+                autoplay:false,
+                responsive:{
+                0:{
+                nav: false,
+                autoWidth:true,
+                margin:10,
+                edgePadding:10,
+                items:2,
+                },
+                600:{
+                slideBy: 1,
+                autoWidth:false,
+                items:3,
+
+                },
+                1200:{
+                items:4,
+
+                },
+                1300:{
+
+                items:5,
+
+                },
+                1400:{
+                items:5,
+                }
+                }
+                })
+            </script2>
+        </div>
+
+        {% if enableBestSeller == 'true' %}
+            <div class="hide_first">
+                {% set tagItems  =services.itemList.getItemList('tag_list', 116, 'sorting.price.avg_asc', 6).documents %}
+                {# {{ tagItems|json_encode }} #}
+                {% if tagItems|length > 0 %}
+                    <div class="best_seller">
+                        <div class="col-sm col-12 pb-4 pl-0 mt-4 pt-s-0 pt-md-1">
+                            <span class="h3 font-weight-bold">{{ trans("devMlt::Homepage.HomepageBestSeller") }}</span>
+                        </div>
+                        <carousel :items-per-page="4">
+                            {% for item2 in tagItems %}
+                                <template slot="items">
+                                    <category-item
+                                            item-data-ref="{{ item2.data | json_data }}"
+                                            :decimal-count="{{ ceresConfig.item2.storeSpecial }}">
+                                        <template
+                                                #before-prices>{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item2.data) }}</template>
+                                        <template
+                                                #after-prices>{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item2.data) }}</template>
+                                        <a href="{{ item.data | itemURL }}" class="small">
+                                            <i class="fa fa-image"></i>
+                                            <span>{{ item2.data | itemName }}</span>
+                                        </a>
+                                    </category-item>
+                                </template>
+                            {% endfor %}
+                        </carousel>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div id="promo--2" class="row mt-4 pb-5 elem to-fade-in">
+            <div class="col-12 pb-2">
+                <span class="h3 font-weight-bold">{{ trans("devMlt::Template.HomepagePromo2") }}</span>
+            </div>
+            <div id="promo-homepage-2" class="col-12 owl-carousel owl-theme">
+                <div class="item">
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=196%2C197"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/groesse_xl.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=196%2C197">{{ trans("devMlt::Homepage.Size1") }}</a>
+                </div>
+                <div class="item">
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=194%2C195"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/groesse_l.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=194%2C195">{{ trans("devMlt::Homepage.Size2") }}</a>
+                </div>
+                <div class="item">
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=191%2C192%2C193"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/groesse_m.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=191%2C192%2C193">{{ trans("devMlt::Homepage.Size3") }}</a>
+                </div>
+                <div class="item">
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=190"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/groesse_s.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=190">{{ trans("devMlt::Homepage.Size4") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(177) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/laeufer.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(177) }}">{{ trans("devMlt::Homepage.Size5") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(1505) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/quadratisch.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(1505) }}">{{ trans("devMlt::Homepage.Size6") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(1509) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/oval_2.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(1509) }}"{{ trans("devMlt::Homepage.Size7") }}</a>
+                </div>
+                <div class="item">
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=185%2C186%2C187%2C188%2C189"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/groesse_xs.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="https://www.morgenland-teppiche.de/teppiche?facets=185%2C186%2C187%2C188%2C189">{{ trans("devMlt::Homepage.Size8") }}</a>
+                </div>
+                <div class="item">
+                    <a href="{{ services.category.getURLById(180) }}"><img
+                                data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/rund.svg"
+                                class="img-fluid lazyload"></a>
+                    <a href="{{ services.category.getURLById(180) }}">{{ trans("devMlt::Homepage.Size9") }}</a>
+                </div>
+
+            </div>
+            <script2>
+                $('#promo-homepage-2').owlCarousel({
+                loop: false,
+                margin: 20,
+                nav: true,
+                dots: false,
+                autoplay:false,
+                responsive:{
+                0:{
+                nav: false,
+                margin:10,
+                autoWidth:true,
+                edgePadding:0,
+                items:2,
+                },
+                600:{
+                autoWidth:false,
+                items:3,
+
+                },
+                1200:{
+                items:4,
+
+                },
+                1300:{
+                items:5,
+
+                },
+                1400:{
+                items:6,
+                }
+                }
+                })
+            </script2>
+        </div>
+    </div>
+
+    {# flash sale #}
+    {% if flash1itemid|length > 1 %}
+        {% set item1config = services.item.getVariation(flash1itemid) %}
+        {% set calc1 = item1config.documents[0].data.prices.default.price.value * 100 %}
+        {% set calc2 = item1config.documents[0].data.prices.rrp.data.price %}
+        {% set calc3 = calc1 / calc2 %}
+        {% set calc4 = 100 - calc3 %}
+        {% if item1config|length > 1 %}
+            <div id="beliebte_teppich" class="row mt-4 pb-5 elem">
+                <div class="container-max">
+                    <div class="col-12 mt-1">
+                        <span class="h3 font-weight-bold flash_deal">{{ trans("devMlt::Template.FlashSale") }}</span>
+                        {% if leftDays > 0 %}
+
+                            <div id="flash_sale" style="background: {{ cdbg }}; color: {{ cdtxtcolor }}">
+                                <div class="flash_sale_div">
+                                    <div class="text-white mr-1">
+                                        {{ trans("devMlt::Template.FlashSaleEnds") }}
+                                    </div>
+                                    <div id="tb1-days">00</div>
+                                    <span>:</span>
+                                    <div id="tb1-hours">00</div>
+                                    <span>:</span>
+                                    <div id="tb1-minutes">00</div>
+                                    <span>:</span>
+                                    <div id="tb1-seconds">00</div>
+                                </div>
+                            </div>
+                            <script2>
+                                var start_date1 = new Date("{{ flash1itemtime|date("Y-m-d") }}T00:00:00+02:00"),
+                                countDown2;
+                                var today = new Date();
+                                var Difference_In_Time = start_date1.getTime() - today.getTime();
+                                var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+                                if (Difference_In_Days > 0) {
+                                $('#flash_sale').show();
+                                $('#beliebte_teppich').show();
+                                }
+                                (function ($) {
+                                $(document).ready(function () {
+                                waitForElementToDisplay1_2('#tb1-days', 40, 200, startCountDown_1);
+                                });
+                                })(jQuery);
+
+                                function waitForElementToDisplay1_2(selector, time, tries, callFunc) {
+                                if (document.querySelector(selector) !== null) {
+                                callFunc();
+                                } else {
+                                if (tries >= 1) {
+                                setTimeout(function () {
+                                waitForElementToDisplay1_2(selector, time, tries - 1, callFunc);
+                                }, time);
+                                } else {
+                                return;
+                                }
+                                }
+                                }
+
+                                function startCountDown_1() {
+                                countDown_1 = setInterval(function () {
+                                countDownTimer_1((start_date1 - new Date()) / 1000);
+                                }, 500);
+                                }
+
+                                var last_day,
+                                last_hour,
+                                last_minute,
+                                last_second;
+
+                                function countDownTimer_1(seconds) {
+                                var rem_days = Math.floor((seconds / 86400) % 60),
+                                days = (rem_days * 86400),
+                                rem_hours = Math.floor(((seconds - days) / 3600) % 60),
+                                hours = (rem_days * 86400) + (rem_hours * 3600),
+                                rem_minutes = Math.floor((seconds - hours) / 60),
+                                rem_seconds = Math.floor(seconds % 60);
+                                $('#tb1-days').text(pad(rem_days));
+                                $('#tb1-hours').text(pad(rem_hours));
+                                $('#tb1-minutes').text(pad(rem_minutes));
+                                $('#tb1-seconds').text(pad(rem_seconds));
+                                countDownSet_1(pad(rem_days), pad(rem_hours), pad(rem_minutes), pad(rem_seconds));
+                                if (seconds <= 0) {
+                                clearInterval(countDown_1);
+                                $('#flash_sale>div').html('');
+                                }
+                                }
+
+                                function countDownSet_1(days, hours, minutes, seconds) {
+                                if (last_second != seconds) {
+                                $('#tb1-seconds').addClass('cd-pop');
+                                last_second = seconds;
+                                } else {
+                                $('#tb1-seconds').removeClass('cd-pop');
+                                }
+                                if (last_minute != minutes) {
+                                $('#tb1-minutes').addClass('cd-pop');
+                                last_minute = minutes;
+                                } else {
+                                $('#tb1-minutes').removeClass('cd-pop');
+                                }
+                                if (last_hour != hours) {
+                                $('#tb1-hours').addClass('cd-pop');
+                                last_hour = hours;
+                                } else {
+                                $('#tb1-hours').removeClass('cd-pop');
+                                }
+                                if (last_day != days) {
+                                $('#tb1-days').addClass('cd-pop');
+                                last_day = days;
+                                } else {
+                                $('#tb1-days').removeClass('cd-pop');
+                                }
+                                }
+
+                                function pad(str) {
+                                str = str.toString();
+                                return str.length < 2 ? pad("0" + str, 2) : str;
+                                }
+                            </script2>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-12">
+                            <div class="beliebte-teppich-carousel-cell row">
+
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="bel_teppich_1 mt-4 pb-4 elem row align-items-center">
+                                        {% for item_data in item1config.documents %}
+                                            {% set url1 = services.url.getVariationURL(item_data.data.item.id , item_data.data.variation.id).toAbsoluteUrl() %}
+                                            <div class="col-12 pb-2">
+                                                <a href="{{ url1 }}">
+                                                    <span class="h3 font-weight-bold">{{ item_data.data.texts.name3 }}</span>
+                                                </a>
+                                            </div>
+                                            <div class="row pb-3 d-flex">
+                                                <div class="col-lg-4 col-md-5 col-sm-12">
+                                                    <a class="img_container"
+                                                       href="{{ url1 }}">
+                                                        {% if item1config.documents[0].data.prices.rrp.data.price|length > 0 %}
+                                                            <div class="badge badge-danger mb-3 h5 px-2 py-1"
+                                                                 style="background-color: rgb(255, 86, 80); font-size: 1em">
+                                                                -{{ calc4|number_format(0) }}%
+                                                            </div>
+                                                        {% endif %}
+                                                        <img class="img-fluid lazyload lazyload"
+                                                             data-src="{{ item_data.data.images.variation[0].url }}"
+                                                             alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-8 col-md-7 col-sm-12 pt-3">
+                                                    <ul class="headings pb-3">
+                                                        {% for article_prop in item_data.data.variationProperties %}
+                                                            {% if article_prop.id == 30 %}
+                                                                {% for heading in article_prop.properties %}
+                                                                    {% if heading.id == 660 %}
+                                                                        <li class="li">{{ heading.values.value }}</li>
+                                                                    {% endif %}
+                                                                    {% if heading.id == 661 %}
+                                                                        <li class="li">{{ heading.values.value }}</li>
+                                                                    {% endif %}
+                                                                    {% if heading.id == 662 %}
+                                                                        <li class="li">{{ heading.values.value }}</li>
+                                                                    {% endif %}
+                                                                    {% if heading.id == 663 %}
+                                                                        <li class="li">{{ heading.values.value }}</li>
+                                                                    {% endif %}
+                                                                    {% if heading.id == 664 %}
+                                                                        <li class="li">{{ heading.values.value }}</li>
+                                                                    {% endif %}
+
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                    <div class="price_details">
+                                                        <div class="item_price">
+                                                            <p class="h4"><span
+                                                                        class="price_line_through">
+                                                                    {{ item_data.data.prices.rrp.price.formatted }}
+                                                                    </span>
+                                                            </p>
+                                                            <span class="h3 font-weight-bold">
+                                                     <span class="text-muted h5 red_color">{{ trans("devMlt::Template.Cat4") }}
+                                                     </span>
+                                                        {{ item_data.data.prices.default.price.formatted }}
+                                                         <span class="text-muted h5 ">{{ trans("devMlt::Template.Cat5") }}
+                                                         </span>
+                                                     </span>
+                                                        </div>
+                                                    </div>
+                                                    <a href="{{ url1 }}"
+                                                       class="btn btn-light mt-3 w-100">
+                                                        <span class="font-weight-bold">{{ trans("devMlt::Template.Cat6") }}</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                {% if flash2itemid|length > 1 %}
+                                    {% set item2config = services.item.getVariation(flash2itemid) %}
+                                    {% set calc1 = item2config.documents[0].data.prices.default.price.value * 100 %}
+                                    {% set calc2 = item2config.documents[0].data.prices.rrp.data.price %}
+                                    {% set calc3 = calc1 / calc2 %}
+                                    {% set calc4 = 100 - calc3 %}
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="bel_teppich_1  mt-4 pb-4 elem row align-items-center">
+                                            {% for item_data1 in item2config.documents %}
+                                                {% set url2 = services.url.getVariationURL(item_data1.data.item.id , item_data1.data.variation.id).toAbsoluteUrl() %}
+                                                <div class="col-12 pb-2">
+                                                    <a href="{{ url2 }}">
+                                                        <span class="h3 font-weight-bold">{{ item_data1.data.texts.name3 }}</span>
+                                                    </a>
+                                                </div>
+                                                <div class="row pb-3 d-flex">
+                                                    <div class="col-lg-4 col-md-5 col-sm-12">
+                                                        <a class="img_container"
+                                                           href="{{ url2 }}">
+                                                            {% if item2config.documents[0].data.prices.rrp.data.price|length > 0 %}
+                                                                <div class="badge badge-danger mb-3 h5 px-2 py-1"
+                                                                     style="background-color: rgb(255, 86, 80); font-size: 1em">
+                                                                    -{{ calc4|number_format(0) }}%
+                                                                </div>
+                                                            {% endif %}
+                                                            <img class="img-fluid lazyload lazyload"
+                                                                 data-src="{{ item_data1.data.images.variation[0].url }}"
+                                                                 alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-7 col-sm-12 pt-3">
+                                                        <ul class="headings pb-3">
+                                                            {% for article_prop in item_data1.data.variationProperties %}
+                                                                {% if article_prop.id == 30 %}
+                                                                    {% for heading in article_prop.properties %}
+                                                                        {% if heading.id == 660 %}
+                                                                            <li class="li">{{ heading.values.value }}</li>
+                                                                        {% endif %}
+                                                                        {% if heading.id == 661 %}
+                                                                            <li class="li">{{ heading.values.value }}</li>
+                                                                        {% endif %}
+                                                                        {% if heading.id == 662 %}
+                                                                            <li class="li">{{ heading.values.value }}</li>
+                                                                        {% endif %}
+                                                                        {% if heading.id == 663 %}
+                                                                            <li class="li">{{ heading.values.value }}</li>
+                                                                        {% endif %}
+                                                                        {% if heading.id == 664 %}
+                                                                            <li class="li">{{ heading.values.value }}</li>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </ul>
+                                                        <div class="price_details">
+                                                            <div class="item_price">
+                                                                <p class="h4"><span
+                                                                            class="price_line_through">
+                                                                    {{ item_data1.data.prices.rrp.price.formatted }}
+                                                                    </span>
+                                                                </p>
+                                                                <span class="h3 font-weight-bold">
+                                                     <span class="text-muted h5 red_color">{{ trans("devMlt::Template.Cat4") }}
+                                                     </span>
+                                                        {{ item_data1.data.prices.default.price.formatted }}
+                                                         <span class="text-muted h5 ">{{ trans("devMlt::Template.Cat5") }}
+                                                         </span>
+                                                     </span>
+                                                            </div>
+                                                        </div>
+                                                        <a href="{{ url2 }}"
+                                                           class="btn btn-light mt-3 w-100">
+                                                            <span class="font-weight-bold">{{ trans("devMlt::Template.Cat6") }}</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+
+    {% if recomendationHeading1|length > 0 %}
+        <div class="container-max empfehlungen mt-5 elem to-fade-in">
+            <div class="col-sm col-12 pb-4 pl-0">
+                <span class="h3 font-weight-bold">{{ trans("devMlt::Template.HomepagePromo3") }}</span>
+            </div>
+            <div class="row mb-5 pb-5">
+                <div class="col-sm-12 col-lg-4">
+                    <div class="card">
+                        <a href="{{ recomendationLink1 }}">
+                            <div class="img_bg_empgfehlung1" style="background: url('{{ recomendationImageLink1 }}')">
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ trans("devMlt::Template.recomendationHeading1") }}</h5>
+                            <p class="card-text">{{ trans("devMlt::Template.recomendationText1") }}</p>
+                            <a href="{{ recomendationLink1 }}"
+                               class="btn btn-light">{{ trans("devMlt::Template.recomendationButtonText1") }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                    <div class="card">
+                        <a href="{{ recomendationLink2 }}">
+                            <div class="img_bg_empgfehlung2" style="background: url('{{ recomendationImageLink3 }}')">
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ trans("devMlt::Template.recomendationHeading2") }}</h5>
+                            <p class="card-text">{{ trans("devMlt::Template.recomendationText2") }}</p>
+                            <a href="{{ recomendationLink2 }}"
+                               class="btn btn-light">{{ trans("devMlt::Template.recomendationButtonText2") }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                    <div class="card">
+                        <a href="{{ recomendationLink3 }}">
+                            <div class="img_bg_empgfehlung3" style="background: url('{{ recomendationImageLink2 }}')">
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recomendationHeading3 }}</h5>
+                            <p class="card-text">{{ recomendationText3 }}</p>
+                            <a href="{{ recomendationLink3 }}" class="btn btn-light">{{ recomendationButtonText3 }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    {% endif %}
+
+
+
+
+
+{#     recomendation category #}
+    {% if recomendationHeadingOne|length > 0 %}
+        {% set url_category = services.category.getURLById(recomendationLink) %}
+        <div class="wrap_container" style="background: {{ wrap_color }}">
+            <div class="container-max">
+                {% if recomendationButtonLink|length>0 %}
+                    <div class="padding_selector row pt-5" style="color: {{ text_color }}">
+                        <div class="col-sm-12 col-lg-6 pr-4">
+                            <h2 class="header_text_recommendation mt-4" style="color: {{ text_header_color }}">
+                                {{ recomendationHeadingOne }}
+                            </h2>
+                            <br>
+                            <h2 class="header_text_recommendation" style="color: {{ text_header_color }}">
+                                {{ recomendationHeadingTwo }}
+                            </h2>
+                            <h3 class="h4 mt-4 pt-4" style="color: {{ text_two_color }}">
+                                {{ recomendationText }}
+                            </h3>
+                            <a href="{{ recomendationButtonLink }}" class="btn my-4 py-3"
+                               style="background: {{ button_rec_color }}">
+                                <span style="color: {{ button_text_rec_color }}">JETZT ENTDECKEN</span>
+                            </a>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <a href="{{ recomendationButtonLink }}">
+                                <img data-src="{{ recomendationImageLink }}" alt="" class="img-fluid lazyload">
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="padding_selector row pt-5" style="color: {{ text_color }}">
+                        <div class="col-sm-12 col-lg-6 pr-4">
+                            <h2 class="header_text_recommendation mt-4" style="color: {{ text_header_color }}">
+                                {{ recomendationHeadingOne }}
+                            </h2>
+                            <br>
+                            <h2 class="header_text_recommendation" style="color: {{ text_header_color }}">
+                                {{ recomendationHeadingTwo }}
+                            </h2>
+                            <h3 class="h4 mt-4 pt-4" style="color: {{ text_two_color }}">
+                                {{ recomendationText }}
+                            </h3>
+                            <a href="{{ url_category }}" class="btn my-4 py-3"
+                               style="background: {{ button_rec_color }}">
+                                <span style="color: {{ button_text_rec_color }}">JETZT ENTDECKEN</span>
+                            </a>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <a href="{{ url_category }}">
+                                <img data-src="{{ recomendationImageLink }}" alt="" class="img-fluid lazyload">
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="container-max mt-3 hide_first">
+            <div class="lazyload modal-cross-selling_random cross_selling_homepage">
+                <div class="container-max">
+                    {% set crossSellingItemsCollection2 = services.itemList.getItemList("category", recomendationLink ,null,12,null).documents %}
+                    {# {{ crossSellingItemsCollection2 | json_encode }} #}
+                    {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+                    {% if crossSellingItemsCollection2 | length > 0 %}
+                        <div class="crossselling lazyload">
+                            <carousel>
+                                {% for item in crossSellingItemsCollection2 %}
+                                    {{ item | json_encode }}
+                                    <template slot="items">
+                                        <category-item
+                                                :item-data="{{ item.data | json_encode }}"
+                                                :decimal-count="{{ ceresConfig.item.storeSpecial }}"
+                                                :disable-carousel-on-mobile="true">
+                                        </category-item>
+                                    </template>
+                                {% endfor %}
+                            </carousel>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+
+    <div class="container-max">
+        {# <div id="promo--3" class="row mt-4 pb-5"> #}
+        {# <div class="col-12 pb-4 elem to-fade-in"> #}
+        {# <span class="h3 font-weight-bold">{{ trans("devMlt::Template.HomepagePromo3") }}</span> #}
+        {# </div> #}
+        {# <div class="row mx-0 elem to-fade-in fade-in"> #}
+        {# <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-md-0 mb-3"> #}
+        {# <a href="{{ services.category.getURLById(173) }}"> #}
+        {# <img data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/einfarbig.jpg" #}
+        {# class="img-fluid lazyload w-100"> #}
+        {# </a> #}
+        {# <div class="content"> #}
+        {# <span class="h3 d-block font-weight-bold">Einfarbige Teppiche</span> #}
+        {# <span class="h5 d-block mb-4">Ausgezeichnete Qualität fur jedes Budget</span> #}
+        {# <a href="{{ services.category.getURLById(173) }}" class="btn btn-outline-dark btn-md">Jetzt #}
+        {# entdecken</a> #}
+        {# </div> #}
+        {# </div> #}
+        {# <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-md-0 mb-3"> #}
+        {# <a href="{{ services.category.getURLById(184) }}"> #}
+        {# <img data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/kelim.jpg" #}
+        {# class="img-fluid lazyload w-100"> #}
+        {# </a> #}
+        {# <div class="content"> #}
+        {# <span class="h3 d-block font-weight-bold">Kelim Teppiche</span> #}
+        {# <span class="h5 d-block mb-4">Der Allrounder für Jedermann</span> #}
+        {# <a href="{{ services.category.getURLById(184) }}" class="btn btn-outline-dark btn-md">Jetzt #}
+        {# entdecken</a> #}
+        {# </div> #}
+        {# </div> #}
+        {# <div class="col-lg-4 col-md-4 col-sm-12 col-12"> #}
+        {# <a href="{{ services.category.getURLById(94) }}"> #}
+        {# <img data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/temp_assets/img/ziegler.jpg" #}
+        {# class="img-fluid lazyload w-100"> #}
+        {# </a> #}
+        {# <div class="content"> #}
+        {# <span class="h3 d-block font-weight-bold">Ziegler Teppiche</span> #}
+        {# <span class="h5 d-block mb-4">Für die Ewigkeit gemacht</span> #}
+        {# <a href="{{ services.category.getURLById(94) }}" class="btn btn-outline-dark btn-md">Jetzt #}
+        {# entdecken</a> #}
+        {# </div> #}
+        {# </div> #}
+        {# </div> #}
+        {# </div> #}
+        {# <script2> #}
+        {# $('#promo-homepage-3').owlCarousel({ #}
+        {# loop: false, #}
+        {# margin: 20, #}
+        {# dots: false, #}
+        {# nav: true, #}
+        {# lazy:true, #}
+        {# responsive:{ #}
+        {# 0:{ #}
+        {# items:1, #}
+        {# nav: true #}
+        {# }, #}
+        {# 767:{ #}
+        {# items:2, #}
+        {# nav: true #}
+        {# }, #}
+        {# 1200:{ #}
+        {# items:3, #}
+        {# nav: false #}
+        {# } #}
+        {# }, #}
+        {# autoplay:true, #}
+        {# autoplayTimeout:10000, #}
+        {# autoplayHoverPause:true #}
+        {# }) #}
+        {# </script2> #}
+        {# promo teppisch empfehlung #}
+        {# {% if recommendation4title1|length > 1 %} #}
+
+        {# <div id="promo--4" class="row mt-4 pb-5 to-fade-in fade-in"> #}
+        {# <div class="col-12 pb-4 elem to-fade-in"> #}
+        {# <span class="h3 font-weight-bold">{{ recommendation4title }}</span> #}
+        {# </div> #}
+        {# <div class="row mx-0 elem to-fade-in fade-in"> #}
+        {# {% if recommendation4title1|length > 1 %} #}
+        {# <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-md-0 mb-3"> #}
+        {# <div class="img_content-2"> #}
+        {# <a href="{{ services.category.getURLById(recommendation4url1) }}"> #}
+        {# <div class="bg_promo4_img " #}
+        {# style="background-image: url('{{ recommendation4img1 }}')"> #}
+        {# </div> #}
+        {# </a> #}
+        {# <div class="content"> #}
+        {# <span class="h3 d-block font-weight-bold">{{ recommendation4title1 }}</span> #}
+        {# <span class="h5 d-block">{{ recommendation4txt1 }}</span> #}
+        {# <a href="{{ services.category.getURLById(recommendation4url1) }}">{{ recommendation4btn1 }}</a> #}
+        {# </div> #}
+        {# </div> #}
+        {# </div> #}
+        {# {% endif %} #}
+        {# {% if recommendation4title2|length > 1 %} #}
+        {# <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-md-0 mb-3"> #}
+        {# <div class="img_content-2"> #}
+        {# <a href="{{ services.category.getURLById(recommendation4url2) }}"> #}
+        {# <div class="bg_promo4_img" #}
+        {# style="background-image: url('{{ recommendation4img2 }}')"></div> #}
+        {# </a> #}
+        {# <div class="content"> #}
+        {# <span class="h3 d-block font-weight-bold">{{ recommendation4title2 }}</span> #}
+        {# <span class="h5 d-block">{{ recommendation4txt2 }}</span> #}
+        {# <a href="{{ services.category.getURLById(recommendation4url2) }}">{{ recommendation4btn2 }}</a> #}
+        {# </div> #}
+        {# </div> #}
+        {# </div> #}
+        {# {% endif %} #}
+        {# {% if recommendation4title3|length > 1 %} #}
+        {# <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-md-0 mb-3"> #}
+        {# <div class="img_content-2"> #}
+        {# <a href="{{ services.category.getURLById(recommendation4url3) }}"> #}
+        {# <div class="bg_promo4_img" #}
+        {# style="background-image: url('{{ recommendation4img3 }}')"></div> #}
+        {# </a> #}
+        {# <div class="content"> #}
+        {# <span class="h3 d-block font-weight-bold">{{ recommendation4title3 }}</span> #}
+        {# <span class="h5 d-block">{{ recommendation4txt3 }}</span> #}
+        {# <a href="{{ services.category.getURLById(recommendation4url3) }}">{{ recommendation4btn3 }}</a> #}
+        {# </div> #}
+        {# </div> #}
+        {# </div> #}
+        {# {% endif %} #}
+        {# </div> #}
+        {# </div> #}
+        {# {% endif %} #}
+        <div class="row elem to-fade-in">
+            <div class="col-12 mt-5">
+                <div class="newsletter-homepage" id="newslettter">
+                    <div class="content">
+                        <div>
+                            <span class="h1 d-block font-weight-bold mb-2">{{ trans("devMlt::Template.HomepageNewsletter1") }}*</span>
+                            <span class="h5 d-block font-weight-normal mb-4">{{ trans("devMlt::Template.HomepageNewsletter2") }}</span>
+                            <div class="col-xs-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+                                {{ hintText | raw }}
+                            </div>
+                            <newsletter-input :show-name-inputs="{{ showNameInputs }}"
+                                              :show-privacy-policy-checkbox="{{ showPrivacyPolicyCheckbox }}"
+                                              :email-folder="{{ emailFolder }}"></newsletter-input>
+                            <span class="d-block small">*{{ trans("devMlt::Template.HomepageNewsletter4") }} {{ trans("devMlt::Template.HomepageNewsletter3") }}</span>
+                        </div>
+                    </div>
+                    <img data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/news_letter_01/newsletter-2-2.jpg"
+                         class="d-none d-sm-none d-md-none d-lg-block d-xl-block img-fluid lazyload">
+                </div>
+            </div>
+        </div>
+        <div class="row pt-5 elem to-fade-in">
+            <div class="col-12">
+                {{ seotext | raw }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col sb">
+                {{ shopBuilderTemplate | raw }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

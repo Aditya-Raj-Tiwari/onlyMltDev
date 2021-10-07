@@ -1,0 +1,31 @@
+<script type="x/template" data-component="newsletter-input">
+   <form :id="'newsletter-input-form_' + _uid" method="post" @submit.prevent>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-7 col-7 pr-0">
+                <div class="input-group">
+                    <div class="input-unit" data-validate="mail">
+                        <input type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email" placeholder="{{ trans("devMlt::Template.HomepageNewsletter5") }}">
+                    </div>
+                    <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-5 col-5 pl-0">
+                <div class="input-group-btn h-100" style="padding-bottom: 15px">
+                    <button type="button" class="btn btn-block btn-secondary btn-appearance h-100" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
+                        ${ $translate("Ceres::Template.newsletterSubscribeButtonLabel") }
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-12" v-if="showPrivacyPolicyCheckbox">
+                <div class="form-check small" data-validate>
+                    <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + _uid" name="privacy-policy-accept" v-model="privacyPolicyValue">
+                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" v-html="privacyPolicyText">
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</script>

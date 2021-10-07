@@ -1,0 +1,292 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% set numberOfCols = config('Ceres.footer.number_of_cols') %}
+{% set colSize = (12 / (numberOfCols + 1)) %}
+{% set displayedCategories = [] %}
+{% set numberOfFeatures = config('Ceres.footer.number_of_features') %}
+{% set topButtonPosition = config('Ceres.footer.to_top_button') %}
+
+{% set footerContainer = LayoutContainer.show("Ceres::Footer") | trim %}
+{% if footerContainer is empty %}
+    <div class="footer">
+        <div class="{% if topButtonPosition == " right
+    " %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">
+            <i class="fa fa-chevron-up"></i>
+        </div>
+        <div class="container-max">
+            <div class="container-max footer-content">
+                <div class="footer-bg"></div>
+                <div class="row d-none d-sm-none d-md-none d-lg-none d-xl-flex">
+                    <div class="col-12">
+                        <div class="icon-row d-flex justify-content-between pr-4 pr-sm-0 pr-md-0 pr-lg-0" id="payment">
+                            <div class="icon icon-md" id="paypal"></div>
+                            <div class="icon icon-md" id="visa"></div>
+                            <div class="icon icon-md" id="mastercard"></div>
+                            <div class="icon icon-md" id="klarna"></div>
+                            <div class="icon icon-md" id="amazonpay"></div>
+                            <div class="icon icon-md" id="sepa"></div>
+                            <div class="icon icon-md" id="prepayment"></div>
+                            <div class="icon icon-md" id="collect"></div>
+                            <div class="icon icon-md" id="invoice"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row b-b">
+                    <div class="col-lg-12">
+                        <div class="row footer-columns mt-2">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-head footer-column footer-hr">
+                                    <a href="#footer_menu_1" aria-controls="footer_menu_1" aria-expanded="true"
+                                       class="h5 bold boldheader text-dark" data-target="#footer_menu_1"
+                                       data-toggle="collapse">{{ trans("devMlt::Template.FooterHead1") }}</a>
+                                    <ul aria-labelledby="footer_menu_head_1" class="collapse" data-parent=""
+                                        id="footer_menu_1">
+                                        <li><a href="/"
+                                               class="hidden-sm-down">{{ trans("devMlt::Template.FooterSec9LinkText1") }}</a>
+                                        </li>
+                                        <li><a href="{{ services.category.getURLById(105) }}" class="hidden-sm-down">Über
+                                                uns</a></li>
+                                        <li><a href="{{ services.category.getURLById(195) }}"
+                                               class="hidden-sm-down">Showrooms</a></li>
+                                        <li><a href="{{ services.category.getURLById(172) }}" class="hidden-sm-down">Produktpalette</a>
+                                        </li>
+                                        <li><a href="{{ services.category.getURLById(193) }}" class="hidden-sm-down">Bezahlung
+                                                &
+                                                Versand</a></li>
+{#                                        <li><a href="{{ services.category.getURLById(220) }}" class="hidden-sm-down">Jobs#}
+{#                                                &#}
+{#                                                Karriere</a></li>#}
+                                        <li>
+                                            <a href="/cancellation-rights">{{ trans("devMlt::Template.FooterSec9LinkText3") }}</a>
+                                        </li>
+                                        <li><a href="/cancellation-form" class="hidden-sm-down">Widerrufs­formular</a>
+                                        </li>
+                                        <li>
+                                            <a href="/privacy-policy">{{ trans("devMlt::Template.FooterSec9LinkText4") }}</a>
+                                        </li>
+                                        <li><a href="/gtc"
+                                               class="hidden-sm-down">{{ trans("devMlt::Template.FooterSec9LinkText2") }}</a>
+                                        </li>
+                                        <li>
+                                            <a href="/legal-disclosure">{{ trans("devMlt::Template.FooterSec9LinkText5") }}</a>
+                                        </li>
+                                    </ul>
+                                    <i aria-hidden="true" class="collapse_arrow"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-head footer-column footer-hr">
+                                    <a href="#footer_menu_2" aria-controls="footer_menu_2" aria-expanded="true"
+                                       class="h5 bold boldheader" data-target="#footer_menu_2"
+                                       data-toggle="collapse">{{ trans("devMlt::Template.FooterHead2") }}</a>
+                                    <ul aria-labelledby="footer_menu_head_2" class="collapse" data-parent=""
+                                        id="footer_menu_2">
+                                        <li><a href="{{ services.category.getURLById(219) }}"
+                                               class="hidden-sm-down">Anfertigung</a></li>
+                                        <li><a href="{{ services.category.getURLById(106) }}" class="hidden-sm-down">Ankauf</a>
+                                        </li>
+                                        <li><a href="{{ services.category.getURLById(192) }}" class="hidden-sm-down">Fair
+                                                &
+                                                Nachhaltig</a></li>
+                                        <li><a href="{{ services.category.getURLById(199) }}" class="hidden-sm-down">Teppichreinigung</a>
+                                        </li>
+                                        <li><a href="{{ services.category.getURLById(212) }}" class="hidden-sm-down">Teppichreparatur</a>
+                                        </li>
+                                        <li><a href="{{ services.category.getURLById(194) }}" class="hidden-sm-down">Vorteile
+                                                &
+                                                Garantie</a></li>
+                                        <li><a href="{{ services.category.getURLById(218) }}" class="hidden-sm-down">Häufige
+                                                Fragen (FAQ)</a></li>
+                                        <li><a href="{{ services.category.getURLById(198) }}" class="hidden-sm-down">Herstellungsarten</a>
+                                        </li>
+                                        <li><a href="{{ services.category.getURLById(189) }}" class="hidden-sm-down">Materialkunde</a>
+                                        </li>
+                                        <li><a href="{{ services.category.getURLById(197) }}" class="hidden-sm-down">Teppichfinder
+                                                & Raumplaner</a></li>
+{#                                        <li><a href="{{ services.category.getURLById(162) }}" class="hidden-sm-down">Teppichlexikon</a>#}
+                                        </li>
+                                        <li><a href="{{ services.category.getURLById(213) }}" class="hidden-sm-down">Versandkosten</a>
+                                        </li>
+                                        <li>
+                                            <a href="/contact">{{ trans("devMlt::Template.FooterSec3LinkText5") }}</a>
+                                        </li>
+                                    </ul>
+                                    <i aria-hidden="true" class="collapse_arrow"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row footer-columns d-flex d-sm-flex d-md-flex d-lg-flex d-xl-none"
+                             style="display: none !important;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-head footer-column footer-hr">
+                                    <a href="#footer_menu_3" aria-controls="footer_menu_3" aria-expanded="true"
+                                       class="h5 bold bold boldheader" data-target="#footer_menu_3"
+                                       data-toggle="collapse">{{ trans("devMlt::Template.FooterSec3LinkText1") }}</a>
+                                    <div aria-labelledby="footer_menu_head_3" class="collapse" data-parent=""
+                                         id="footer_menu_3">
+                                        TEST
+                                    </div>
+                                    <i aria-hidden="true" class="collapse_arrow"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="footer-head footer-column footer-hr">
+                                    <a href="#footer_menu_4" aria-controls="footer_menu_4" aria-expanded="true"
+                                       class="h5 bold"
+                                       data-target="#footer_menu_4"
+                                       data-toggle="collapse">{{ trans("devMlt::Template.FooterSec3LinkText2") }}</a>
+                                    <div aria-labelledby="footer_menu_head_4" class="collapse" data-parent=""
+                                         id="footer_menu_4">
+                                        TEST
+                                    </div>
+                                    <i aria-hidden="true" class="collapse_arrow"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-none d-sm-flex">
+                    <div class="col-6">
+                        <hr class="my-2" style="border-color: rgba(255, 255, 255, 0.2);">
+                        <div class="icon-row mb-0 pr-4 pr-sm-0 pr-md-0 pr-lg-0" id="shipping">
+                            <h2 class="h5 mb-4 bold boldheader">Versand</h2>
+                            <div class="icon icon-md" id="dhl"></div>
+                            <div class="icon icon-md" id="dpd"></div>
+                            <div class="icon icon-md" id="gls"></div>
+                            <div class="icon icon-md" id="fedex"></div>
+                            <div class="icon icon-md" id="ups"></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <hr class="my-2" style="border-color: rgba(255, 255, 255, 0.2);">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-8 icon-row mb-0 pr-4 pr-sm-0 pr-md-0 pr-lg-0">
+                                <h2 class="h5 mb-4 bold boldheader">{{ trans("devMlt::Template.FooterSec4Text2") }}</h2>
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6">
+                                        <p class="mb-0">{{ trans("devMlt::Template.FooterSec4Text4") }}</p> <a href="tel:+494038632775"
+                                                                          class="text-dark font-weight-bold text-small">040
+                                            386 32 77 5</a>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6">
+                                        <p class="mb-0 "> {{ trans("devMlt::Template.FooterSec4Text5") }}</p> <a href="mailto:mail@morgenland-teppiche.de"
+                                                                            class="text-dark font-weight-bold text-small">mail@morgenland-teppiche.de</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="social_media" class="col-sm-6 col-md-4 icon-row mb-0 pr-4 pr-sm-0 pr-md-0 pr-lg-0">
+                                <h2 class="h5 mb-4 bold boldheader">{{ trans("devMlt::Template.FooterSec4Text1") }}</h2>
+                                <div class="container d-flex justify-content-between">
+                                    <a href="https://twitter.com/Morgenland24" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="#403F3F">
+                                            <path d="M24 4.37a9.6 9.6 0 0 1-2.83.8 5.04 5.04 0 0 0 2.17-2.8c-.95.58-2 1-3.13 1.22A4.86 4.86 0 0 0 16.61 2a4.99 4.99 0 0 0-4.79 6.2A13.87 13.87 0 0 1 1.67 2.92 5.12 5.12 0 0 0 3.2 9.67a4.82 4.82 0 0 1-2.23-.64v.07c0 2.44 1.7 4.48 3.95 4.95a4.84 4.84 0 0 1-2.22.08c.63 2.01 2.45 3.47 4.6 3.51A9.72 9.72 0 0 1 0 19.74 13.68 13.68 0 0 0 7.55 22c9.06 0 14-7.7 14-14.37v-.65c.96-.71 1.79-1.6 2.45-2.61z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="https://www.facebook.com/MorgenlandTeppiche2" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="#403F3F">
+                                            <path d="M22.5 0c.83 0 1.5.67 1.5 1.5v21c0 .83-.67 1.5-1.5 1.5h-6v-9h3l.75-3.75H16.5v-1.5c0-1.5.75-2.25 2.25-2.25h1.5V3.75h-3c-2.76 0-4.5 2.16-4.5 5.25v2.25h-3V15h3v9H1.5A1.5 1.5 0 0 1 0 22.5v-21C0 .67.67 0 1.5 0h21z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="https://www.instagram.com/morgenland_teppiche/" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="#403F3F">
+                                            <path d="M16.98 0a6.9 6.9 0 0 1 5.08 1.98A6.94 6.94 0 0 1 24 7.02v9.96c0 2.08-.68 3.87-1.98 5.13A7.14 7.14 0 0 1 16.94 24H7.06a7.06 7.06 0 0 1-5.03-1.89A6.96 6.96 0 0 1 0 16.94V7.02C0 2.8 2.8 0 7.02 0h9.96zm.05 2.23H7.06c-1.45 0-2.7.43-3.53 1.25a4.82 4.82 0 0 0-1.3 3.54v9.92c0 1.5.43 2.7 1.3 3.58a5 5 0 0 0 3.53 1.25h9.88a5 5 0 0 0 3.53-1.25 4.73 4.73 0 0 0 1.4-3.54V7.02a5 5 0 0 0-1.3-3.49 4.82 4.82 0 0 0-3.54-1.3zM12 5.76c3.39 0 6.2 2.8 6.2 6.2a6.2 6.2 0 0 1-12.4 0 6.2 6.2 0 0 1 6.2-6.2zm0 2.22a3.99 3.99 0 0 0-3.97 3.97A3.99 3.99 0 0 0 12 15.92a3.99 3.99 0 0 0 3.97-3.97A3.99 3.99 0 0 0 12 7.98zm6.44-3.77a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="https://www.pinterest.de/Morgenland_Teppiche/_saved/" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="#403F3F">
+                                            <path d="M12 0a12 12 0 0 0-4.82 23c-.03-.85 0-1.85.21-2.76l1.55-6.54s-.39-.77-.39-1.9c0-1.78 1.03-3.1 2.32-3.1 1.09 0 1.62.81 1.62 1.8 0 1.09-.7 2.73-1.06 4.25-.3 1.27.63 2.31 1.89 2.31 2.27 0 3.8-2.92 3.8-6.38 0-2.63-1.77-4.6-4.99-4.6a5.68 5.68 0 0 0-5.9 5.75c0 1.05.3 1.78.78 2.35.23.27.26.37.18.67l-.25.97c-.08.3-.32.4-.6.3-1.67-.69-2.46-2.52-2.46-4.59 0-3.4 2.88-7.5 8.58-7.5 4.58 0 7.6 3.32 7.6 6.88 0 4.7-2.62 8.22-6.48 8.22-1.3 0-2.51-.7-2.93-1.5l-.84 3.3c-.26.93-.76 1.86-1.21 2.58A11.99 11.99 0 0 0 24 12 12 12 0 0 0 12 0z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row footer-columns d-sm-none">
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="footer-head footer-column footer-hr">
+                            <a href="#footer_menu_kontakt" aria-controls="footer_menu_kontakt" aria-expanded="true"
+                               class="h5 bold bold boldheader" data-target="#footer_menu_kontakt"
+                               data-toggle="collapse">{{ trans("devMlt::Template.FooterSec4Text2") }}</a>
+                            <div aria-labelledby="footer_menu_kontakt" class="collapse" data-parent=""
+                                 id="footer_menu_kontakt">
+                                <p class="mb-0">{{ trans("devMlt::Template.FooterSec4Text4") }}</p>
+                                <a href="tel:+494038632775" class="text-dark font-weight-bold text-small">040 386 32 77
+                                    5</a>
+                                <p class="mb-0 ">{{ trans("devMlt::Template.FooterSec4Text5") }}</p>
+                                <a href="mailto:mail@morgenland-teppiche.de"
+                                   class="text-dark font-weight-bold text-small">mail@morgenland-teppiche.de</a>
+                            </div>
+                            <i aria-hidden="true" class="collapse_arrow"></i>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="footer-head footer-column footer-hr">
+                            <a href="#footer_menu_social_media" aria-controls="footer_menu_social_media"
+                               aria-expanded="true" class="h5 bold boldheader" data-target="#footer_menu_social_media"
+                               data-toggle="collapse">{{ trans("devMlt::Template.FooterSec4Text1") }}</a>
+                            <div aria-labelledby="footer_menu_social_media"
+                                 class="collapse text-center footer_menu_social_media" data-parent=""
+                                 id="footer_menu_social_media">
+                                <a href="https://twitter.com/Morgenland24" target="_blank" class="mr-3 twitter">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="#403F3F">
+                                        <path d="M24 4.37a9.6 9.6 0 0 1-2.83.8 5.04 5.04 0 0 0 2.17-2.8c-.95.58-2 1-3.13 1.22A4.86 4.86 0 0 0 16.61 2a4.99 4.99 0 0 0-4.79 6.2A13.87 13.87 0 0 1 1.67 2.92 5.12 5.12 0 0 0 3.2 9.67a4.82 4.82 0 0 1-2.23-.64v.07c0 2.44 1.7 4.48 3.95 4.95a4.84 4.84 0 0 1-2.22.08c.63 2.01 2.45 3.47 4.6 3.51A9.72 9.72 0 0 1 0 19.74 13.68 13.68 0 0 0 7.55 22c9.06 0 14-7.7 14-14.37v-.65c.96-.71 1.79-1.6 2.45-2.61z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://www.facebook.com/MorgenlandTeppiche2" target="_blank" class="mr-3 facebook">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="#403F3F">
+                                        <path d="M22.5 0c.83 0 1.5.67 1.5 1.5v21c0 .83-.67 1.5-1.5 1.5h-6v-9h3l.75-3.75H16.5v-1.5c0-1.5.75-2.25 2.25-2.25h1.5V3.75h-3c-2.76 0-4.5 2.16-4.5 5.25v2.25h-3V15h3v9H1.5A1.5 1.5 0 0 1 0 22.5v-21C0 .67.67 0 1.5 0h21z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://www.instagram.com/morgenland_teppiche/" target="_blank" class="mr-3 instagram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="#403F3F">
+                                        <path d="M16.98 0a6.9 6.9 0 0 1 5.08 1.98A6.94 6.94 0 0 1 24 7.02v9.96c0 2.08-.68 3.87-1.98 5.13A7.14 7.14 0 0 1 16.94 24H7.06a7.06 7.06 0 0 1-5.03-1.89A6.96 6.96 0 0 1 0 16.94V7.02C0 2.8 2.8 0 7.02 0h9.96zm.05 2.23H7.06c-1.45 0-2.7.43-3.53 1.25a4.82 4.82 0 0 0-1.3 3.54v9.92c0 1.5.43 2.7 1.3 3.58a5 5 0 0 0 3.53 1.25h9.88a5 5 0 0 0 3.53-1.25 4.73 4.73 0 0 0 1.4-3.54V7.02a5 5 0 0 0-1.3-3.49 4.82 4.82 0 0 0-3.54-1.3zM12 5.76c3.39 0 6.2 2.8 6.2 6.2a6.2 6.2 0 0 1-12.4 0 6.2 6.2 0 0 1 6.2-6.2zm0 2.22a3.99 3.99 0 0 0-3.97 3.97A3.99 3.99 0 0 0 12 15.92a3.99 3.99 0 0 0 3.97-3.97A3.99 3.99 0 0 0 12 7.98zm6.44-3.77a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://www.pinterest.de/Morgenland_Teppiche/_saved/" target="_blank" class="mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="#403F3F">
+                                        <path d="M12 0a12 12 0 0 0-4.82 23c-.03-.85 0-1.85.21-2.76l1.55-6.54s-.39-.77-.39-1.9c0-1.78 1.03-3.1 2.32-3.1 1.09 0 1.62.81 1.62 1.8 0 1.09-.7 2.73-1.06 4.25-.3 1.27.63 2.31 1.89 2.31 2.27 0 3.8-2.92 3.8-6.38 0-2.63-1.77-4.6-4.99-4.6a5.68 5.68 0 0 0-5.9 5.75c0 1.05.3 1.78.78 2.35.23.27.26.37.18.67l-.25.97c-.08.3-.32.4-.6.3-1.67-.69-2.46-2.52-2.46-4.59 0-3.4 2.88-7.5 8.58-7.5 4.58 0 7.6 3.32 7.6 6.88 0 4.7-2.62 8.22-6.48 8.22-1.3 0-2.51-.7-2.93-1.5l-.84 3.3c-.26.93-.76 1.86-1.21 2.58A11.99 11.99 0 0 0 24 12 12 12 0 0 0 12 0z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <i aria-hidden="true" class="collapse_arrow"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row footer-socket text-center mt-3 mt-sm-3 mt-md-5 mt-lg-5 mt-xl-5">
+                    <div class="col-lg-12 p-y-1">
+                        <hr class="my-2" style="border-color: rgba(255, 255, 255, 0.2);">
+                        <span class="copyright">{{ trans("devMlt::Template.FooterSecCopyrightText1") }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="footer container-max">
+        <div class="row">
+            <div class="col clearfix">
+                {{ footerContainer | raw }}
+            </div>
+        </div>
+        <div class="{% if topButtonPosition == " right
+    " %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">
+            <i class="fa fa-chevron-up"></i>
+        </div>
+
+        <div class="row">
+            <div class="to-top hidden-md-up" v-scroll-to-top>
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+{% endif %}
+

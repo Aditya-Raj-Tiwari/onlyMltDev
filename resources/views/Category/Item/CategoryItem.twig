@@ -1,0 +1,442 @@
+{% extends getPartial('page-design') %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::Category.Macros.CategoryTree" as Tree %}
+{% set cdcodeitem = config("devMlt.devMlt.cdcodeitem") %}
+{% set cdpercent = config("devMlt.devMlt.cdpercent") %}
+{% set moderneSale = config("devMlt.devMlt.moderneSale") %}
+{% set orientSale = config("devMlt.devMlt.orientSale") %}
+{% set premiumSale = config("devMlt.devMlt.premiumSale") %}
+{% set alleTeppichSale = config("devMlt.devMlt.alleTeppichSale") %}
+{% set dekoSale = config("devMlt.devMlt.dekoSale") %}
+{% set wohnraumSale = config("devMlt.devMlt.wohnraumSale") %}
+{% set saleSale = config("devMlt.devMlt.saleSale") %}
+
+
+{% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets ) %}
+{% set subCategories = services.category.getChildren(category.id) %}
+{% set idPositions = {} %}
+{% set idCategories = {} %}
+{% for subCategory in subCategories if "Y" == subCategory.linklist %}
+    {% for client in subCategory.clients if client.plentyId == services.webstoreConfig.getPlentyId() %}
+        {% set idPositions = idPositions|merge({ ('id_' ~ subCategory.id) : subCategory.details[0].position }) %}
+        {% set idCategories = idCategories|merge({ ('id_' ~ subCategory.id) : subCategory }) %}
+    {% endfor %}
+{% endfor %}
+{% set urlLanguageCode = (urls.includeLanguage) ? "/" ~ category.details[0].lang : "" %}
+
+{% block PageBody %}
+    {% set listType = isSearch ? "itemsearch" : "categoryitem" %}
+    {% set shopBuilderTemplate = shop_builder_category_template(category.id, listType) %}
+    {% if shopBuilderTemplate | trim is not empty or isShopBuilder %}
+        <div class="categoriegrid pt-0 page-content container-max">
+            <div class="row">
+                <div class="col-12">
+                    {{ shopBuilderTemplate | raw }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+
+        {# category banner #}
+        {% if category.id == 1391 and premiumSale == 'true' %}
+            <div class="sale_banner_category row text-center">
+                <div class="col-12">
+                    <p>Sale</p>
+                </div>
+            </div>
+        {% elseif category.id == 107 and saleSale == 'true' %}
+            <div class="sale_banner_category row text-center">
+                <div class="col-12">
+                    <p>Sale</p>
+                </div>
+            </div>
+        {% endif %}
+        {% for item_sub in subCategories %}
+
+            {% if item_sub.id == 78 and moderneSale == 'true' %}
+                <div class="sale_banner_category row text-center">
+                    <div class="col-12">
+                        <p>Sale</p>
+                    </div>
+                </div>
+            {% elseif item_sub.id == 83 and orientSale == 'true' %}
+                <div class="sale_banner_category row text-center">
+                    <div class="col-12">
+                        <p>Sale</p>
+                    </div>
+                </div>
+            {% elseif item_sub.id == 770 and wohnraumSale == 'true' %}
+                <div class="sale_banner_category row text-center">
+                    <div class="col-12">
+                        <p>Sale</p>
+                    </div>
+                </div>
+            {% elseif item_sub.id == 173 and alleTeppichSale == 'true' %}
+                <div class="sale_banner_category row text-center">
+                    <div class="col-12">
+                        <p>Sale</p>
+                    </div>
+                </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% if cdpercent|length > 0 %}
+            <div id="promo_category">
+                <div class="row">
+                    <div class="content">
+                     <span>
+                   {{ cdpercent | raw }}% <b>EXTRA</b> mit dem Code: <span class="code">{{ cdcodeitem }}</span>
+                </span>
+                        <br>
+                        <span>
+                    auf alle Teppiche
+                </span>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="categoriegrid page-content container-max pt-4">
+            <div class="row">
+                <div class="col-12">
+                    {% if subCategories|length > 0 %}
+                        <div class="category-thumbnails owl-carousel owl-theme elem to-fade-in mb-5 d-none d-sm-none s-md-none d-lg-block d-xl-block">
+                            {% for id, position in idPositions|sort %}
+                                {% set completeUrl = urlLanguageCode ~ request.getRequestUri() ~ "/" ~ idCategories[id].details[0].nameUrl %}
+                                <div class="item">
+                                    <div>
+                                        <div class="category_box prop-xs-1-1">
+
+                                            {% set imagePath = "/documents/" ~ idCategories[id].details[0].imagePath %}
+                                            <a href="{{ completeUrl }}">
+                                                {% if idCategories[id].details[0].imagePath |length > 1 %}
+                                                    <img data-src="{{ imagePath }}" class="img-fluid lazyload">
+                                                {% else %}
+                                                    <img data-src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/devMlt_placeholder.jpg"
+                                                         class="img-fluid lazyload">
+                                                {% endif %}
+                                            </a>
+
+                                            <a href="{{ completeUrl }}" class="widget-inner">
+        							<span>
+        								{{ idCategories[id].details[0].name }}
+        							</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <script2>
+                        $('.category-thumbnails').owlCarousel({
+                        loop: false,
+                        margin: 20,
+                        dots: false,
+                        nav: true,
+                        responsive:{
+                        0:{
+                        items:2
+                        },
+                        992:{
+                        items:4
+                        },
+                        1200:{
+                        items:5
+                        },
+                        1400:{
+                        items:6
+                        }
+                        },
+                        autoplay:true,
+                        autoplayTimeout:3500,
+                        autoplayHoverPause:true
+                        })
+                    </script2>
+                    {% if category is defined and ceresConfig.item.showCategoryImage %}
+                        {% include "devMlt::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
+                    {% endif %}
+                    <hr>
+                    <div class="row narrow-row my-4 d-flex d-sm-flex d-md-flex d-lg-none d-xl-none">
+                        <div class="col-6"><a
+                                    class="btn btn-outline-primary filter-toggle d-flex justify-content-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                     fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                                     stroke-linejoin="round" class="mr-1">
+                                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                </svg>
+                                Kategorien
+                            </a></div>
+                        <div class="col-6"><a data-toggle="collapse" href="#filter_collapse" aria-expanded="false"
+                                              aria-controls="filter_collapse"
+                                              class="btn btn-outline-primary filter-toggle d-flex justify-content-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                     fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="butt"
+                                     stroke-linejoin="round" class="mr-1">
+                                    <line x1="4" y1="21" x2="4" y2="14"></line>
+                                    <line x1="4" y1="10" x2="4" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12" y2="3"></line>
+                                    <line x1="20" y1="21" x2="20" y2="16"></line>
+                                    <line x1="20" y1="12" x2="20" y2="3"></line>
+                                    <line x1="1" y1="14" x2="7" y2="14"></line>
+                                    <line x1="9" y1="8" x2="15" y2="8"></line>
+                                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                                </svg>
+                                Filter
+                            </a></div>
+                    </div>
+                    <div class="collapse" id="filter_collapse">
+                        <item-filter-list :facet-data="{{ facets | json_encode }}">
+                            {% if facets | length > 0 %}
+                                <a class="btn btn-link filter-toggle">
+                                    <i class="fa fa-sliders default-float"
+                                       aria-hidden="true"></i> {{ trans("Ceres::Template.itemFilter") }}
+                                </a>
+                            {% endif %}
+                        </item-filter-list>
+                        <item-filter-tag-list></item-filter-tag-list>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-between mb-5">
+                            <div class="itemCount d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                        <span class="text-muted">{{ itemList | length }} {{ trans("devMlt::Template.Cat1") }}
+                            {{ itemCountTotal }} {{ trans("devMlt::Template.Cat2") }}</span>
+                            </div>
+                            <div class="d-flex">
+                                {% include "Ceres::Category.Item.Partials.ItemSorting" with { 'sortingData': searchOptions.sorting, 'selectedSorting': itemSorting } %}
+                                {% include "Ceres::Category.Item.Partials.ItemsPerPage" with { 'itemsPerPage': searchOptions.itemsPerPage, 'selectedValue': itemsPerPage } %}
+                                {# facette teilen button and content #}
+                                <a id="url_link" href="#share_link" class="button btn-dark p-2">
+                                    Suche Teilen
+                                </a>
+                                <div id="share_link" class="row bg-white">
+                                    <h2 class="h3">
+                                        Suchergebnis teilen
+                                    </h2>
+                                    <hr>
+                                    <div class="col-12">
+                                        <p>
+                                            Mit der nachfolgenden URL können Sie Ihre Suchergebnisseite schnell und
+                                            einfach
+                                            wiederherstellen oder per E-Mail sowie WhatsApp versenden.
+                                        </p>
+                                        <p class="mt-2 p-3" id="url_text">
+                                        </p>
+                                    </div>
+
+                                    <div class="col-12">
+                                        {# <div> #}
+                                        {# <button class="copyButton"><p>Copy</p></button> #}
+                                        {# <input class="linkToCopy" value="" id="url_placeholder" #}
+                                        {# style="position: absolute; z-index: -999; opacity: 0;"/> #}
+                                        {# </div> #}
+                                        <div class="d-flex justify-content-center mt-4">
+                                            <div id="sharecart-copy" class="btn text-center px-4 copyButton"
+                                                 style="cursor: pointer;">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     xmlns:xlink="http://www.w3.org/1999/xlink" idth="35"
+                                                     height="35" version="1.1" id="Layer_1" x="0px" y="0px"
+                                                     viewBox="0 0 300 300"
+                                                     fill="#b9b9b9"
+                                                     xml:space="preserve"> <g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M149.996,0C67.157,0,0.001,67.161,0.001,149.997S67.157,300,149.996,300s150.003-67.163,150.003-150.003     S232.835,0,149.996,0z M225.363,123.302l-36.686,36.686c-3.979,3.979-9.269,6.17-14.895,6.17c-5.625,0-10.916-2.192-14.895-6.168     l-1.437-1.437l-3.906,3.906l1.434,1.434c8.214,8.214,8.214,21.579,0,29.793l-36.681,36.686c-3.979,3.979-9.269,6.17-14.898,6.17     c-5.628,0-10.919-2.192-14.9-6.173L74.634,216.5c-8.214-8.209-8.214-21.573-0.003-29.79l36.689-36.684     c3.979-3.979,9.269-6.17,14.898-6.17s10.916,2.192,14.898,6.17l1.432,1.432l3.906-3.906l-1.432-1.432     c-8.214-8.211-8.214-21.576-0.005-29.79l36.689-36.686c3.981-3.981,9.272-6.173,14.898-6.173s10.916,2.192,14.898,6.17     l13.868,13.873C233.577,101.723,233.577,115.09,225.363,123.302z"></path>
+                                                                <path d="M142.539,173.459l-7.093,7.093l-11.002-10.999l7.093-7.093l-1.432-1.432c-1.04-1.037-2.422-1.611-3.89-1.611     c-1.471,0-2.853,0.573-3.893,1.611l-36.686,36.681c-2.145,2.147-2.145,5.638,0,7.783l13.87,13.873     c2.083,2.083,5.708,2.08,7.786,0.003l36.681-36.686c2.148-2.147,2.148-5.641,0-7.789L142.539,173.459z"></path>
+                                                                <path d="M200.493,90.643c-1.04-1.04-2.425-1.613-3.896-1.613c-1.471,0-2.856,0.573-3.896,1.616l-36.686,36.684     c-2.142,2.147-2.142,5.638,0.003,7.786l1.434,1.432l10.88-10.883l11.002,11.002l-10.88,10.883l1.434,1.434     c2.083,2.077,5.703,2.08,7.786-0.003l36.684-36.681c2.145-2.147,2.145-5.638,0-7.786L200.493,90.643z"></path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                            </svg>
+                                                <button class="copyButton d-block"><p
+                                                            class="d-none d-sm-block d-md-block d-lg-block font-weight-bold mt-2">
+                                                        Kopieren</p>
+                                                </button>
+                                                <input class="linkToCopy url_placeholder" value="" id="url_placeholder"
+                                                       style="position: absolute; z-index: -999; opacity: 0;"/>
+                                            </div>
+                                            <input class="linkToCopy url_placeholder" value=""
+                                                   style="position: absolute; z-index: -999; opacity: 0;"/>
+                                            <div id="sharecart-email" class="btn text-center px-4"
+                                                 style="cursor: pointer;">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     width="35"
+                                                     height="35" version="1.1" id="Layer_1" x="0px" y="0px"
+                                                     viewBox="0 0 299.997 299.997"
+                                                     fill="#b9b9b9" xml:space="preserve"> <g>
+                                                        <g>
+                                                            <path d="M149.996,0C67.157,0,0.001,67.158,0.001,149.997c0,82.837,67.156,150,149.995,150s150-67.163,150-150    C299.996,67.158,232.835,0,149.996,0z M149.999,52.686l88.763,55.35H61.236L149.999,52.686z M239.868,196.423h-0.009    c0,8.878-7.195,16.072-16.072,16.072H76.211c-8.878,0-16.072-7.195-16.072-16.072v-84.865c0-0.939,0.096-1.852,0.252-2.749    l84.808,52.883c0.104,0.065,0.215,0.109,0.322,0.169c0.112,0.062,0.226,0.122,0.34,0.179c0.599,0.309,1.216,0.558,1.847,0.721    c0.065,0.018,0.13,0.026,0.195,0.041c0.692,0.163,1.393,0.265,2.093,0.265h0.005c0.005,0,0.01,0,0.01,0    c0.7,0,1.401-0.099,2.093-0.265c0.065-0.016,0.13-0.023,0.195-0.041c0.63-0.163,1.245-0.412,1.847-0.721    c0.114-0.057,0.228-0.117,0.34-0.179c0.106-0.06,0.218-0.104,0.322-0.169l84.808-52.883c0.156,0.897,0.252,1.808,0.252,2.749    V196.423z"></path>
+                                                        </g>
+                                                    </g>
+                          </svg>
+                                                <span class="d-none d-sm-block d-md-block d-lg-block font-weight-bold mt-2">per E-Mail</span>
+                                            </div>
+                                            <div id="sharecart-whatsapp" class="btn text-center px-4"
+                                                 style="cursor: pointer;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                                     viewBox="0 0 24 24"
+                                                     fill="#b9b9b9">
+                                                    <path d="M12 0a12 12 0 1 1 0 24 12 12 0 0 1 0-24zm.14 4.5a7.34 7.34 0 0 0-6.46 10.82l.15.26L4.5 19.5l4.08-1.3a7.38 7.38 0 0 0 10.92-6.4c0-4.03-3.3-7.3-7.36-7.3zm0 1.16c3.41 0 6.19 2.76 6.19 6.15a6.17 6.17 0 0 1-9.37 5.27l-.23-.15-2.38.76.77-2.28a6.08 6.08 0 0 1-1.17-3.6 6.17 6.17 0 0 1 6.19-6.15zM9.66 8.47a.67.67 0 0 0-.48.23l-.14.15c-.2.23-.5.65-.5 1.34 0 .72.43 1.41.64 1.71l.14.2a7.26 7.26 0 0 0 3.04 2.65l.4.14c1.44.54 1.47.33 1.77.3.33-.03 1.07-.43 1.22-.85.15-.42.15-.78.1-.85-.02-.05-.08-.08-.15-.12l-1.12-.54a5.15 5.15 0 0 0-.3-.13c-.17-.06-.3-.1-.41.09-.12.18-.47.58-.57.7-.1.1-.18.13-.32.08l-.4-.18a4.64 4.64 0 0 1-2.13-1.98c-.1-.18-.01-.28.08-.37l.27-.31c.1-.1.12-.18.18-.3a.3.3 0 0 0 .01-.26l-.1-.23-.48-1.15c-.15-.36-.3-.3-.4-.3l-.35-.02z"></path>
+                                                </svg>
+                                                <span class="d-none d-sm-block d-md-block d-lg-block font-weight-bold mt-2">per WhatsApp</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script2>
+                                    $('.url_placeholder').each(function () {
+                                    var $this = $(this),
+                                    href = $this.attr('value');
+                                    $this.attr('value', document.URL);
+                                    });
+
+                                    $('#url_text').text(document.URL);
+                                    $('#url_link').click(function(){
+                                    $('#share_link').css("display", "block");
+                                    });
+                                    $(document).ready(function () {
+                                    $('#url_link').magnificPopup({type: 'inline'});
+                                    });
+
+                                    $('#sharecart-copy').click(function(){
+                                    $(this).siblings('input.linkToCopy').select();
+                                    document.execCommand("copy");
+                                    $(".copyButton button p").html("Kopiert !");
+                                    });
+
+                                    $(document).on("click", "#sharecart-whatsapp", function () {
+                                    var share_url = document.URL;
+                                    console.log(document.URL);
+                                    window.open("https://web.whatsapp.com/send?text="+share_url,'_blank');
+                                    });
+
+                                    $('button.copyButton').click(function(){
+                                    $(this).siblings('input.linkToCopy').select();
+                                    document.execCommand("copy");
+                                    $(".copyButton button p").html("Kopiert !");
+                                    {# $('.copyButton p').text('Copied!); #}
+                                    });
+
+                                    $(document).on("click", "#sharecart-email", function () {
+                                    var share_url = document.URL;
+                                    window.location.href = `mailto:?subject=Schau Dir mal diese Produkte
+                                    an&body=`+share_url;
+                                    });
+                                </script2>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# infinity scroll #}
+                    {# <scroller #}
+                    {# :pagelimit="{{ config("InfinityScroller.item.pageLimit")|json_encode }}" #}
+                    {# :page="{{ page|json_encode }}" #}
+                    {# :itemsperpage="{{ itemsPerPage|json_encode }}" #}
+                    {# item-classes="col-12 col-sm-6 col-md-4 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}4{% else %}3{% endif %}" #}
+                    {# {% if services.template.isCurrentTemplate('tpl.category.item') and category is defined %} #}
+                    {# :categoryid="{{ category.id|json_encode }}" #}
+                    {# {% elseif services.template.isCurrentTemplate('tpl.search') %} #}
+                    {# :query="{{ searchString|json_encode }}" #}
+                    {# {% elseif services.template.isCurrentTemplate('tpl.tags') %} #}
+                    {# :tagid="{{ tagId|json_encode }}" #}
+                    {# {% endif %}> #}
+                    {# <div class="w-100"> #}
+                    {# <div class="loading d-flex text-center"> #}
+                    {# <div class="loading-animation m-auto"> #}
+                    {# <div class="rect1 bg-appearance"></div> #}
+                    {# <div class="rect2 bg-appearance"></div> #}
+                    {# <div class="rect3 bg-appearance"></div> #}
+                    {# <div class="rect4 bg-appearance"></div> #}
+                    {# <div class="rect5 bg-appearance"></div> #}
+                    {# </div> #}
+                    {# </div> #}
+                    {# </div> #}
+                    {# </scroller> #}
+
+
+                    <ul class="product-list row grid">
+                        {% for item in itemList %}
+                            <li class="col-6 col-sm-6 col-md-4 col-lg-3 elem ">
+                                <category-item
+                                        item-data-ref="{{ item.data | json_data }}"
+                                        :decimal-count="{{ ceresConfig.item.storeSpecial }}">
+                                    <template
+                                            #before-prices>{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+                                    <template
+                                            #after-prices>{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
+
+                                    <a href="{{ item.data | itemURL }}" class="small">
+                                        <i class="fa fa-image"></i>
+                                        <span>{{ item.data | itemName }}</span>
+                                    </a>
+                                </category-item>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% if category is not defined and itemList is empty %}
+                        <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
+                    {% endif %}
+                    <hr>
+                    <div class="list-controls mb-5 row elem to-fade-in">
+                        <div class="col-12">
+                            <div class="mt-3">
+                                {% include "Ceres::Category.Item.Partials.Pagination" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if category is defined %}
+                        <div class="col-12 px-0 elem to-fade-in">
+                            {% if ceresConfig.item.showCategoryDescriptionBottom in ["description1", "both"] and category.details[0].description | trim is not empty %}
+                                <div class="category-description mb-3">{{ category.details[0].description | raw }}</div>
+                            {% endif %}
+                            {% if ceresConfig.item.showCategoryDescriptionBottom in ["description2", "both"] and category.details[0].description2 | trim is not empty %}
+                                <div class="category-description mb-3">{{ category.details[0].description2 | raw }}</div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}
+
+{% block PartialHead %}
+    {% set canonicalUrl = services.url.getCanonicalURL(null, true) %}
+    {% if currentPage - 1 > 0 %}
+        <link rel="prev" href="{{ canonicalUrl ~ queryString({'page': currentPage - 1}) }}"/>
+    {% endif %}
+
+    {% if currentPage + 1 <= pageMax %}
+        <link rel="next" href="{{ canonicalUrl ~ queryString({'page': currentPage + 1}) }}"/>
+    {% endif %}
+
+    {% if category is null %}
+        {% if '&' in queryString() %}
+            {% set robotsValue = 'NOINDEX' %}
+        {% else %}
+            {% set robotsValue = ceresConfig.meta.robotsSearchResult %}
+        {% endif %}
+
+        {% embed getPartial('page-metadata') %}
+            {% block title      trans("Ceres::Template.itemSearchResults") ~ " " ~ searchString %}
+            {% block robots     robotsValue %}
+        {% endembed %}
+    {% else %}
+        {% embed getPartial('page-metadata') %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}
+

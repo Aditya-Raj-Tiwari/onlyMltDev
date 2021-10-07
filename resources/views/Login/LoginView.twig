@@ -1,0 +1,43 @@
+{% set backlink = request.get("backlink") %}
+{% set expressbtn = config("devMlt.devMlt.expressbtn") %}
+
+
+<script type="x/template" data-component="login-view">
+    <div class="container-max pt-5 login">
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <div id="login-card" class="card h-100">
+                    <div class="card-body p-5">
+                        <div>
+                            <h3 class="h2 font-weight-bold login-view-title d-block mb-2">{{ trans("Ceres::Template.login") }}</h3>
+                            <p>{{ trans("devMlt::Template.LoginMaskLogin") }}</p>
+                            <login :backlink="sanitizedBacklink" :has-to-forward="true">
+
+                                <template #extend-overlay-buttons>
+                                    <slot name="extend-overlay-buttons"></slot>
+                                </template>
+
+                            </login>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="guest-register-card" class="card h-100">
+                    <div class="card-body p-5">
+                        <h3 class="h2 font-weight-bold login-view-title d-block mb-2">{{ trans("Ceres::Template.loginOrderAsGuest") }}</h3>
+                        <p>{{ trans("devMlt::Template.LoginMaskGuest") }}</p>
+                        <guest-login :backlink="sanitizedBacklink" :initial-email="guestEmail"></guest-login>
+                        <hr style="margin-top: 1.725rem !important; margin-bottom: 1.2rem !important; border-color: transparent;">
+                            <h3 class="h2 font-weight-bold login-view-title d-block mb-2">{{ trans("Ceres::Template.loginRegister") }}</h3>
+                            <p>{{ trans("devMlt::Template.LoginMaskRegister") }}</p>
+                            <a class="btn btn-primary btn-lg btn-block" href="{{ urls.registration }}{% if backlink | trim is not empty %}?backlink={{ backlink | url_encode }}{% endif %}">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                {{ trans("Ceres::Template.loginRegister") }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>

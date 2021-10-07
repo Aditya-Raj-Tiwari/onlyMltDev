@@ -1,0 +1,140 @@
+{% set slide1pos = config("devMlt.devMlt.slide1pos") %}
+
+{% set slide1active = config("devMlt.devMlt.slide1active") %}
+{% set slide1img = config("devMlt.devMlt.slide1img") %}
+{% set slide1bgcolor = config("devMlt.devMlt.slide1bgcolor") %}
+{% set slide1btnurl = config("devMlt.devMlt.slide1btnurl") %}
+{% set slide1textfontcolor = config("devMlt.devMlt.slide1textfontcolor") %}
+
+{% set slide2active = config("devMlt.devMlt.slide2active") %}
+{% set slide2img = config("devMlt.devMlt.slide2img") %}
+{% set slide2bgcolor = config("devMlt.devMlt.slide2bgcolor") %}
+{% set slide2btnurl = config("devMlt.devMlt.slide2btnurl") %}
+{% set slide2textfontcolor = config("devMlt.devMlt.slide2textfontcolor") %}
+
+{% set slide3active = config("devMlt.devMlt.slide3active") %}
+{% set slide3img = config("devMlt.devMlt.slide3img") %}
+{% set slide3bgcolor = config("devMlt.devMlt.slide3bgcolor") %}
+{% set slide3btnurl = config("devMlt.devMlt.slide3btnurl") %}
+{% set slide3textfontcolor = config("devMlt.devMlt.slide3textfontcolor") %}
+
+{% set slide4active = config("devMlt.devMlt.slide4active") %}
+{% set slide4img = config("devMlt.devMlt.slide4img") %}
+{% set slide4bgcolor = config("devMlt.devMlt.slide4bgcolor") %}
+{% set slide4btnurl = config("devMlt.devMlt.slide4btnurl") %}
+{% set slide4textfontcolor = config("devMlt.devMlt.slide4textfontcolor") %}
+
+{% set slide5active = config("devMlt.devMlt.slide5active") %}
+{% set slide5img = config("devMlt.devMlt.slide5img") %}
+{% set slide5bgcolor = config("devMlt.devMlt.slide5bgcolor") %}
+{% set slide5btnurl = config("devMlt.devMlt.slide5btnurl") %}
+{% set slide5textfontcolor = config("devMlt.devMlt.slide5textfontcolor") %}
+
+
+
+{% if slide1active == 'true' and slide1title1|length > 1 and slide1pos == 1 %}
+    <div class="carousel-cell">
+        <div class="content_container item d-flex">
+            <div class="content">
+                <div class="content-inner">
+                    <p class="date mb-4 mt-5">{{ trans("devMlt::HomepageSlider.Slide1Erscheindatum") }}</p>
+                    <p class="h1" style="color: {{ slide1textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide1Uberschrift1") }}</p>
+                    <p class="h1" style="color: {{ slide1textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide1Uberschrift2") }}</p>
+                    <p class="h3 font-weight-normal my-3"
+                       style="color: {{ slide1textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide1Zwischenuberschrift") }}</p>
+                    <a href="{{ services.category.getURLById(slide1btnurl) }}"
+                       class="btn btn-light btn-md mt-3">
+                        {{ trans("devMlt::HomepageSlider.Slide1Schaltflasche") }}
+                    </a>
+                </div>
+            </div>
+            <a href="{{ services.category.getURLById(slide1btnurl) }}">
+                <img class="img-fluid" src="{{ slide1img }}">
+            </a>
+        </div>
+    </div>
+{% elseif slide2active == 'true' and slide2title1|length > 1 and slide1pos == 2 %}
+    <div class="carousel-cell">
+        <div class="content_container item d-flex">
+            <div class="content ">
+                <div class="content-inner">
+                    <p class="date mb-4 mt-5">{{ trans("devMlt::HomepageSlider.Slide2Erscheindatum") }}</p>
+                    <p class="h1" style="color: {{ slide2textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide2Uberschrift1") }}</p>
+                    <p class="h1" style="color: {{ slide2textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide2Uberschrift2") }}</p>
+                    <p class="h3 font-weight-normal my-3"
+                       style="color: {{ slide2textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide2Zwischenuberschrift") }}</p>
+                    <a href="{{ services.category.getURLById(slide2btnurl) }}"
+                       class="btn btn-light btn-md mt-3">
+                       {{ trans("devMlt::HomepageSlider.Slide2Schaltflasche") }}
+                    </a>
+                </div>
+            </div>
+            <a href="{{ services.category.getURLById(slide2btnurl) }}">
+                <img class="img-fluid" src="{{ slide2img }}">
+            </a>
+        </div>
+    </div>
+{% elseif slide3active == 'true' and slide3title1|length > 1 and slide1pos == 3 %}
+    <div class="carousel-cell">
+        <div class="content_container item d-flex">
+            <div class="content ">
+                <div class="content-inner">
+                    <p class="date mb-4 mt-5">{{ trans("devMlt::HomepageSlider.Slide3Erscheindatum") }}</p>
+                    <p class="h1" style="color: {{ slide3textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide3Uberschrift1") }}</p>
+                    <p class="h1" style="color: {{ slide3textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide3Uberschrift2") }}</p>
+                    <p class="h3 font-weight-normal my-3"
+                       style="color: {{ slide2textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide3Zwischenuberschrift") }}</p>
+                    <a href="{{ services.category.getURLById(slide2btnurl) }}"
+                       class="btn btn-light btn-md mt-3">
+                        {{ trans("devMlt::HomepageSlider.Slide3Schaltflasche") }}
+                    </a>
+                </div>
+            </div>
+            <a href="{{ services.category.getURLById(slide3btnurl) }}">
+                <img class="img-fluid " src="{{ slide3img }}">
+            </a>
+        </div>
+    </div>
+{% elseif slide4active == 'true' and slide4title1|length > 1 and slide1pos == 4 %}
+    <div class="carousel-cell">
+        <div class="content_container item d-flex">
+            <div class="content">
+                <div class="content-inner">
+                    <p class="date mb-4 mt-5">{{ trans("devMlt::HomepageSlider.Slide4Erscheindatum") }}</p>
+                    <p class="h1" style="color: {{ slide4textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide4Uberschrift1") }}</p>
+                    <p class="h1" style="color: {{ slide4textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide4Uberschrift2") }}</p>
+                    <p class="h3 font-weight-normal my-3"
+                       style="color: {{ slide2textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide4Zwischenuberschrift") }}</p>
+                    <a href="{{ services.category.getURLById(slide2btnurl) }}"
+                       class="btn btn-light btn-md mt-3">
+                        {{ trans("devMlt::HomepageSlider.Slide4Schaltflasche") }}
+                    </a>
+                </div>
+            </div>
+            <a href="{{ services.category.getURLById(slide4btnurl) }}">
+                <img class="img-fluid" src="{{ slide4img }}">
+            </a>
+        </div>
+    </div>
+{% elseif slide5active == 'true' and slide5title1|length > 1 and slide1pos == 5 %}
+    <div class="carousel-cell">
+        <div class="content_container item d-flex">
+            <div class="content">
+                <div class="content-inner">
+                    <p class="date mb-4 mt-5">{{ trans("devMlt::HomepageSlider.Slide5Erscheindatum") }}</p>
+                    <p class="h1" style="color: {{ slide5textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide5Uberschrift1") }}</p>
+                    <p class="h1" style="color: {{ slide5textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide5Uberschrift2") }}</p>
+                    <p class="h3 font-weight-normal my-3"
+                       style="color: {{ slide2textfontcolor }}">{{ trans("devMlt::HomepageSlider.Slide5Zwischenuberschrift") }}</p>
+                    <a href="{{ services.category.getURLById(slide2btnurl) }}"
+                       class="btn btn-light btn-md mt-3">
+                        {{ trans("devMlt::HomepageSlider.Slide5Schaltflasche") }}
+                    </a>
+                </div>
+            </div>
+            <a href="{{ services.category.getURLById(slide5btnurl) }}">
+                <img class="img-fluid" src="{{ slide5img }}">
+            </a>
+        </div>
+    </div>
+{% endif %}

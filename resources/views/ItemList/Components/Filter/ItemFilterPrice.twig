@@ -1,0 +1,67 @@
+<script type="x/template" data-component="item-filter-price">
+    <div class="item-filter-price d-block p-2">
+        <div class="d-flex">
+            <div class="input-group mb-0">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <span v-if="currency === '€'">EUR</span>
+                        <span v-else>${ currency }</span>
+                    </div>
+                </div>
+
+                <input type="number" min="0" step="1" oninput="validity.valid||(value='');"
+                       class="form-control"
+                       @focus="selectAll($event)"
+                       min="0"
+                       placeholder="Min"
+                       v-model="priceMin">
+            </div>
+
+            <div class="input-group mb-0">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <span v-if="currency === '€'">EUR</span>
+                        <span v-else>${ currency }</span>
+                    </div>
+                </div>
+
+                <input type="number" min="0" step="1" oninput="validity.valid||(value='');"
+                       class="form-control"
+                       @focus="selectAll($event)"
+                       placeholder="Max"
+                       v-model="priceMax">
+            </div>
+
+            <button type="button" class="btn btn-primary btn-appearance" :class="{'disabled': isDisabled}" v-tooltip
+                    data-toggle="tooltip" data-placement="top" @click="triggerFilter()"
+                    title="{{ trans("Ceres::Template.itemApply") }}">
+                <i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="d-block w-100">
+            <ul class="price-range list-unstyled">
+                <li><a class="price-range-btn"
+                       onclick="javascript:location.href='{{ services.category.getURLById(category.id) }}?priceMin=50&priceMax=100'">50
+                        € - 100 €</a></li>
+                <li><a class="price-range-btn"
+                       onclick="javascript:location.href='{{ services.category.getURLById(category.id) }}?priceMin=100&priceMax=200'">100
+                        € - 200 €</a></li>
+                <li><a class="price-range-btn"
+                       onclick="javascript:location.href='{{ services.category.getURLById(category.id) }}?priceMin=200&priceMax=500'">200
+                        € - 500 €</a></li>
+                <li><a class="price-range-btn"
+                       onclick="javascript:location.href='{{ services.category.getURLById(category.id) }}?priceMin=500&priceMax=1000'">500
+                        € - 1000 €</a></li>
+                <li><a class="price-range-btn"
+                       onclick="javascript:location.href='{{ services.category.getURLById(category.id) }}?priceMin=1000&priceMax=2000'">1000
+                        € - 2000 €</a></li>
+                <li><a class="price-range-btn"
+                       onclick="javascript:location.href='{{ services.category.getURLById(category.id) }}?priceMin=2000&priceMax=5000'">2000
+                        € - 5000 €</a></li>
+                <li><a class="price-range-btn"
+                       onclick="javascript:location.href='{{ services.category.getURLById(category.id) }}?priceMin=5000'">über
+                        5000 €</a></li>
+            </ul>
+        </div>
+    </div>
+</script>

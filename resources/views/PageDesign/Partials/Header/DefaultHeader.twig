@@ -1,0 +1,146 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+<header id="page-header" class="fixed-top default-header d-print-none">
+    <div class="container-max">
+        <div class="row flex-row-reverse position-relative">
+            <div id="page-header-parent" class="col-12 header-container" data-header-offset>
+                <div class="top-bar header-fw d-none d-sm-none d-md-none d-lg-block d-xl-block h-auto">
+                    {% include "devMlt::PageDesign.Partials.Header.PromoBar" %}
+                    <div class="container-max pr-lg-3">
+                        <div class="row mx-0 justify-content-between position-relative">
+                            {{ LayoutContainer.show("Ceres::Header.LeftSide") }}
+                            <div class="top-bar-adv justify-content-between d-flex">
+                                <div class="d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                                         fill="none" stroke="#7b7b7b" stroke-width="4" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    {{ trans("devMlt::Template.TopBarAdv1") }}
+                                </div>
+
+                                <div class="d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                                         fill="none" stroke="#7b7b7b" stroke-width="4" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    {{ trans("devMlt::Template.TopBarAdv2") }}
+                                </div>
+                                <div class="d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                                         fill="none" stroke="#7b7b7b" stroke-width="4" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    {{ trans("devMlt::Template.TopBarAdv3") }}
+                                </div>
+                            </div>
+                            <div class="top-bar-items">
+                                <div class="controls">
+                                    <ul id="controlsList"
+                                        class="controls-list mb-0 d-flex justify-content-end list-inline pl-2 pl-sm-1 pl-md-0">
+                                        <li class="list-inline-item control-user">
+                                            <user-login-handler>
+                                                <a class="register-link" data-toggle="modal">
+                                                    <span class="d-sm-inline">+ {{ trans("Ceres::Template.loginRegister") }}</span>
+                                                </a>
+                                            </user-login-handler>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-max px-0 px-lg-3">
+                        <div class="row mx-0 flex-row-reverse position-relative">
+                            <div id="searchBox" class="cmp cmp-search-box collapse">
+                                {% set overrideSearchBar = LayoutContainer.show("Ceres::Search.SearchBar") %}
+                                {% if overrideSearchBar | trim is empty %}
+                                    <item-search></item-search>
+                                {% else %}
+                                    {{ overrideSearchBar | raw }}
+                                {% endif %}
+                            </div>
+
+                            {% if enableCurrencySelect == "true" %}
+                                <div id="currencySelect" class="cmp cmp-currency-select collapse">
+                                    <div class="container-max">
+                                        <div class="row py-3">
+                                            <div class="currency-list col-12">
+                                                <div class="list-title">
+                                                    <strong>{{ trans("Ceres::Template.headerCurrency") }}</strong>
+                                                    <hr>
+                                                </div>
+                                                <ul class="row text-center text-sm-left">
+                                                    {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
+                                                        <li class="col-2 px-0{% if currency.name == services.checkout.getCurrencyData().name %} active{% endif %}">
+                                                            <a class="nav-link"
+                                                               href="{{ queryString({"currency": currency.name}) }}"
+                                                               rel="nofollow">
+                                                                {% if currencyFormatSelect == 'all' %}
+                                                                    {{ currency.name }} <br
+                                                                        class="d-block d-sm-none"/>({{ currency.symbol }})
+                                                                {% else %}
+                                                                    {{ currency[currencyFormatSelect] }}
+                                                                {% endif %}
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div id="countrySettings" class="cmp cmp-country-settings collapse">
+                                <div class="container-max">
+                                    <div class="row py-3">
+                                        <div class="col-12 col-lg-6">
+
+                                            <div class="language-settings">
+                                                <div class="list-title">
+                                                    <strong>{{ trans("Ceres::Template.headerSelectLanguage") }}</strong>
+                                                    <hr>
+                                                </div>
+
+                                                {% set languageList = services.webstoreConfigurationRepository.getActiveLanguageList() %}
+                                                {% set languageUrls = services.url.getLanguageURLs() %}
+                                                <ul class="row">
+                                                    {% for language in languageList %}
+                                                        {% set languageISO = services.localizationRepository.getLanguageCode(language) %}
+                                                        <li class="col-6 col-sm-4 px-0{% if lang == language %} active{% endif %}">
+                                                            <a class="nav-link"
+                                                               href="{% if languageUrls[languageISO] is defined %}{{ languageUrls[languageISO] ~ queryString() }}{% elseif language != defaultLanguage %}/{{ language }}{{ urls.trailingSlashSuffix }}{% else %}/{% endif %}"
+                                                               data-update-url>
+                                                                <i class="flag-icon flag-icon-{{ language }}"></i>
+                                                                {{ trans("Ceres::Template.header" ~ language | capitalize) }}
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="shipping-settings">
+                                                <div class="list-title">
+                                                    <strong>{{ trans("Ceres::Template.headerSelectShippingCountry") }}</strong>
+                                                    <hr>
+                                                </div>
+                                                <shipping-country-select
+                                                        :disable-input="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include "devMlt::PageDesign.Partials.Header.Navigation" %}
+            </div>
+        </div>
+    </div>
+</header>

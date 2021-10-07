@@ -1,0 +1,16 @@
+<script type="x/template" id="vue-item-filter-tag-list">
+    <div class="selected-filters clearfix col-12">
+        <div class="tag-outer">
+            <span :class="'selected-filter badge badge-dark mx-1 filter-' + tag.id" v-for="tag in tagList"
+                  @click="removeTag(tag)">
+                <i class="fa fa-times" aria-hidden="true"></i> ${ tag.name }
+            </span>
+        </div>
+        <div class="d-block my-3">
+            <span class="btn btn-secondary selected-filter reset-all" v-if="tagList.length >= 2"
+                  @click="resetAllTags()">
+                {{ trans("Ceres::Template.itemFilterReset") }}
+            </span>
+        </div>
+    </div>
+</script>

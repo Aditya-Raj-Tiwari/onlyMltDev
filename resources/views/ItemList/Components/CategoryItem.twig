@@ -1,0 +1,149 @@
+<script type="x/template" data-component="category-item">
+    <article class="cmp cmp-product-thumb">
+        <a href="javascript:void(0)" class="hover_on">
+            <div class="thumb-inner" :class="paddingClasses" :style="paddingInlineStyles">
+                <div class="thumb-image">
+                    <add-to-wish-list :variation-id="item.variation.id"></add-to-wish-list>
+                    <div class="prop-1-1">
+                        <slot name="item-image">
+                            <category-image-carousel :image-urls-data="item.images | itemImages(imageUrlAccessor)"
+                                                     :alt-text="item | itemName"
+                                                     :title-text="item | itemName"
+                                                     :item-url="item | itemURL(urlWithVariationId)"
+                                                     :enable-carousel="$ceres.config.item.enableImageCarousel"
+                                                     :disable-carousel-on-mobile="disableCarouselOnMobile"
+                                                     ref="categoryImageCarousel">
+                            </category-image-carousel>
+                        </slot>
+                    </div>
+                </div>
+                <!-- STORE SPECIALS -->
+                <div class="replace_special" v-if="item.prices.rrp">
+                    ${ Number(((item.prices.default.price.value - item.prices.rrp.price.value) /
+                    item.prices.rrp.price.value) *100).toLocaleString('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                    }) } %
+                </div>
+                <div v-else>
+                    <slot name="store-special">
+                        <item-store-special v-if="storeSpecial || item.variation.bundleType === 'bundle'"
+                                            :store-special="storeSpecial"
+                                            :recommended-retail-price="item.prices.rrp"
+                                            :variation-retail-price="item.prices.default"
+                                            :special-offer-price="item.prices.specialOffer"
+                                            :decimal-count="decimalCount"
+                                            :bundle-type="item.variation.bundleType"></item-store-special>
+                    </slot>
+                </div>
+
+                <!-- ./STORE SPECIALS -->
+                <!-- ITEM DETAILS -->
+                <slot name="item-details">
+                    <div class="thumb-content text-center">
+                        <a :href="item | itemURL(urlWithVariationId)" class="thumb-title stretched-link text-center">
+                            <h3 class>${ item | itemName }</h3>
+                            <!--
+                            span category color(farbe)
+                            <span v-for="attribute in item.groupedAttributes">${ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }</span>
+                            -->
+                        </a>
+                        <div class="thumb-meta mt-2">
+                            <div class="prices d-block d-flex justify-content-center">
+                                <div>
+                                    <div class="price">
+                                        <div v-if="storeSpecial" style="color: #FF5650">
+                                            <template v-if="item.item.itemType === 'set'">
+                                                ${ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }
+                                            </template>
+                                            <template
+                                                    v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting">
+                                                ${ $translate("Ceres::Template.categoryItemFromPrice", { price:
+                                                itemPrice })
+                                                }
+                                            </template>
+                                            <template v-else>
+                                                ${ item.prices.default.unitPrice.formatted | specialOffer(item.prices,
+                                                "unitPrice", "formatted") }
+                                            </template>
+                                        </div>
+                                        <div v-else>
+                                            <template v-if="item.item.itemType === 'set'">
+                                                ${ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }
+                                            </template>
+                                            <template
+                                                    v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting">
+                                                ${ $translate("Ceres::Template.categoryItemFromPrice", { price:
+                                                itemPrice })
+                                                }
+                                            </template>
+                                            <template v-else>
+                                                ${ item.prices.default.unitPrice.formatted | specialOffer(item.prices,
+                                                "unitPrice", "formatted") }
+                                            </template>
+                                        </div>
+
+                                    </div>
+                                    <div class="category-unit-price text-muted small text-center pl-3 py-1"
+                                         v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
+                                        <span v-if="item.variation.mayShowUnitPrice">${ item.prices.default.basePrice }</span>
+                                    </div>
+                                </div>
+                                <div v-if="item.prices.rrp && item.prices.rrp.price.value > 0 && item.prices.rrp.price.value > item.prices.default.unitPrice.value"
+                                     class="ml-2">
+                                    <del class="crossprice w-100" v-if="item.prices.specialOffer">
+                                        ${ item.prices.default.unitPrice.formatted | itemCrossPrice(true) }
+                                    </del>
+                                    <del class="crossprice w-100" color="red" v-else>
+                                        ${ item.prices.rrp.unitPrice.formatted | itemCrossPrice }
+                                    </del>
+                                </div>
+                                <div v-else>
+                                </div>
+                            </div>
+                        </div>
+                        <slot name="before-prices"></slot>
+                        <slot name="after-prices"></slot>
+                    </div>
+                </slot>
+                <!-- ./ITEM DETAILS  -->
+
+                {# weitere farbe img #}
+
+                {# <div class="row cross_items" v-if="item.images.all.length > 2"> #}
+                {# <div class="col-3 d-md-inline font-weight-bold title_of_hover"> #}
+                {# <div id="itemcount_parent" v-for="a in item.images.all" v-if="a.position == 0"> #}
+                {# </div> #}
+                {# <p>Verfügbare Farben:</p> #}
+                {# </div> #}
+                {# <div class="col-8 d-md-inline"> #}
+                {# <div class="main-carousel" style="z-index: 11"> #}
+                {# <div v-for="(a,index) in item.images.all" v-if="a.position == 0"> #}
+                {# <div class="carousel-cell"> #}
+                {# <div class="item"> #}
+                {# <img :src="a.urlMiddle" alt="" width="30px" height="30px"> #}
+                {# </div> #}
+                {# </div> #}
+                {# </div> #}
+                {# </div> #}
+                {# <script2> #}
+                {# var $gallery = $('.main-carousel').flickity({ #}
+                {# // options #}
+                {# cellAlign: 'left', #}
+                {# contain: true, #}
+                {# prevNextButtons: false, #}
+                {# pageDots: false #}
+                {# }); #}
+                {# var flkty = $gallery.data('flickity'); #}
+                {# if(flkty.slides.length<2){ #}
+                {# $('.cross_items').hide(); #}
+                {# } #}
+                {# </script2> #}
+                {# </div> #}
+                {# </div> #}
+            </div>
+        </a>
+    </article>
+</script>
+
+

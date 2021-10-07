@@ -1,0 +1,874 @@
+{% import "Ceres::PageDesign.Macros.IncludeComponents" as Loader %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.Translations" as Translations %}
+{{ component( "Ceres::PageDesign.Components.Notifications" ) }}
+{{ component( "Ceres::PageDesign.Components.Popper" ) }}
+{{ component( "Ceres::Customer.Components.ForgotPassword" ) }}
+
+{% if isShopBuilder %}
+    {% include "Ceres::Widgets.WidgetComponents" %}
+{% endif %}
+
+{% set isItem = services.template.isItem() == "1" %}
+{% set currencyFormat = config("Ceres.currency.format") %}
+{% set defaultLanguage = webstoreConfig.defaultLanguage %}
+
+<!DOCTYPE html>
+
+<html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#" class="icons-loading">
+
+<head>
+    {{ get_consent_scripts(ceresConfig.global.blockCookies) }}
+
+    {% include getPartial('head') %}
+
+    {% block PartialHead %}
+        {% embed getPartial('page-metadata') %}{% endembed %}
+    {% endblock %}
+
+    {% for styleTemplate in get_additional_styles() %}
+        {% include styleTemplate.path ignore missing with styleTemplate.params %}
+    {% endfor %}
+
+<body class="{{ bodyClasses | join(' ') }} {% if request.get('openBasketPreview') == 1 %} basket-open{% endif %}">
+
+{{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
+
+<script>
+    if ('ontouchstart' in document.documentElement) {
+        document.body.classList.add("touch");
+    } else {
+        document.body.classList.add("no-touch");
+    }
+</script>
+
+<div id="vue-app" class="app">
+    <!-- messages -->
+    <notifications template="#vue-notifications"
+                   :initial-notifications="{{ notifications | json_encode() }}"></notifications>
+
+    {% include getPartial('header') %}
+
+    <div id="page-body" class="main">
+        {% block PageBody %}{% endblock %}
+    </div>
+
+    {% include getPartial('footer') %}
+
+    {% block PartialFooter %}{% endblock %}
+
+    <!-- LOGIN MODAL -->
+    <div id="login-modal-wrapper">
+        <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <login modal-element="login-modal-wrapper">
+                        <template #extend-overlay-buttons>
+                            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                        </template>
+                    </login>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./LOGIN MODAL -->
+
+    <!-- REGISTRATION MODAL -->
+    <div id="simple-registration-modal-wrapper">
+        <div class="modal fade" id="registration" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <lazy-load component="register-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title h3">
+                                {{ trans("Ceres::Template.regCreateAccount") }}
+
+                            </div>
+
+                            <popper v-cloak class="ml-auto">
+                                <template #handle>
+                                    <button class="btn btn-icon btn-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1"
+                                             stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                        </svg>
+                                    </button>
+                                </template>
+                                <template #title>
+                                    {{ trans("Ceres::Template.regContactInformations") }}
+                                </template>
+                                <template #content>
+                                    <ul class='pl-3'>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                        <li class='mb-3'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                        <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
+                                    </ul>
+                                </template>
+                            </popper>
+
+                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"
+                                     fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <registration :is-simple-registration="true"
+                                          modal-element="simple-registration-modal-wrapper">
+                                <template #extend-overlay-buttons>
+                                    {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+                                </template>
+                                <template #custom-address-fields>
+                                    {{ LayoutContainer.show("Ceres::Checkout.CustomAddressField") }}
+                                </template>
+                            </registration>
+                        </div>
+                    </div>
+                </lazy-load>
+            </div>
+        </div>
+    </div>
+    <!-- ./REGISTRATION MODAL -->
+
+    <!-- BASKET MODAL -->
+    <lazy-load component="add-item-to-basket-overlay">
+        <add-item-to-basket-overlay>
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
+            </template>
+        </add-item-to-basket-overlay>
+    </lazy-load>
+    <!-- ./BASKET MODAL -->
+
+    <!-- PASSWORD RESET MODAL -->
+    <lazy-load component="forgot-password-modal">
+        <forgot-password-modal :current-template="{{ services.template.getCurrentTemplate() | json_encode }}">
+            <template slot="extendOverlayButtons">
+                {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+            </template>
+        </forgot-password-modal>
+    </lazy-load>
+    <!-- ./PASSWORD RESET MODAL -->
+
+    <!-- SHIPPINGCOSTS MODAL -->
+    {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
+        <div id="shippingscosts-modal-wrapper">
+            <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}
+                            {% if shopBuilderShippingTemplate | trim is not empty %}
+                                {{ shopBuilderShippingTemplate | raw }}
+                            {% else %}
+                                {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- ./SHIPPINGCOSTS MODAL -->
+</div>
+
+<script>
+    App = {
+        config: {{ ceresConfig | json_encode | raw }},
+        urls: {{ urls | json_encode | raw }},
+        activeCurrency: "{{ currencyData[currencyFormat] }}",
+        currencyPattern: {{ services.checkout.getCurrencyPattern() | json_encode | raw }},
+        isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
+        isCheckoutView: {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
+        isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
+        isItemView: {% if isItem %}true{% else %}false{% endif %},
+        templateEvent: "{{ templateEvent }}",
+        templateType: "{{ urls.templateType }}",
+        language: "{{ lang }}",
+        defaultLanguage: "{{ defaultLanguage }}",
+        decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
+        urlTrailingSlash: {{ urls.appendTrailingSlash | json_encode }},
+        propertyFileUrl: "{{ services.propertyFile.getPropertyFileUrl() }}",
+        isShopBuilder: {{ isShopBuilder | default(false) | json_encode }},
+        bundleSetting: {{ webstoreConfig.dontSplitItemBundle | default(1) }},
+        initialPleaseSelect: {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
+        publicPath: "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
+        isCheapestSorting: "{{ services.template.isCheapestSorting() }}",
+        initialData: {
+            shippingCountries: {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name"]) | json_encode | raw }},
+            shippingCountryId: {{ services.checkout.getShippingCountryId() }},
+            showNetPrices: {{ showNetPrices | json_encode }}
+        },
+        features: {}
+    };
+</script>
+
+{{ Loader.include_components() }}
+
+{{ LayoutContainer.show("Ceres::Script.Loader") }}
+
+{{ Translations.add( "Ceres", "Template" ) }}
+
+{{ get_json_data() }}
+
+
+{% if ceresConfig.log.performanceLevel  == 'development' %}
+    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.js?v={{ buildHash }}"></script>
+{% else %}
+    <script src="{{ plugin_path('Ceres') }}/js/dist/{{ assetName }}.min.js?v={{ buildHash }}"></script>
+{% endif %}
+
+{% for scriptTemplate in get_additional_scripts() %}
+    {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
+{% endfor %}
+
+{% if isShopBuilder %}
+    {% include "Ceres::Widgets.ShopBuilderDataStore" %}
+{% endif %}
+
+{{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
+
+
+<link href="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/css/temp_content_css.css" rel="stylesheet"/>
+
+{% if assetName == 'ceres-checkout' %}
+    {{ LayoutContainer.show("Ceres::Checkout.AfterScriptsLoaded") }}
+{% endif %}
+
+{% if isItem %}
+    {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
+{% endif %}
+
+<script>
+    Vue.prototype.ceresStore = window.ceresStore;
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-53377201-4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+
+    gtag('config', 'UA-53377201-4');
+</script>
+
+{# lazyload #}
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+<script>
+    $(window).on('load', function () {
+        $("img.lazyload").lazyload();
+    });
+</script>
+
+
+{# <script> #}
+{# $(document).ready(function () { #}
+{# window.onload = function () { #}
+{# if ($('.selected-filter').hasClass('filter-price')) { #}
+{# $('.filter_suggestion_price').hide(); #}
+{# $('.filter_suggestion_grose').addClass('d-block'); #}
+{# } #}
+{# if ($('.selected-filter').hasClass('filter-185')) { #}
+{# $('.filter_suggestion_grose').addClass('d-none-2'); #}
+{# $('.filter_suggestion_farbe').addClass('d-block'); #}
+{# } #}
+{# if ($('.selected-filter').hasClass('filter-186')) { #}
+{# $('.filter_suggestion_grose').addClass('d-none-2'); #}
+{# $('.filter_suggestion_farbe').addClass('d-block'); #}
+{# } #}
+{# if ($('.selected-filter').hasClass('filter-187')) { #}
+{# $('.filter_suggestion_grose').addClass('d-none-2'); #}
+{# $('.filter_suggestion_farbe').addClass('d-block'); #}
+{# } #}
+{# if ($('.selected-filter').hasClass('filter-188')) { #}
+{# $('.filter_suggestion_grose').addClass('d-none-2'); #}
+{# $('.filter_suggestion_farbe').addClass('d-block'); #}
+{# } #}
+{# if ($('.selected-filter').hasClass('filter-189')) { #}
+{# $('.filter_suggestion_grose').addClass('d-none-2'); #}
+{# $('.filter_suggestion_farbe').addClass('d-block'); #}
+{# } #}
+{# if ($('.selected-filter').hasClass('filter-192')) { #}
+{# $('.filter_suggestion_grose').addClass('d-none-2'); #}
+{# $('.filter_suggestion_farbe').addClass('d-block'); #}
+{# } #}
+{# }; #}
+{# }); #}
+{# </script> #}
+
+{# maginify-opo-up #}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.min.css"
+      integrity="sha512-nIm/JGUwrzblLex/meoxJSPdAKQOe2bLhnrZ81g5Jbh519z8GFJIWu87WAhBH+RAyGbM4+U3S2h+kL5JoV6/wA=="
+      crossorigin="anonymous"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"
+        integrity="sha512-+m6t3R87+6LdtYiCzRhC5+E0l4VQ9qIT1H9+t1wmHkMJvvUQNI5MKKb7b08WL4Kgp9K0IBgHDSLCRJk05cFUYg=="
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $('#videolink').magnificPopup({type: 'inline'});
+        $('.magic-thumb img').on('contextmenu', function (e) {
+            return false;
+        });
+    });
+
+</script>
+
+{# end maginfypop #}
+
+{# beratung anfodern #}
+<script>
+    $(document).ready(function () {
+        $('.hide_first').show();
+        $("input[placeholder$='Vorname: ']").attr('placeholder', 'Vorname, Nachname');
+    });
+    $(window).on('load', function () {
+        if ($('h1~#feedback-stars-average').children().length > 0) {
+            $('h1~a #feedback-stars-average').first().attr('style', 'display: block !important');
+        }
+    })
+</script>
+{# end beratung anfodern #}
+
+<script>
+    window.onload = function () {
+        let btntoExectue = document.querySelector('.filter-toggle:first-of-type');
+        btntoExectue.addEventListener('click', function () {
+            hamburger.classList.toggle('isactive');
+            menu.classList.toggle('active');
+            $('body').removeClass('menu-is-visible')
+        });
+    }
+</script>
+<script>
+    (function (h, o, t, j, a, r) {
+        h.hj = h.hj || function () {
+            (h.hj.q = h.hj.q || []).push(arguments)
+        };
+        h._hjSettings = {hjid: 2328970, hjsv: 6};
+        a = o.getElementsByTagName('head')[0];
+        r = o.createElement('script');
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+</script>
+<!-- Install this snippet AFTER the Hotjar tracking code. -->
+<script>
+    var userId = 2328970 || null; // Replace your_user_id with your own if available.
+    window.hj('identify', userId, {
+        'Login_date': new Date(),
+        // Add your own custom attributes here. Some EXAMPLES:
+        // 'Signed up': '2019—06-20Z', // Signup date in ISO-8601 format.
+        // 'Last purchase category': 'Electronics', // Send strings with quotes around them.
+        // 'Total purchases': 15, // Send numbers without quotes.
+        // 'Last purchase date': '2019-06-20Z', // Send dates in ISO-8601 format.
+        // 'Last refund date': null, // Send null when no value exists for a user.
+    });
+</script>
+{# doo finder #}
+{# <script> #}
+{# var doofinder_script = '//cdn.doofinder.com/media/js/doofinder-compact.7.latest.min.js'; #}
+{# (function (d, t) { #}
+{# var f = d.createElement(t), s = d.getElementsByTagName(t)[0]; #}
+{# f.async = 1; #}
+{# f.src = ('https:' == location.protocol ? 'https:' : 'http:') + doofinder_script; #}
+{# f.setAttribute('charset', 'utf-8'); #}
+{# s.parentNode.insertBefore(f, s) #}
+{# }(document, 'script')); #}
+
+{# var dfCompactLayers = [{ #}
+{# "hashid": "a16e265797f2f0beb57a8bd27352698e", #}
+{# "zone": "eu1", #}
+{# "display": { #}
+{# "lang": "de", #}
+{# "results": { #}
+{# "allResultsURL": "https://www.morgenland-teppiche.de//search?q=%query%", #}
+{# "maxResults": 5 #}
+{# }, #}
+{# "closeOnClick": true, #}
+{# "suggestions": { #}
+{# "maxSuggestions": 5 #}
+{# } #}
+{# }, #}
+{# "queryInput": "#page-header-parent > .navbar.header-fw.p-0.megamenu > .container-max.d-block > .row.mx-0.position-relative.d-flex.py-2 > .d-none.d-sm-none.d-md-none.d-lg-block.d-xl-block > div > .d-flex.flex-grow-1.position-relative.my-2 > .search-input.flex-grow-1.px-3.py-2" #}
+{# }]; #}
+{# </script> #}
+
+{# tiny slider cdn #}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+
+{# flickty slider #}
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/flickity-fade@1/flickity-fade.css">
+<script src="https://unpkg.com/flickity-fade@1/flickity-fade.js"></script>
+
+<script
+        src="https://eu-library.klarnaservices.com/lib.js"
+        data-client-id="2ec1c0b5-8386-5d95-9224-50cd9891eece"
+></script>
+
+<script>
+    window.KlarnaOnsiteService = window.KlarnaOnsiteService || [];
+    window.KlarnaOnsiteService.push({eventName: 'refresh-placements'});
+</script>
+
+<script>
+    window.__loadPluginChunk = function (source) {
+        return source += "?v={{ buildHash }}";
+    };
+
+    window.vueEventHub = new Vue();
+
+    if (App.config.log.checkSyntax) {
+        var rootElement = document.getElementById("vue-app");
+
+        rootElement.innerHTML = rootElement.innerHTML.replace(/(?:^|\s)(?::|v-bind:)\S+=(?:""|'')/g, "");
+
+        window.vueApp = new Vue({
+            store: window.ceresStore
+        });
+
+        vueApp.$mount(rootElement.cloneNode(true));
+
+        if (vueApp.$el.id === "vue-app") {
+            document.body.replaceChild(vueApp.$el, rootElement);
+        }
+    } else {
+        // eslint-disable-next-line no-unused-vars
+        window.vueApp = new Vue({
+            el: "#vue-app",
+            store: window.ceresStore
+        });
+    }
+
+    {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
+
+    $(document).ready(function () {
+        var innerHeight1 = $('.top-bar').height();
+        var innerHeight2 = $('.navbar').height();
+        var innerHeight3 = $('.main-navigation').height();
+        var innerHeight4 = innerHeight1 + innerHeight2 - innerHeight3;
+        $(window).on("scroll", function () {
+            if ($(this).scrollTop() > innerHeight4) {
+                $("#page-header-parent").css("top", '-' + innerHeight4 - 2 + 'px').addClass('navbar-sticky');
+            } else {
+                $("#page-header-parent").css("top", "0px").removeClass('navbar-sticky');
+            }
+        })
+    })
+</script>
+
+<script>
+    //$(document).ready(function(){
+    // var innerHeight1 = $('.top-bar').height();
+    // var innerHeight2 = $('.navbar').height();
+    // var innerHeight3 = $('.main-navigation').height();
+    // var innerHeight4 = innerHeight1 + innerHeight2 - innerHeight3;
+    //    $(window).on("scroll",function() {
+    //        if($(this).scrollTop() > innerHeight4)
+    //            $("#page-header-parent").css("top", '-' + innerHeight4 - 2 + 'px').addClass('navbar-sticky');
+    //        else
+    //            $("#page-header-parent").css("top", "0px").removeClass('navbar-sticky');
+    //    })
+    //})
+
+    function checkElementLocation() {
+        var $window = $(window);
+        var bottom_of_window = $window.scrollTop() + $window.height();
+
+        $('.elem').each(function (i) {
+            var $that = $(this);
+            var bottom_of_object = $that.position().top + $that.outerHeight() / 4;
+
+            //if element is in viewport, add the animate class
+            if (bottom_of_window > bottom_of_object) {
+                $(this).addClass('fade-in');
+            }
+        });
+    }
+
+    // if in viewport, show the animation
+    checkElementLocation();
+
+    $(window).on('scroll', function () {
+        checkElementLocation();
+    });
+
+
+    // --------------------------------------------------------------------------------------------------------------------------- //
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#account-toggler').click(function () {
+            $('.login-box').toggleClass('login-box-show');
+        });
+    });
+</script>
+
+<script data-cfasync="false" type='text/javascript'>
+    $(window).on('load', function () {
+        var $submenu_hidden = true;
+        $('.card').each(function () {
+            var $contents = $(this);
+            $contents.children('.form-check-wrapper').wrapAll('<div class="filter-content"></div>');
+
+            $contents.on("click", function (event) {
+                console.log(".card clicked");
+                if ($submenu_hidden) {
+                    $(this).addClass("active");
+                    $submenu_hidden = false;
+                } else if ($(this).hasClass("active")) {
+                    $(this).removeClass("active");
+                    $submenu_hidden = true;
+                } else {
+                    $('.card.active').removeClass("active");
+                    $(this).addClass("active");
+                }
+            });
+        });
+
+        $(".filterdrop").find('.filter-content').append('<div class="close-filter-outer"><button class="close-filter-content btn btn-md btn-block btn-primary py-2">Schliessen</button></div>');
+        $('.close-filter-content').on('click', function (event) {
+            $(this).closest('.card').removeClass("active");
+            event.stopPropagation();
+        });
+        $(document).ready(function () {
+            waitForElementToDisplayfilter1(".item-filter-price", 200, 400, filterPriceClickEvent);
+        });
+
+        function waitForElementToDisplayfilter1(selector, time, tries, callFunc) {
+            if (document.querySelector(selector) !== null) {
+                callFunc();
+            } else {
+                if (tries >= 1) {
+                    setTimeout(function () {
+                        waitForElementToDisplayfilter1(selector, time, tries - 1, callFunc);
+                    }, time);
+                } else {
+                    return;
+                }
+            }
+        }
+
+        function filterPriceClickEvent() {
+            $(".item-filter-price").after('<div class="close-filter-outer"><button class="close-filter-content btn btn-md btn-block btn-primary py-2">{{ trans("FilterDrop::Template.closebtn") }}</button></div>');
+            $(".item-filter-price").click(function (e) {
+                e.stopPropagation();
+            });
+            $(".close-filter-content").click(function () {
+                $('.close-filter-content').on('click', function (event) {
+                    $(this).closest('.card').removeClass("active");
+                    event.stopPropagation();
+                });
+            });
+        }
+
+        $(document).ready(function () {
+            waitForElementToDisplayfilter1(".filterdrop", 20, 100, addFade);
+        });
+
+        function waitForElementToDisplayfilter1(selector, time, tries, callFunc) {
+            if (document.querySelector(selector) !== null) {
+                callFunc();
+            } else {
+                if (tries >= 1) {
+                    setTimeout(function () {
+                        waitForElementToDisplayfilter1(selector, time, tries - 1, callFunc);
+                    }, time);
+                } else {
+                    return;
+                }
+            }
+        }
+
+        function addFade() {
+            $(".filterdrop .card").click(function () {
+                var card_content = $(this).find(".filter-content");
+                if (card_content[0] && card_content && card_content[0].scrollHeight > card_content.height()) {
+                    $(".close-filter-outer", card_content).removeClass("no-overflow");
+                } else {
+                    $(".close-filter-outer", card_content).addClass("no-overflow");
+                }
+            });
+        }
+
+        $(".filter-collapse .collapse-container .filterdrop:not(:first) > div > .card").appendTo(".filter-collapse .collapse-container .filterdrop:first-of-type > div"); // Merge filters
+        $(".filter-collapse .collapse-container .filterdrop:not(:first)").remove();
+
+        $(".filter-collapse button[data-toggle='collapse']").parents(".widget-primary").remove(); // Removes close button
+
+
+        $(".item-filter-price").parent().parent().addClass("dm_card");
+        $(document).ready(function () {
+            waitForElementToDisplayfilter1(".item-filter-price", 200, 400, filterPriceClickEvent);
+        });
+
+        function waitForElementToDisplayfilter1(selector, time, tries, callFunc) {
+            if (document.querySelector(selector) !== null) {
+                callFunc();
+            } else {
+                if (tries >= 1) {
+                    setTimeout(function () {
+                        waitForElementToDisplayfilter1(selector, time, tries - 1, callFunc);
+                    }, time);
+                } else {
+                    return;
+                }
+            }
+        }
+
+        function filterPriceClickEvent() {
+            $(".item-filter-price").click(function (e) {
+                e.stopPropagation();
+            });
+        }
+
+    });
+
+    // Colors
+
+    $(document).ready(function () {
+        waitForElementToDisplayfilter1("label[for^='option-']", 20, 100, formCheckAddClass);
+    });
+
+    function waitForElementToDisplayfilter1(selector, time, tries, callFunc) {
+        if (document.querySelector(selector) !== null) {
+            callFunc();
+        } else {
+            if (tries >= 1) {
+                setTimeout(function () {
+                    waitForElementToDisplayfilter1(selector, time, tries - 1, callFunc);
+                }, time);
+            } else {
+                return;
+            }
+
+        }
+    }
+
+    function formCheckAddClass() {
+
+        $('label[for^=option-43-]').closest('.form-check-wrapper').addClass('cw cw-43');
+        $('label[for^=option-44-]').closest('.form-check-wrapper').addClass('cw cw-44');
+        $('label[for^=option-45-]').closest('.form-check-wrapper').addClass('cw cw-45');
+        $('label[for^=option-46-]').closest('.form-check-wrapper').addClass('cw cw-46');
+        $('label[for^=option-47-]').closest('.form-check-wrapper').addClass('cw cw-47');
+        $('label[for^=option-48-]').closest('.form-check-wrapper').addClass('cw cw-48');
+        $('label[for^=option-49-]').closest('.form-check-wrapper').addClass('cw cw-49');
+        $('label[for^=option-50-]').closest('.form-check-wrapper').addClass('cw cw-50');
+        $('label[for^=option-51-]').closest('.form-check-wrapper').addClass('cw cw-51');
+
+        $('label[for^=option-170-]').closest('.form-check-wrapper').addClass('cw cw-170');
+        $('label[for^=option-177-]').closest('.form-check-wrapper').addClass('cw cw-177');
+        $('label[for^=option-178-]').closest('.form-check-wrapper').addClass('cw cw-178');
+        $('label[for^=option-181-]').closest('.form-check-wrapper').addClass('cw cw-181');
+        $('label[for^=option-182-]').closest('.form-check-wrapper').addClass('cw cw-182');
+        $('label[for^=option-179-]').closest('.form-check-wrapper').addClass('cw cw-179');
+        $('label[for^=option-183-]').closest('.form-check-wrapper').addClass('cw cw-183');
+        $('label[for^=option-184-]').closest('.form-check-wrapper').addClass('cw cw-184');
+        $('label[for^=option-180-]').closest('.form-check-wrapper').addClass('cw cw-180');
+
+
+        // Custom Images
+
+        $('label[for^=option-20-]').closest('.form-check-wrapper').addClass('cw cuscw-20');
+        $('label[for^=option-21-]').closest('.form-check-wrapper').addClass('cw cuscw-21');
+        $('label[for^=option-22-]').closest('.form-check-wrapper').addClass('cw cuscw-22');
+        $('label[for^=option-23-]').closest('.form-check-wrapper').addClass('cw cuscw-23');
+        $('label[for^=option-24-]').closest('.form-check-wrapper').addClass('cw cuscw-24');
+
+        $('label[for^=option-173-]').closest('.form-check-wrapper').addClass('cw cuscw-20');
+        $('label[for^=option-172-]').closest('.form-check-wrapper').addClass('cw cuscw-21');
+        $('label[for^=option-175-]').closest('.form-check-wrapper').addClass('cw cuscw-22');
+        $('label[for^=option-171-]').closest('.form-check-wrapper').addClass('cw cuscw-23');
+        $('label[for^=option-174-]').closest('.form-check-wrapper').addClass('cw cuscw-24');
+    }
+</script>
+<style>
+    .filterdrop > div > .card > .h3 + div > .cw {
+        width: 20%;
+        padding: 0 !important;
+        display: inline-block;
+        text-indent: -9999px;
+    }
+
+    .filterdrop > div > .card > .h3 + div > .cw > div > label {
+        padding: 14px 0 !important;
+    }
+
+    .filterdrop > div > .card:nth-child(4) > .h3 + div > .cw > div > label {
+        padding: 16px 0 !important;
+    }
+
+    .filterdrop > div > .card > .h3 + div > .cw .filter-badge {
+        display: none;
+    }
+
+    .filterdrop > div > .card > .h3 + div > .cw > div > .form-check-input + label:before {
+        height: 30px !important;
+        width: calc(100% - 20px) !important;
+    }
+
+    .filterdrop > div > .card > .h3 + div > .cw-184 > div > .form-check-input + label:before {
+        height: 28px !important;
+        width: 28px !important;
+    }
+
+    .filterdrop > div > .card > .h3 + div > .form-check-wrapper > div > .form-check-input + label:before {
+        top: 10.5px !important;
+    }
+
+    .option-20:before,
+    .option-173:before {
+        background-image: url(https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/rund_1.svg) !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        outline: 0 !important;
+    }
+
+    .option-21:before,
+    .option-172:before {
+        background-image: url(https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/oval_1.svg) !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        outline: 0 !important;
+    }
+
+    .option-22:before,
+    .option-175:before {
+        background-image: url(https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/filter_icon/form_rechteckig.svg) !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        outline: 0 !important;
+        transform: rotate(90deg);
+    }
+
+    .option-23:before,
+    .option-171:before {
+        background-image: url(https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/quadratisch_1.svg) !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        outline: 0 !important;
+    }
+
+    .option-24:before,
+    .option-174:before {
+        background-image: url(https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/lauefer.svg) !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        outline: 0 !important;
+    }
+
+    .option-43:before {
+        background: #c5a79c !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .option-44:before {
+        background: #2196f3 !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .option-45:before {
+        background: #614439 !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .option-46:before {
+        background: #d40808 !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .option-47:before {
+        background: #1a9c20 !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .option-48:before {
+        background: #6115e8 !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .option-49:before {
+        background: #ea3800 !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .option-50:before {
+        background: #191919 !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .option-51:before {
+        background-color: #c73e1d;
+        background-image: linear-gradient(315deg, #c73e1d 0%, #a23b72 37%, #2e86ab 100%) !important;
+        outline: 0 !important;
+        border-radius: .25em;
+    }
+
+    .feedback-stars-average .feedback-star {
+        color: #FFD700;
+    }
+
+    .filterdrop > div > .card:nth-of-type(3) > .h3 + div {
+        width: 340px;
+    }
+
+    @media only screen and (max-width: 900px) {
+        .filterdrop > div > .card > .h3 + div > .cw label span {
+            margin-left: 100px;
+        }
+    }
+</style>
+
+{{ get_filtered_tags() }}
+
+{{ get_shop_builder_scripts( "latest", ceresConfig.log.performanceLevel == 'live') }}
+
+{% if not services.template.shouldBeCached() %}
+    <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+{% endif %}
+
+{# dropdown single item #}
+<script type="text/javascript" src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/js/util.js"></script>
+
+</body>
+</html>

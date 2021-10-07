@@ -1,0 +1,71 @@
+<!-- ITEM DESCRIPTION -->
+<div class="my-5">
+    <ul class="nav nav-tabs" role="tablist">
+        {% if 'item.description' in itemData or 'all' in itemData %}
+            <li class="nav-item" v-if="isDescriptionTabActive">
+                <a class="nav-link active" data-toggle="tab" :href="'#details-' +  currentVariation.variation.id" role="tab">{{ trans("Ceres::Template.singleItemDescription") }}</a>
+            </li>
+        {% endif %}
+
+        <li class="nav-item d-none">
+            <a :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="nav-link" data-toggle="tab" href="#assessments-details" role="tab">{{ trans("Ceres::Template.singleItemMoreDetails") }}</a>
+        </li>
+
+        <slot name="add-detail-tabs"></slot>
+    </ul>
+
+    <div class="tab-content overflow-hidden">
+            <div class="tab-pane active overflow-auto" :id="'details-' + currentVariation.variation.id" role="tabpanel" v-if="isDescriptionTabActive">
+                    <h2 v-html="currentVariation.texts.name1"></h2>
+                    {% if 'item.description' in itemData or 'all' in itemData %}
+                        <div class="tab-pane active overflow-auto" :id="'details-' + currentVariation.variation.id" role="tabpanel" v-if="isDescriptionTabActive">
+                            <div class="my-4" v-html="currentVariation.texts.description">
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if item.documents[0].data.item.add_cms_page == 676 %}
+                    {% include category_template( 676, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1090 %}
+                    {% include category_template( 1090, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1089 %}
+                    {% include category_template( 1089, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1087 %}
+                    {% include category_template( 1087, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1076 %}
+                    {% include category_template( 1076, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1077 %}   
+                    {% include category_template( 1077, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1082 %}
+                    {% include category_template( 1082, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1066 %}    
+                    {% include category_template( 1066, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1061 %}
+                    {% include category_template( 1061, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1065 %}
+                    {% include category_template( 1065, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1070 %}
+                    {% include category_template( 1070, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1079 %}
+                    {% include category_template( 1079, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% elseif item.documents[0].data.item.add_cms_page == 1086 %}
+                    {% include category_template( 1086, lang, webstoreConfig.webstoreId ) ignore missing %}
+                    {% endif %} 
+            </div>
+
+        {% if 'item.technical_data' in itemData or 'all' in itemData %}
+            <div :class="{ 'active': !isDescriptionTabActive && isTechnicalDataTabActive }" class="tab-pane overflow-auto" :id="'data-' + currentVariation.variation.id" role="tabpanel" v-if="isTechnicalDataTabActive">
+                <div class="my-4" v-html="currentVariation.texts.technicalData">
+                </div>
+            </div>
+        {% endif %}
+
+        <div :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="tab-pane overflow-auto" id="assessments-details" role="tabpanel">
+            <div class="my-4">
+   
+            </div>
+        </div>
+
+        <slot name="add-detail-tabs-content"></slot>
+    </div>
+</div>
+<!-- ./ITEM DESCRIPTION -->

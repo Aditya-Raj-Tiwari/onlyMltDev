@@ -1,0 +1,22 @@
+{% set categoryDescriptionTop = ceresConfig.item.showCategoryDescriptionTop %}
+
+<div class="parallax-img-container">
+    <div class="parallax-img-container-inner">
+        <div>
+            <div>
+                <div class="parallax-text-container d-flex justify-content-between pb-2">
+                    <div class="d-flex">
+                        <h1 class="h2 font-weight-bold {% if category.details[0].description > 0 %}mb-4{% else %}mb-0{% endif %} category-title">{{ category.details[0].name | raw }}</h1>
+                        <div class="ml-3 py-2 d-block d-sm-block d-md-block d-lg-none d-xl-none" style="line-height: 1">
+                            <span class="text-muted small">({{ itemCountTotal }} {% include "devMlt::Category.Item.Partials.ItemCount" %} {{ trans("devMlt::Template.Cat3") }})</span>
+                        </div>
+                    </div>
+                    {% if category.details[0].description > 0 %}
+                        <div class="category-description mb-3">{{ category.details[0].description | raw }}</div>
+                    {% endif %}
+                     {% include "devMlt::PageDesign.Partials.Header.Breadcrumb" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

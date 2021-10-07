@@ -1,0 +1,21 @@
+{% set cdcodeitem = config("devMlt.devMlt.cdcodeitem") %}
+{% set cdpercent = config("devMlt.devMlt.cdpercent") %}
+
+
+
+{% if cdcodeitem|length > 0 %}
+    <div id="singleitempromo" class="mb-4">
+        <div class="text-center">
+
+            <span class="font-weight-bold">{{ cdpercent }}%   {{ trans("devMlt::SingleItem.Promotext1") }}</span> {{ trans("devMlt::Promobar.PromobarVorText2") }}
+            <span class="code font-weight-bold">{{ cdcodeitem }}</span> <span
+                    class="only_desktop">{{ trans("devMlt::SingleItem.Promotext2") }} </span>
+        </div>
+    </div>
+    <script2>
+        function pad(str) {
+        str = str.toString();
+        return str.length < 2 ? pad("0" + str, 2) : str;
+        }
+    </script2>
+{% endif %}

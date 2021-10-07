@@ -1,0 +1,128 @@
+{% set rcdate = config("devMlt.devMlt.cdzeitpunkt") %}
+{% set rchours = "0" %}
+{% set rcminutes = "0" %}
+{% set rcseconds = "0" %}
+{% set cdcode = config("devMlt.devMlt.cdcode") %}
+{% set promotext = config("devMlt.devMlt.promotext") %}
+{% set cdbg = config("devMlt.devMlt.cdbg") %}
+{% set cdtxtcolor = config("devMlt.devMlt.cdtxtcolor") %}
+
+{% set difference = date(rcdate|date("Y-m-d")).diff(date("now"|date("Y-m-d") )) %}
+{% set leftDays = difference.days %}
+
+
+{% if cdcode|length > 0 and leftDays > 0 %}
+    <div class="spacing-topPromo" style="display: none"></div>
+    <div id="topPromo" style="background: {{ cdbg }}; color: {{ cdtxtcolor }};display: none">
+        <div>
+            {{ trans("devMlt::Promobar.PromobarVorText") }}
+            {{ trans("devMlt::Promobar.PromobarVorText2") }} <span
+                    class="code">{{ cdcode }}</span> {{ trans("devMlt::Promobar.PromobarVorText3") }}
+            <div id="tb-days">00</div>
+            <span>:</span>
+            <div id="tb-hours">00</div>
+            <span>:</span>
+            <div id="tb-minutes">00</div>
+            <span>:</span>
+            <div id="tb-seconds">00</div>
+        </div>
+    </div>
+
+
+    <script2>
+        var start_date = new Date("{{ rcdate|date("Y-m-d") }}T00:00:00+02:00"),
+        countDown;
+        var today = new Date();
+        var Difference_In_Time = start_date.getTime() - today.getTime();
+        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        if(Difference_In_Days > 0){
+        $('#topPromo').show();
+        $('.spacing-topPromo').show();
+        $('#vue-app').addClass("margin_adjst");
+        }else{
+        $('#vue-app').addClass("margin_adjst_no_promo");
+        }
+        (function ($) {
+        $(document).ready(function () {
+        waitForElementToDisplay1('#tb-days', 40, 200, startCountDown);
+        });
+        })(jQuery);
+
+        function waitForElementToDisplay1(selector, time, tries, callFunc) {
+        if (document.querySelector(selector) !== null) {
+        callFunc();
+        } else {
+        if (tries >= 1) {
+        setTimeout(function () {
+        waitForElementToDisplay1(selector, time, tries - 1, callFunc);
+        }, time);
+        } else {
+        return;
+        }
+        }
+        }
+
+        function startCountDown() {
+        countDown = setInterval(function () {
+        countDownTimer((start_date - new Date()) / 1000);
+        }, 500);
+        }
+
+        var last_day,
+        last_hour,
+        last_minute,
+        last_second;
+
+        function countDownTimer(seconds) {
+        var rem_days = Math.floor((seconds / 86400) % 60),
+        days = (rem_days * 86400),
+        rem_hours = Math.floor(((seconds - days) / 3600) % 60),
+        hours = (rem_days * 86400) + (rem_hours * 3600),
+        rem_minutes = Math.floor((seconds - hours) / 60),
+        rem_seconds = Math.floor(seconds % 60);
+        $('#tb-days').text(pad(rem_days));
+        $('#tb-hours').text(pad(rem_hours));
+        $('#tb-minutes').text(pad(rem_minutes));
+        $('#tb-seconds').text(pad(rem_seconds));
+        countDownSet(pad(rem_days), pad(rem_hours), pad(rem_minutes), pad(rem_seconds));
+        if (seconds <= 0) {
+        clearInterval(countDown);
+        $('#topPromo>div').html('');
+        }
+        }
+
+        function countDownSet(days, hours, minutes, seconds) {
+        if (last_second != seconds) {
+        $('#tb-seconds').addClass('cd-pop');
+        last_second = seconds;
+        } else {
+        $('#tb-seconds').removeClass('cd-pop');
+        }
+        if (last_minute != minutes) {
+        $('#tb-minutes').addClass('cd-pop');
+        last_minute = minutes;
+        } else {
+        $('#tb-minutes').removeClass('cd-pop');
+        }
+
+        if (last_hour != hours) {
+        $('#tb-hours').addClass('cd-pop');
+        last_hour = hours;
+        } else {
+        $('#tb-hours').removeClass('cd-pop');
+        }
+        if (last_day != days) {
+        $('#tb-days').addClass('cd-pop');
+        last_day = days;
+        } else {
+        $('#tb-days').removeClass('cd-pop');
+        }
+        }
+
+        function pad(str) {
+        str = str.toString();
+        return str.length < 2 ? pad("0" + str, 2) : str;
+        }
+    </script2>
+
+{% endif %}

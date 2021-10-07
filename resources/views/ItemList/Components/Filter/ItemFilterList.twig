@@ -1,0 +1,54 @@
+<script type="x/template" data-component="item-filter-list">
+    <div v-if="filterListBulk">
+        <item-filter v-for="facet in facets"
+                     :facet="facet"
+                     :key="facet.id"
+                     :padding-classes="paddingClasses"
+                     :padding-inline-styles="paddingInlineStyles">
+        </item-filter>
+    </div>
+    <div v-else class="filter-wrapper" v-show="facets && facets.length > 0">
+        <div class="row narrow-row mb-2 d-flex d-sm-flex d-md-flex d-lg-none d-xl-none">
+            <div class="col-6">
+                <a v-open-mobile-navigation class="btn btn-outline-primary filter-toggle d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24"
+                         fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                    </svg>
+                    {{ trans("devMlt::Template.CatBtn") }}
+                </a>
+            </div>
+            <div class="col-6">
+                <a class="btn btn-outline-primary filter-toggle d-flex justify-content-center" data-toggle="collapse"
+                   :href="'#filter-collapse_' + _uid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24"
+                         fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="butt" stroke-linejoin="round">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                        <line x1="1" y1="14" x2="7" y2="14"></line>
+                        <line x1="9" y1="8" x2="15" y2="8"></line>
+                        <line x1="17" y1="16" x2="23" y2="16"></line>
+                    </svg>
+                    {{ trans("devMlt::Template.FilterBtn") }}
+                </a>
+            </div>
+        </div>
+        <div v-open-filter-toolbar class="filter-collapse collapse position-relative mt-3"
+             :id="'filter-collapse_' + _uid">
+            <div class="container-max page-content component-loading filterdrop" :class="{ 'is-loading': isLoading }">
+                <div class="card-columns">
+                    <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

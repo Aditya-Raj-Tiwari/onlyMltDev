@@ -1,0 +1,1817 @@
+{
+  "formatVersion": 1,
+  "menu": {
+    "Config.opt8": {
+      "label": "Config.Wohnräume Section",
+      "formFields": {
+        "global.container21": {
+          "type": "verticalContainer",
+          "label": "Wohnraum 1",
+          "options": {
+            "containerEntries": {
+              "devMlt.recommendation4title": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4title",
+                "label": "Config.Title"
+              },
+              "devMlt.recommendation4img1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4img1",
+                "label": "Config.Image link 1"
+              },
+              "devMlt.recommendation4title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4title1",
+                "label": "Config.Überschrift1"
+              },
+              "devMlt.recommendation4txt1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4txt1",
+                "label": "Config.Text1"
+              },
+              "devMlt.recommendation4btn1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4btn1",
+                "label": "Config.Schaltflächen Beschriftung1"
+              },
+              "devMlt.recommendation4url1": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.recommendation4url1",
+                "label": "Config.Schaltflächen URL1"
+              }
+            }
+          }
+        },
+        "global.container22": {
+          "type": "verticalContainer",
+          "label": "Wohnraum 2",
+          "options": {
+            "containerEntries": {
+              "devMlt.recommendation4img2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4img2",
+                "label": "Config.Image link 2"
+              },
+              "devMlt.recommendation4title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4title2",
+                "label": "Config.Überschrift2"
+              },
+              "devMlt.recommendation4txt2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4txt2",
+                "label": "Config.Text2"
+              },
+              "devMlt.recommendation4btn2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4btn2",
+                "label": "Config.Schaltflächen Beschriftung2"
+              },
+              "devMlt.recommendation4url2": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.recommendation4url2",
+                "label": "Config.Schaltflächen URL2"
+              }
+            }
+          }
+        },
+        "global.container23": {
+          "type": "verticalContainer",
+          "label": "Wohnraum 3",
+          "options": {
+            "containerEntries": {
+              "devMlt.recommendation4img3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4img3",
+                "label": "Config.Image link 3"
+              },
+              "devMlt.recommendation4title3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4title3",
+                "label": "Config.Überschrift3"
+              },
+              "devMlt.recommendation4txt3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4txt3",
+                "label": "Config.Text3"
+              },
+              "devMlt.recommendation4btn3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation4btn3",
+                "label": "Config.Schaltflächen Beschriftung3"
+              },
+              "devMlt.recommendation4url3": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.recommendation4url3",
+                "label": "Config.Schaltflächen URL3"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.opt7": {
+      "label": "Config.Homepage Titel/Beschreibung",
+      "formFields": {
+        "global.container19": {
+          "type": "verticalContainer",
+          "label": "Titel",
+          "options": {
+            "containerEntries": {
+              "devMlt.titlehomepage": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.titlehomepage",
+                "label": "Titel"
+              }
+            }
+          }
+        },
+        "global.container20": {
+          "type": "verticalContainer",
+          "label": "Beschreibung",
+          "options": {
+            "containerEntries": {
+              "devMlt.descriptionhomepage": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.descriptionhomepage",
+                "label": "Beschreibung"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.opt3": {
+      "label": "Config.Promo Bar Konfiguration",
+      "formFields": {
+        "global.container16": {
+          "type": "verticalContainer",
+          "label": "Countdown Zeitpunkt",
+          "options": {
+            "containerEntries": {
+              "devMlt.cdzeitpunkt": {
+                "type": "datePicker",
+                "scss": false,
+                "key": "devMlt.cdzeitpunkt",
+                "label": "Config.Countdown Zeitpunkt (TT/MM/JJJJ)"
+              },
+              "devMlt.cdcode": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.cdcode",
+                "label": "Config.Gutscheincode"
+              },
+              "devMlt.promotext": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.promotext",
+                "label": "Promo Vor Text"
+              }
+            }
+          }
+        },
+        "global.container17": {
+          "type": "verticalContainer",
+          "label": "Countdown Aussehen",
+          "options": {
+            "containerEntries": {
+              "devMlt.cdbg": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.cdbg",
+                "label": "Config.Promo Bar Hintergrundfarbe"
+              },
+              "devMlt.cdtxtcolor": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.cdtxtcolor",
+                "label": "Config.Promo Bar Schriftfarbe"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.opt4": {
+      "label": "Config.SingleItem Promo Bar Konfiguration",
+      "formFields": {
+        "global.container18": {
+          "type": "verticalContainer",
+          "label": "Percentage discount percentage",
+          "options": {
+            "containerEntries": {
+              "devMlt.cdpercent": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.cdpercent",
+                "label": "Percentage discount"
+              },
+              "devMlt.cdcodeitem": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.cdcodeitem",
+                "label": "Config.Gutscheincode"
+              },
+              "devMlt.bordercolor": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.bordercolor",
+                "label": "Config.Promo Bar border color"
+              },
+              "devMlt.promoitemtextcolor": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.promoitemtextcolor",
+                "label": "Config.Promo Bar item text color"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.opt5": {
+      "label": "Config.Homepage SEO text",
+      "formFields": {
+        "global.container19": {
+          "type": "verticalContainer",
+          "label": "Seo text",
+          "options": {
+            "containerEntries": {
+              "devMlt.seotext": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.seotext",
+                "label": "Html raw text"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design": {
+      "label": "Config.Homepage Slider Konfiguration",
+      "formFields": {
+        "global.container1": {
+          "type": "verticalContainer",
+          "label": "Slide Positionen",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide1pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide1pos",
+                "label": "Config.Slide 1 Position",
+                "options": {
+                  "tooltip": "Please put it in the end if not active"
+                }
+              },
+              "devMlt.slide2pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide2pos",
+                "label": "Config.Slide 2 Position",
+                "options": {
+                  "tooltip": "Please put it in the end if not active"
+                }
+              },
+              "devMlt.slide3pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide3pos",
+                "label": "Config.Slide 3 Position",
+                "options": {
+                  "tooltip": "Please put it in the end if not active"
+                }
+              },
+              "devMlt.slide4pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide4pos",
+                "label": "Config.Slide 4 Position",
+                "options": {
+                  "tooltip": "Please put it in the end if not active"
+                }
+              },
+              "devMlt.slide5pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide5pos",
+                "label": "Config.Slide 5 Position",
+                "options": {
+                  "tooltip": "Please put it in the end if not active"
+                }
+              }
+            }
+          }
+        },
+        "global.container2": {
+          "type": "verticalContainer",
+          "label": "Slide 1 Daten",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide1active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide1active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide1img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide1img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide1bgcolor": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.slide1bgcolor",
+                "label": "Config.Hintergrundfarbe"
+              },
+              "devMlt.slide1date": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide1date",
+                "label": "Config.Erscheinungsdatum"
+              },
+              "devMlt.slide1title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide1title1",
+                "label": "Config.Überschrift",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.slide1title12": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide1title12",
+                "label": "Config.Überschrift2",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.slide1title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide1title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide1btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide1btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide1btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide1btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide1textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide1textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        },
+        "global.container3": {
+          "type": "verticalContainer",
+          "label": "Slide 2 Daten",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide2active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide2active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide2img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide2img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide2bgcolor": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.slide2bgcolor",
+                "label": "Config.Hintergrundfarbe"
+              },
+              "devMlt.slide2date": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide2date",
+                "label": "Config.Erscheinungsdatum"
+              },
+              "devMlt.slide2title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide2title1",
+                "label": "Config.Überschrift",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.slide2title12": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide2title12",
+                "label": "Config.Überschrift2",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.slide2title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide2title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide2btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide2btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide2btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide2btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide2textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide2textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        },
+        "global.container4": {
+          "type": "verticalContainer",
+          "label": "Slide 3 Daten",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide3active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide3active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide3img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide3img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide3bgcolor": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.slide3bgcolor",
+                "label": "Config.Hintergrundfarbe"
+              },
+              "devMlt.slide3date": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide3date",
+                "label": "Config.Erscheinungsdatum"
+              },
+              "devMlt.slide3title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide3title1",
+                "label": "Config.Überschrift",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.slide3title12": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide3title12",
+                "label": "Config.Überschrift2",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.slide3title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide3title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide3btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide3btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide3btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide3btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide3textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide3textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        },
+        "global.container5": {
+          "type": "verticalContainer",
+          "label": "Slide 4 Daten",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide4active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide4active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide4img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide4img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide4bgcolor": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.slide4bgcolor",
+                "label": "Config.Hintergrundfarbe"
+              },
+              "devMlt.slide4date": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide4date",
+                "label": "Config.Erscheinungsdatum"
+              },
+              "devMlt.slide4title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide4title1",
+                "label": "Config.Überschrift",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.slide4title12": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide4title12",
+                "label": "Config.Überschrift2",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.slide4title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide4title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide4btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide4btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide4btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide4btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide4textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide4textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        },
+        "global.container6": {
+          "type": "verticalContainer",
+          "label": "Slide 5 Daten",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide5active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide5active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide5img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide5img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide5bgcolor": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.slide5bgcolor",
+                "label": "Config.Hintergrundfarbe"
+              },
+              "devMlt.slide5date": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide5date",
+                "label": "Config.Erscheinungsdatum"
+              },
+              "devMlt.slide5title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide5title1",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.slide5title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide5title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide5btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide5btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide5btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide5btnurl",
+                "label": "Config.Schaltfläche URL"
+              }
+            }
+          },
+          "devMlt.slide5textfontcolor": {
+            "type": "inputText",
+            "scss": false,
+            "key": "devMlt.slide5textfontcolor",
+            "label": "Config.type white for white and black for black"
+          }
+        },
+        "global.container7": {
+          "type": "verticalContainer",
+          "label": "Slider 6 Konfiguration",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide6active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide6active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide6pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide6pos",
+                "label": "Config.Position"
+              },
+              "devMlt.slide6img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide6img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide6title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide6title1",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.slide6title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide6title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide6btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide6btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide6btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide6btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide6textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide6textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        },
+        "global.container8": {
+          "type": "verticalContainer",
+          "label": "Slider 7 Konfiguration",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide7active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide7active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide7pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide7pos",
+                "label": "Config.Position"
+              },
+              "devMlt.slide7img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide7img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide7title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide7title1",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.slide7title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide7title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide7btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide7btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide7btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide7btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide7textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide7textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        },
+        "global.container9": {
+          "type": "verticalContainer",
+          "label": "Slider 8 Konfiguration",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide8active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide8active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide8pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide8pos",
+                "label": "Config.Position"
+              },
+              "devMlt.slide8img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide8img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide8title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide8title1",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.slide8title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide8title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide8btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide8btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide8btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide8btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide8textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide8textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        },
+        "global.container10": {
+          "type": "verticalContainer",
+          "label": "Slider 9 Konfiguration",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide9active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide9active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide9pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide9pos",
+                "label": "Config.Position"
+              },
+              "devMlt.slide9img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide9img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide9title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide9title1",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.slide9title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide9title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide9btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide9btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide9btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide9btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide9textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide9textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        },
+        "global.container11": {
+          "type": "verticalContainer",
+          "label": "Slider 10 Konfiguration",
+          "options": {
+            "containerEntries": {
+              "devMlt.slide1active": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.slide10active",
+                "label": "Config.Slide aktivieren"
+              },
+              "devMlt.slide10pos": {
+                "type": "inputNumber",
+                "scss": false,
+                "key": "devMlt.slide10pos",
+                "label": "Config.Position"
+              },
+              "devMlt.slide10img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide10img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.slide10title1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide1title1",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.slide10title2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide10title2",
+                "label": "Config.Zwischenübersicht"
+              },
+              "devMlt.slide10btncaption": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide10btncaption",
+                "label": "Config.Schaltfläche"
+              },
+              "devMlt.slide10btnurl": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.slide10btnurl",
+                "label": "Config.Schaltfläche URL"
+              },
+              "devMlt.slide10textfontcolor": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.slide10textfontcolor",
+                "label": "Config.type white for white and black for black"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design2": {
+      "label": "Config.Teppich Stil Konfiguration",
+      "formFields": {
+        "global.container1": {
+          "type": "verticalContainer",
+          "label": "Teppich Stil 1",
+          "options": {
+            "containerEntries": {
+              "devMlt.style1img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style1img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.style1txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style1txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.style1url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.style1url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container2": {
+          "type": "verticalContainer",
+          "label": "Teppich Stil 2",
+          "options": {
+            "containerEntries": {
+              "devMlt.style2img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style2img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.style2txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style2txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.style2url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.style2url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container3": {
+          "type": "verticalContainer",
+          "label": "Teppich Stil 3",
+          "options": {
+            "containerEntries": {
+              "devMlt.style3img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style3img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.style3txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style3txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.style3url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.style3url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container4": {
+          "type": "verticalContainer",
+          "label": "Teppich Stil 4",
+          "options": {
+            "containerEntries": {
+              "devMlt.style4img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style4img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.style4txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style4txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.style4url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.style4url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container5": {
+          "type": "verticalContainer",
+          "label": "Teppich Stil 5",
+          "options": {
+            "containerEntries": {
+              "devMlt.style5img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style5img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.style5txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style5txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.style5url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.style5url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container6": {
+          "type": "verticalContainer",
+          "label": "Teppich Stil 6",
+          "options": {
+            "containerEntries": {
+              "devMlt.style6img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style6img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.style6txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style6txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.style6url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.style6url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container7": {
+          "type": "verticalContainer",
+          "label": "Teppich Stil 7",
+          "options": {
+            "containerEntries": {
+              "devMlt.style7img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style7img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.style7txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style7txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.style7url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.style7url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container8": {
+          "type": "verticalContainer",
+          "label": "Teppich Stil 8",
+          "options": {
+            "containerEntries": {
+              "devMlt.style8img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style8img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.style8txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.style8txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.style8url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.style8url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design3": {
+      "label": "Config.Teppich Formen Konfiguration",
+      "formFields": {
+        "global.container1": {
+          "type": "verticalContainer",
+          "label": "Teppich Form 1",
+          "options": {
+            "containerEntries": {
+              "devMlt.shape1img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape1img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.shape1txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape1txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.shape1url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.shape1url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container2": {
+          "type": "verticalContainer",
+          "label": "Teppich Form 2",
+          "options": {
+            "containerEntries": {
+              "devMlt.shape2img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape2img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.shape2txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape2txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.shape2url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.shape2url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container3": {
+          "type": "verticalContainer",
+          "label": "Teppich Form 3",
+          "options": {
+            "containerEntries": {
+              "devMlt.shape3img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape3img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.shape3txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape3txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.shape3url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.shape3url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container4": {
+          "type": "verticalContainer",
+          "label": "Teppich Form 4",
+          "options": {
+            "containerEntries": {
+              "devMlt.shape4img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape4img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.shape4txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape4txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.shape4url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.shape4url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        },
+        "global.container5": {
+          "type": "verticalContainer",
+          "label": "Teppich Form 5",
+          "options": {
+            "containerEntries": {
+              "devMlt.shape5img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape5img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.shape5txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.shape5txt",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.shape5url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.shape5url",
+                "label": "Config.URL"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design4": {
+      "label": "Config.Teppich Empfehlungen Konfiguration",
+      "formFields": {
+        "global.container1": {
+          "type": "verticalContainer",
+          "label": "Teppich Empfehlungen 1",
+          "options": {
+            "containerEntries": {
+              "devMlt.recommendation1img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation1img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.recommendation1title": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation1title",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.recommendation1txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation1txt",
+                "label": "Config.Text"
+              },
+              "devMlt.recommendation1btn": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation1btn",
+                "label": "Config.Schaltflächen Beschriftung"
+              },
+              "devMlt.recommendation1url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.recommendation1url",
+                "label": "Config.Schaltflächen URL"
+              }
+            }
+          }
+        },
+        "global.container2": {
+          "type": "verticalContainer",
+          "label": "Teppich Empfehlungen 2",
+          "options": {
+            "containerEntries": {
+              "devMlt.recommendation2img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation2img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.recommendation2title": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation2title",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.recommendation2txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation2txt",
+                "label": "Config.Text"
+              },
+              "devMlt.recommendation2btn": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation2btn",
+                "label": "Config.Schaltflächen Beschriftung"
+              },
+              "devMlt.recommendation2url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.recommendation2url",
+                "label": "Config.Schaltflächen URL"
+              }
+            }
+          }
+        },
+        "global.container3": {
+          "type": "verticalContainer",
+          "label": "Teppich Empfehlungen 3",
+          "options": {
+            "containerEntries": {
+              "devMlt.recommendation3img": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation3img",
+                "label": "Config.Grafik"
+              },
+              "devMlt.recommendation3title": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation3title",
+                "label": "Config.Überschrift"
+              },
+              "devMlt.recommendation3txt": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation3txt",
+                "label": "Config.Text"
+              },
+              "devMlt.recommendation3btn": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recommendation3btn",
+                "label": "Config.Schaltflächen Beschriftung"
+              },
+              "devMlt.recommendation3url": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.recommendation3url",
+                "label": "Config.Schaltflächen URL"
+              }
+            }
+          }
+        },
+        "global.container4": {
+          "type": "verticalContainer",
+          "label": "Recomendation Slider Text",
+          "options": {
+            "containerEntries": {
+              "devMlt.recomendationSliderText": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationSliderText",
+                "label": "Config.Recomendation Slider Text"
+              },
+              "devMlt.recomendationSliderLink": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationSliderLink",
+                "label": "Config.Recomendation Slider Link"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design5": {
+      "label": "Config.Flash Sale",
+      "formFields": {
+        "global.container1": {
+          "type": "verticalContainer",
+          "label": "Flash sale item 1",
+          "options": {
+            "containerEntries": {
+              "devMlt.flash1itemid": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.flash1itemid",
+                "label": "Config.Item_id"
+              },
+              "devMlt.flash1itemtime": {
+                "type": "datePicker",
+                "scss": false,
+                "key": "devMlt.flash1itemtime",
+                "label": "Config.Countdown Zeitpunkt (TT/MM/JJJJ)"
+              }
+            }
+          }
+        },
+        "global.container2": {
+          "type": "verticalContainer",
+          "label": "Flash sale item 2",
+          "options": {
+            "containerEntries": {
+              "devMlt.flash2itemid": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.flash2itemid",
+                "label": "Config.Item_id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design6": {
+      "label": "Config.Empfehlungen",
+      "formFields": {
+        "global.container1": {
+          "type": "verticalContainer",
+          "label": "Home Page Recommendation",
+          "options": {
+            "containerEntries": {
+              "devMlt.recomendationHeading1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationHeading1",
+                "label": "Config.Heading 1"
+              },
+              "devMlt.recomendationText1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationText1",
+                "label": "Config.Heading 1"
+              },
+              "devMlt.recomendationButtonText1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationButtonText1",
+                "label": "Config.button text"
+              },
+              "devMlt.recomendationImageLink1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationImageLink1",
+                "label": "Config.Image Link 1"
+              },
+              "devMlt.recomendationLink1": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationLink1",
+                "label": "Config.Link 1"
+              }
+            }
+          }
+        },
+        "global.container2": {
+          "type": "verticalContainer",
+          "label": "Home Page Recommendation 2",
+          "options": {
+            "containerEntries": {
+              "devMlt.recomendationHeading2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationHeading2",
+                "label": "Config.Heading 2"
+              },
+              "devMlt.recomendationText2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationText2",
+                "label": "Config.Heading 2"
+              },
+              "devMlt.recomendationButtonText2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationButtonText2",
+                "label": "Config.button text"
+              },
+              "devMlt.recomendationImageLink2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationImageLink2",
+                "label": "Config.Image Link 2"
+              },
+              "devMlt.recomendationLink2": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationLink2",
+                "label": "Config.Link 2"
+              }
+            }
+          }
+        },
+        "global.container3": {
+          "type": "verticalContainer",
+          "label": "Home Page Recommendation 3",
+          "options": {
+            "containerEntries": {
+              "devMlt.recomendationHeading3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationHeading3",
+                "label": "Config.Heading 3"
+              },
+              "devMlt.recomendationText3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationText3",
+                "label": "Config.Heading 3"
+              },
+              "devMlt.recomendationButtonText3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationButtonText3",
+                "label": "Config.button text"
+              },
+              "devMlt.recomendationImageLink3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationImageLink3",
+                "label": "Config.Image Link 3"
+              },
+              "devMlt.recomendationLink3": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationLink3",
+                "label": "Config.Link 3"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design7": {
+      "label": "Config.Recomendation Homepage Category",
+      "formFields": {
+        "global.container1": {
+          "type": "verticalContainer",
+          "label": "Home Page Recommendation",
+          "options": {
+            "containerEntries": {
+              "devMlt.wrap_color": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.wrap_color",
+                "label": "Config.Background"
+              },
+              "devMlt.text_header_color": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.text_header_color",
+                "label": "Config.Text Header Color"
+              },
+              "devMlt.text_two_color": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.text_two_color",
+                "label": "Config.Text Color"
+              },
+              "devMlt.button_rec_color": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.button_rec_color",
+                "label": "Config.button color"
+              },
+              "devMlt.button_text_rec_color": {
+                "type": "colorPicker",
+                "scss": false,
+                "key": "devMlt.button_text_rec_color",
+                "label": "Config.button text color"
+              },
+              "devMlt.recomendationHeadingOne": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationHeadingOne",
+                "label": "Config.HeadingOne",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.recomendationHeadingTwo": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationHeadingTwo",
+                "label": "Config.HeadingTwo",
+                "options": {
+                  "maxLength": 27,
+                  "tooltip": "Max length 27 characters"
+                }
+              },
+              "devMlt.recomendationText": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationHeading",
+                "label": "Config.Untertitel"
+              },
+              "devMlt.recomendationImageLink": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationImageLink",
+                "label": "Config.Image Link"
+              },
+              "devMlt.recomendationButtonLink": {
+                "type": "inputText",
+                "scss": false,
+                "key": "devMlt.recomendationButtonLink",
+                "label": "Config.Button Link"
+              },
+              "devMlt.recomendationLink": {
+                "type": "categoryPicker",
+                "scss": false,
+                "key": "devMlt.recomendationLink",
+                "label": "Config.Category"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design8": {
+      "label": "Config.Category Page Banner",
+      "formFields": {
+        "global.container19": {
+          "type": "verticalContainer",
+          "label": "Check box for sales",
+          "options": {
+            "containerEntries": {
+              "devMlt.alleTeppichSale": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.alleTeppichSale",
+                "label": "Config.For Alle Teppich Teppich"
+              },
+              "devMlt.moderneSale": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.moderneSale",
+                "label": "Config.For Moderne Teppich"
+              },
+              "devMlt.orientSale": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.orientSale",
+                "label": "Config.For Orient Teppich"
+              },
+              "devMlt.premiumSale": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.premiumSale",
+                "label": "Config.For Premium Teppich"
+              },
+              "devMlt.dekoSale": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.dekoSale",
+                "label": "Config.For Deko"
+              },
+              "devMlt.wohnraumSale": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.wohnraumSale",
+                "label": "Config.For Wohnraum Teppich"
+              },
+              "devMlt.saleSale": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.saleSale",
+                "label": "Config.For Sale section"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.design9": {
+      "label": "Config.Best Seller Config",
+      "formFields": {
+        "global.container19": {
+          "type": "verticalContainer",
+          "label": "Check box Best seller",
+          "options": {
+            "containerEntries": {
+              "devMlt.enableBestSeller": {
+                "type": "checkBox",
+                "scss": false,
+                "key": "devMlt.enableBestSeller",
+                "label": "Config.show Best Seller"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Config.LanguagesTab": {
+      "label": "Config.additionalSettings",
+      "menu": {
+        "languages": {
+          "label": "Config.additionalSettingsLanguagesLabel",
+          "formFields": {
+            "additional.languages.supportedLanguages": {
+              "type": "multiCheckBox",
+              "required": false,
+              "label": "Config.additionalSettingsSupportedLanguagesLabel",
+              "options": {
+                "tooltip": "Config.additionalSettingsSupportedLanguagesTooltip",
+                "defaultValue": "de, en",
+                "checkBoxValues": [
+                  {
+                    "value": "de",
+                    "caption": "Config.languageGerman"
+                  },
+                  {
+                    "value": "en",
+                    "caption": "Config.languageEnglish"
+                  },
+                  {
+                    "value": "fr",
+                    "caption": "Config.languageFrench"
+                  },
+                  {
+                    "value": "es",
+                    "caption": "Config.languageSpanish"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

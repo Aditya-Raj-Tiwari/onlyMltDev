@@ -1,0 +1,147 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% set ordersPerPage = config("Ceres.my_account.orders_per_page") %}
+{% if not (ordersPerPage matches '/^\\d+$/') %}
+    {# config value is not a valid number #}
+    {% set ordersPerPage = 5 %}
+{% endif %}
+
+{% set query = [] %}
+{% set page = request.get("page") | default(1) %}
+{% set orderList = services.customer.getOrders(page, ordersPerPage).toArray() %}
+{% set pageMax = orderList.lastPageNumber %}
+
+{% set paymentMethodId = 0 %}
+{% set paymentStatus = "" %}
+
+{{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
+
+<script type="x/template" id="vue-order-history">
+    {% if orderList.totalsCount > 0 %}
+    <div class="form-group">
+        <div class="row mb-3">
+            <div class="col-12 col-md-12 col-lg-12">
+                <!-- ORDER PAGINATION -->
+                {% if orderList.lastPageNumber > 1 %}
+                <div class="clearfix mt-3">
+                    <div class="float-left counter">
+                        {{ trans("Ceres::Template.orderHistoryShow", {"countStart": orderList.firstOnPage, "countEnd": orderList.lastOnPage, "orderMaxCount": orderList.totalsCount }) }}
+                    </div>
+                    <div class="float-right row">
+                        {% include "Ceres::Category.Item.Partials.Pagination" with { 'currentPage': page } %}
+                    </div>
+                </div>
+                {% endif %}
+                <!-- ./ORDER PAGINATION -->
+                <hr>
+                <!-- ORDER HISTORY TWIG -->
+                <div class="order-list">
+                    {% for entry in orderList.entries %}
+                        <article class="cmp cmp-order-item">
+                            <div class="item-details small">
+                                <div class="mb-3">
+                                    <h5 class="d-inline">{{ trans("Ceres::Template.orderHistoryOrderId") }} {{ entry.order.id }}</h5>
+                                    {% if entry.order.typeId == 5 %}
+                                        <i class="fa fa-info d-inline ml-1"
+                                            v-tooltip
+                                            data-placement="top"
+                                            data-trigger="hover"
+                                            data-boundary="window"
+                                            :data-title="'{{ trans("Ceres::Template.orderHistoryWarranty", {id: entry.order.parentOrder.id}) }}'">
+                                        </i>
+                                    {% endif %}
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-8">
+                                        <div class="row">
+                                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryOrderDate") }}</strong>
+                                            <span class="col-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.devDateTimeFormat") ) }} {{ trans("Ceres::Template.orderHistoryTime") }}</span>
+                                        </div>
+                                        {% if entry.status is defined and entry.status is not empty %}
+                                            <div class="row my-account-no-line">
+                                                <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryStatus") }}</strong>
+                                                <span class="col-6 col-sm-7">{{ entry.status }}</span>
+                                            </div>
+                                        {% endif %}
+                                        {% if entry.paymentMethodName | trim is not empty %}
+                                            <div class="row">
+                                                <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentMethod") }}</strong>
+                                                <span class="col-6 col-sm-7" id="payment_name_{{ entry.order.id }}">{{ entry.paymentMethodName }}</span>
+                                            </div>
+                                        {% endif %}
+                                        <div class="row">
+                                            <strong class="col-6 col-sm-5">{{ trans("Ceres::Template.orderHistoryPaymentStatus") }}</strong>
+                                            <span class="col-6 col-sm-7" id="payment_state_{{ entry.order.id }}">
+                                                {% for propertyKey in entry.order.properties %}
+                                                    {% if entry.order.properties[loop.index0].typeId == 4 %}
+                                                        {% set paymentStatus = entry.order.properties[loop.index0].value %}
+                                                        {{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ entry.order.properties[loop.index0].value) }}
+                                                    {% endif %}
+                                                    {% if entry.order.properties[loop.index0].typeId == 3 %}
+                                                        {% set paymentMethodId = entry.order.properties[loop.index0].value %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {% set currentTemplate = services.template.getCurrentTemplate() %}
+
+                                    <div class="col-12 col-md-4">
+                                        <div class="payment-change-box">
+                                            <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                                {{ trans("Ceres::Template.orderHistoryOrderDetails") }}
+                                            </button>
+                                            {% set returnOrder = entry.toArray() %}
+                                            {% if returnOrder.isReturnable and ceresConfig.myAccount.orderReturnActive %}
+                                                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="{{ urls.returns(returnOrder.order.id) }}">
+                                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                                    {{ trans("Ceres::Template.orderHistoryReturnSendBack") }}
+                                                </a>
+                                            {% endif %}
+
+                                            <change-payment-method
+                                                :current-order="{{ entry.order | json_encode() }}"
+                                                :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
+                                                :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, entry.order.id) | json_encode() }}"
+                                                :payment-status="{{ paymentStatus | json_encode() }}"
+                                                :current-template="{{ currentTemplate | json_encode() }}"
+                                                :current-payment-method-name="{{ entry.paymentMethodName | json_encode() }}">
+                                            </change-payment-method>
+                                            {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry.order) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+                <!-- ./ORDER HISTORY TWIG -->
+            </div>
+
+            <!-- ORDER DETAILS MODAL -->
+            <div class="modal fade" ref="orderDetails" v-if="currentOrder" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">{{ trans("Ceres::Template.orderHistoryOrderDetails") }}</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body" style="min-height:350px">
+                            <loading-animation v-if="isLoading"></loading-animation>
+                            <div id="dynamic-twig-content">
+                                {# DYNAMIC ADD CONTENT #}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./ORDER DETAILS MODAL -->
+        </div>
+    </div>
+    {% else %}
+    <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.orderHistoryNoOrders") }}</p>
+    {% endif %}
+</script>

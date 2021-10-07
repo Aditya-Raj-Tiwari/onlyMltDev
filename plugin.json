@@ -1,0 +1,22 @@
+{
+    "name"              : "devMlt",
+    "description"       : "",
+    "namespace"         : "devMlt",
+    "type"              : "theme",
+    "version"           : "1.0.0",
+    "license"           : "AGPL-3.0",
+    "isClosedSource"    : "true",
+    "author"            : "Webimpact GmbH, Thayamohan Mohanathas",
+    "email"             : "thayamohan@webimpact.io",
+    "phone"             : "+49 2794 77 99999",
+    "keywords"          : ["theme", "webimpact", "template"],
+    "serviceProvider"   :"devMlt\\Providers\\devMltServiceProvider",
+    "dataProviders"         :
+    [
+        {
+            "key"           :"devMlt\\Containers\\devMltContainer",
+            "name"          :"devMlt CSS",
+            "description"   :""
+        }
+    ]
+}

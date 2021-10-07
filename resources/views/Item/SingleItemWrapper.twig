@@ -1,0 +1,130 @@
+{% extends getPartial('page-design') %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.ItemName" as ItemName %}
+
+{% block PartialHead %}
+
+    {% set itemData = item.documents[0].data %}
+
+    {% if queryString() | length > 0 %}
+        {% set robotsValue = 'NOINDEX' %}
+    {% else %}
+        {% set robotsValue = 'ALL' %}
+    {% endif %}
+    {% embed getPartial('page-metadata') %}
+        {% block title          ItemName.get(itemData | itemName, itemData.variation.bundleType) %}
+        {% block description    itemData.texts.metaDescription %}
+        {% block keywords       itemData.texts.keywords %}
+        {% block image          itemData.images.all[0].url %}
+        {% block robots         robotsValue %}
+        {% block schemaOrg %}
+            {
+                "@context"      : "http://schema.org/",
+                "@type"         : "Product",
+                "@id"           : "{{ itemData.variation.id }}",
+                "name"          : "{{ ItemName.get(itemData | itemName, itemData.variation.bundleType) | trim }}",
+                "category"      : "{{ defaultCategory.details[0].name }}",
+                "releaseDate"   : "{{ itemData.variation.releasedAt }}",
+                "image"         : "{{ itemData.images.all[0].urlPreview }}",
+                "identifier"    : "{{ itemData.variation.id }}",
+                "description"   : "{{ itemData.texts.description | striptags | filterTabs }}",
+                "disambiguatingDescription" : "{{ itemData.texts.shortDescription }}",
+                "manufacturer"  : {
+                    "@type"         : "Organization",
+                    "name"          : "{{ itemData.item.manufacturer.externalName }}"
+                },
+                "offers": {
+                    "@type"         : "Offer",
+                    "priceCurrency" : "{{ itemData.prices.default.currency }}",
+                    "price"         : "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
+                    "url"           : "{{ requestedVariationUrl }}",
+{% if itemData.prices.default.baseLot > 0 %}
+                    "priceSpecification": {
+                        "@type": "UnitPriceSpecification",
+                        "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
+                        "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
+                        "referenceQuantity": {
+                            "@type": "QuantitativeValue",
+                            "value": "{{ itemData.unit.content }}",
+                            "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
+                        }
+                    },
+{% endif %}
+                    "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
+                    "itemCondition" : "{{ itemData.item.condition.names.name }}",
+                    "serialNumber"  : "{{ itemData.variation.number }}"
+                },
+                "depth": {
+                    "@type"         : "QuantitativeValue",
+                    "value"         : "{{ itemData.variation.lengthMM }}"
+                },
+                "width": {
+                    "@type"         : "QuantitativeValue",
+                    "value"         : "{{ itemData.variation.widthMM }}"
+                },
+                "height": {
+                    "@type"         : "QuantitativeValue",
+                    "value"         : "{{ itemData.variation.heightMM }}"
+                },
+                "weight": {
+                    "@type"         : "QuantitativeValue",
+                    "value"         : "{{ itemData.variation.weightG }}"
+                }
+            }
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+    {{ set_item_data_base(item.documents[0].data) }}
+
+    {% set shopBuilderTemplate = "" %}
+    {% set currentCategory = services.category.getCurrentCategory() %}
+
+    {% if currentCategory is defined %}
+        {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, isItemSet ? "itemset" : "singleitem") %}
+    {% endif %}
+
+    {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
+        {# Item template is configured for the item #}
+        {% set template %}
+            {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
+        {% endset %}
+
+        {% if template | trim is not empty %}
+            {{ template }}
+        {% else %}
+            {% include "Ceres::Item.SingleItemView" %}
+        {% endif %}
+
+    {% elseif shopBuilderTemplate | trim is not empty or isShopBuilder %}
+        {# Shopbuilder template #}
+        <div class="single container-max page-content">
+            <div class="row">
+                <div class="col">
+                    <single-item
+                        v-cloak
+                        item-data="{{ item | json_data }}"
+                        attributes-data="{{ attributes | json_data }}"
+                        variations="{{ variations | json_data }}"
+                        :after-key="{{ afterKey | json_encode }}"
+                        :please-select-option-variation-id="{{ dynamicVariationId }}"
+                        :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"
+                        :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
+                        :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"
+                        :item-id="{{ item.documents[0].data.item.id }}"
+                        v-slot="slotProps">
+                        {% set currentCategory = services.category.getCurrentCategory() %}
+                        {{ shop_builder_category_template("1613", "singleitem") | raw }}
+                    </single-item>
+                </div>
+            </div>
+        </div>
+    {% elseif shop_builder_category_template_exists() %}
+        {# Empty shop builder template is loading #}
+    {% else %}
+        {# No item template defined in ShopBuilder => use default template from plugin #}
+        {% include "Ceres::Item.SingleItemView" %}
+    {% endif %}
+
+{% endblock %}

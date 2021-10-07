@@ -1,0 +1,376 @@
+{% extends getPartial('page-design') %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.basket") %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+    <div v-cloak class="page-content basket container-max pt-3"
+         itemtype="http://schema.org/Product http://schema.org/Thing http://schema.org/Offer http://schema.org/PriceSpecification">
+        <div class="row">
+            <div class="basket-mlt">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8">
+                    <div class="p-3 p-sm-4 p-md-4 p-lg-5 bg-white">
+                        <div class="d-flex mb-3"><h1 class="h2 mb-0">{{ trans("Ceres::Template.basket") }}</h1>&nbsp;<div
+                                    class="text-muted ml-1"
+                                    style="font-family: 'Biennale', Arial, Sans-Serif !important; font-size: 1.25rem; line-height: 1.75em;">
+                                (<span class="count"
+                                       v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span> {{ trans("devMlt::Basket.Cat1") }})
+                            </div>
+                        </div>
+                        <basket-list :basket-details-data="{{ ceresConfig.basket.itemData | json_encode }}">
+                            <template #before-basket-item>
+                                {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+                            </template>
+                            <template #after-basket-item>
+                                {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+                            </template>
+                        </basket-list>
+                        <hr class="hr">
+                        <div class="row cross-selling-item_71486 ">
+                            <div class="my-4 d-flex">
+                                <img src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/icon_warenkorb/reload.png"
+                                     alt="" width="20px" height="20px">
+                                <p class="ml-2">{{ trans("devMlt::Basket.Cat2") }}:</p>
+                            </div>
+                            {{ component( "Ceres::ItemList.Components.CategoryItem") }}
+                            <div class="row">
+                                {% set itemData = services.item.getVariation(133011) %}
+                                {% if itemData.documents[0].data %}
+                                    <div class="col-lg-2 col-sm-12 text-center">
+                                        <a href="https://www.morgenland-teppiche.de/zubehoer/teppichunterlage-langlebigkeit-pro-langlebigkeit-pro-rechteckig_12406442_133012">
+                                            <img class="img-fluid ml-2"
+                                                 src="{{ itemData.documents[0].data.images.all[0].url }}" alt=""
+                                                 width="70px"
+                                                 height="70px">
+                                        </a>
+
+                                    </div>
+                                    <div class="col-lg-7 col-sm-12">
+                                        <p class="h5 font-weight-bold">
+                                            {{ trans("devMlt::Basket.Cat3") }}
+                                        </p>
+                                        <small class="text-muted">
+                                            {{ itemData.documents[0].data.texts.shortDescription|raw }}
+                                        </small>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12">
+                                        <div class="dropdown">
+                                            <button class="btn btn-dark dropdown-toggle pt-3" type="button"
+                                                    id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                {{ trans("devMlt::Basket.Cat5") }}
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <button class="dropdown-item" type="button"
+                                                        @click="$itemId = 133012" id="id12"
+                                                >{{ trans("devMlt::Basket.Size1") }}
+                                                </button>
+                                                <button class="dropdown-item" type="button" id="id13"
+                                                        @click.prevent="$itemId = 133013">{{ trans("devMlt::Basket.Size2") }}
+                                                </button>
+                                                <button class="dropdown-item" type="button" id="id14"
+                                                        @click="$itemId = 133014">{{ trans("devMlt::Basket.Size3") }}
+                                                </button>
+                                                <button class="dropdown-item" type="button" id="id15"
+                                                        @click="$itemId = 133015">{{ trans("devMlt::Basket.Size4") }}
+                                                </button>
+                                                <button class="dropdown-item" type="button" id="id16"
+                                                        @click="$itemId = 133016">{{ trans("devMlt::Basket.Size5") }}
+                                                </button>
+                                                <button class="dropdown-item" type="button" id="id17"
+                                                        @click="$itemId = 133017">{{ trans("devMlt::Basket.Size6") }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-danger" id="priceId">
+                                            {# direct price to avoidthe loop #}
+                                            {{ trans("devMlt::Basket.Cat5") }}
+                                        </p>
+                                        <a class="btn btn-danger text-white"
+                                           @click.prevent="ceresStore.dispatch('addBasketItem',{ 'variationId':$itemId,'quantity':1 });">  {{ trans("devMlt::Basket.Cat7") }}</a>
+                                    </div>
+                                    <script2>
+                                        let itemId = 133012;
+                                        let preis = 0;
+                                        $('#id12').click(function(){
+                                        $('#priceId').text('11,90 €');
+                                        $('#dropdownMenu2').text('130 x 60 cm Rechteckig');
+                                        });
+                                        $('#id13').click(function(){
+                                        $('#priceId').text('14,90 €');
+                                        $('#dropdownMenu2').text('150 x 80 cm Rechteckig');
+                                        });
+                                        $('#id14').click(function(){
+                                        $('#priceId').text('22,90 €');
+                                        $('#dropdownMenu2').text('190 x 120 cm Rechteckig');
+                                        });
+                                        $('#id15').click(function(){
+                                        $('#priceId').text('32,90 €');
+                                        $('#dropdownMenu2').text('230 x 160 cm Rechteckig');
+                                        });
+                                        $('#id16').click(function(){
+                                        $('#priceId').text('42,90 €');
+                                        $('#dropdownMenu2').text('290 x 190 cm Rechteckig');
+                                        });
+                                        $('#id17').click(function(){
+                                        $('#priceId').text('59,90 €');
+                                        $('#dropdownMenu2').text('340 x 240 cm Rechteckig');
+                                        });
+                                    </script2>
+                                {% endif %}
+                            </div>
+                            <hr class="my-4">
+                            <div class="row">
+                                {% set itemData1 = services.item.getVariation(164974) %}
+                                {% if itemData1.documents[0].data %}
+                                    <div class="col-lg-2 col-sm-12 text-center">
+                                        <a href="https://www.morgenland-teppiche.de/dekoration/zubehoer/reinigungsspray-teppich-fleckententferner-cleanilo_12421780_164974">
+                                            <img class="img-fluid ml-2"
+                                                 src="{{ itemData1.documents[0].data.images.all[0].url }}" alt=""
+                                                 width="70px"
+                                                 height="70px">
+                                        </a>
+
+                                    </div>
+                                    <div class="col-lg-7 col-sm-12">
+                                        <p class="h5 font-weight-bold">
+                                            {{ trans("devMlt::Basket.Cat8") }}
+                                        </p>
+                                        <small class="text-muted">
+                                            {{ itemData1.documents[0].data.texts.shortDescription|raw }}
+                                        </small>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-12">
+                                        <p class="text-danger pt-3">
+                                            {{ trans("devMlt::Basket.Cat6") }}
+                                        </p>
+                                        <a class="btn btn-danger text-white"
+                                           @click.prevent="ceresStore.dispatch('addBasketItem',{ 'variationId':164974,'quantity':1 });">  {{ trans("devMlt::Basket.Cat7") }}</a>
+                                    </div>
+
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="d-none d-sm-none d-md-none d-lg-none d-xl-block mt-3 p-3 p-sm-4 p-md-4 p-lg-5 bg-white">
+                        <span class="h2">  {{ trans("devMlt::Basket.Cat9") }}</span>
+                        <div class="warenkorb-width icon-row d-flex justify-content-between mt-4 mb-0 pr-4 pr-sm-0 pr-md-0 pr-lg-0"
+                             id="payment-basket">
+                            <div class="icon icon-md" id="paypal"></div>
+                            <div class="icon icon-md" id="visa"></div>
+                            <div class="icon icon-md" id="mastercard"></div>
+                            <div class="icon icon-md" id="klarna-sofort"></div>
+                            <div class="icon icon-md" id="klarna-ratenkauf"></div>
+                            <div class="icon icon-md" id="klarna"></div>
+                            <div class="icon icon-md" id="amazonpay"></div>
+                            <div class="icon icon-md" id="sepa"></div>
+                            <div class="icon icon-md" id="barzahlung"></div>
+                        </div>
+                    </div>
+                    <div class="row  mt-3 basket_two_col_grid">
+                        <div class="col-6">
+                            <div class="col-12 bg-white ">
+                                <span class="h2">  {{ trans("devMlt::Basket.Cat18") }}</span>
+                                <div class=""
+                                     id="shipping">
+                                    <div class="icon icon-md lazyload" id="dhl"></div>
+                                    <div class="icon icon-md lazyload" id="dpd"></div>
+                                    <div class="icon icon-md lazyload" id="gls"></div>
+                                    <div class="icon icon-md lazyload" id="fedex"></div>
+                                    <div class="icon icon-md lazyload" id="ups"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6">
+                            <div class="col-12 bg-white">
+                                <span class="h2">  {{ trans("devMlt::Basket.Cat10") }}</span>
+                                <div class=""
+                                     id="shipping">
+                                    <a href="https://www.trustedshops.de/bewertung/info_XC94A61ADF1468DE51751E2FB895C1590.html"
+                                       target="_blank">
+                                        <div class="icon icon-md lazyload" id="trustedshop"></div>
+                                    </a>
+                                    <a href="https://www.haendlerbund.de/mitglied/show.php?uuid=6766ebe7-7cb1-11e5-baa9-14dae9b38da3-2462347049"
+                                       target="_blank">
+                                        <div class="icon icon-md lazyload" id="haaendlerbund"></div>
+                                    </a>
+                                    <a href="https://www.haendlerbund.de/mitglied/show.php?uuid=6766ebe7-7cb1-11e5-baa9-14dae9b38da3-2462347049">
+                                        <div class="icon icon-md lazyload" id="fc_logo"></div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 mt-3 mt-sm-3 mt-md-0">
+                    <div>
+
+                        {% if ceresConfig.basket.showShippingCountrySelect %}
+                            <shipping-country-select :basket-select="true"
+                                                     :open-basket-preview="false"></shipping-country-select>
+                            <hr>
+                        {% endif %}
+                        <div class="d-block bg-white p-3 p-sm-4 p-md-4 p-lg-5">
+                            {{ LayoutContainer.show("Ceres::Basket.BeforeBasketTotals") }}
+                            <basket-totals template-override="#basket-v2-totals" class="mb-2">
+                                <template #before-item-sum>
+                                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                                </template>
+                                <template #after-item-sum>
+                                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+                                </template>
+                                <template #before-shipping-costs>
+                                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+                                </template>
+                                <template #after-shipping-costs>
+                                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                                </template>
+                                <template #before-total-sum>
+                                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+                                </template>
+                                <template #before-vat>
+                                    {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                                </template>
+                                <template #after-vat>
+                                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+                                </template>
+                                <template #after-total-sum>
+                                    {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+                                </template>
+                            </basket-totals>
+                            {{ LayoutContainer.show("Ceres::Basket.AfterBasketTotals") }}
+                            {{ LayoutContainer.show("Ceres::Basket.BeforeCheckoutButton") }}
+                            <a v-waiting-animation-infinite class="btn btn-secondary btn-lg btn-block text-uppercase"
+                               href="{{ urls.checkout }}">
+                                {{ trans("Ceres::Template.basketCheckout") }}
+                            </a>
+                            <hr class="inner-hr">
+                            <span class="inner-hr-caption" style="background-color: white">  {{ trans("devMlt::Basket.Cat11") }}</span>
+
+                            {{ LayoutContainer.show("Ceres::Basket.AfterCheckoutButton") }}
+
+                            <a href="#" data-toggle="modal" data-target="#sharecart"
+                               class="btn btn-dark btn-block py-3 mt-2">  {{ trans("devMlt::Basket.Cat12") }}</a>
+                        </div>
+                        <div class="collapse-coupon-outer d-block bg-white my-3 px-3 px-sm-4 px-md-4 px-lg-5 py-3 py-sm-3 py-md-3> py-lg-4">
+
+                            <div class="d-flex justify-content-between w-100" data-toggle="collapse"
+                                 data-target="#collapse-coupon" aria-expanded="false" aria-controls="collapse-coupon">
+                                <div>
+                                    <b>  {{ trans("devMlt::Basket.Cat13") }}</b>
+                                    <span class="text-muted">(optional)</span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                     fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path d="M6 9l6 6 6-6"/>
+                                </svg>
+                            </div>
+                            <div class="collapse my-3" id="collapse-coupon">
+                                {{ LayoutContainer.show("Ceres::Basket.BeforeCoupon") }}
+                                <coupon></coupon>
+                            </div>
+
+
+                        </div>
+                        <div class="d-block bg-white px-3 px-sm-4 px-md-4 px-lg-5 py-3 py-sm-3 py-md-3 py-lg-4">
+                            <div class="basket-adv">
+                                <div class="d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                                         fill="none" stroke="#7b7b7b" stroke-width="4" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    {{ trans("devMlt::Template.TopBarAdv1") }}
+                                </div>
+                                <div class="d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                                         fill="none" stroke="#7b7b7b" stroke-width="4" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    {{ trans("devMlt::Template.TopBarAdv2") }}
+                                </div>
+                                <div class="d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                                         fill="none" stroke="#7b7b7b" stroke-width="4" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    {{ trans("devMlt::Template.TopBarAdv3") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse-hilfe-outer d-block bg-white my-3 px-3 px-sm-4 px-md-4 px-lg-5 py-3 py-sm-3 py-md-3> py-lg-4">
+
+                            <div class="d-flex justify-content-between w-100" data-toggle="collapse"
+                                 data-target="#collapse-hilfe" aria-expanded="false" aria-controls="collapse-hilfe">
+                                <div>
+                                    <b><img src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/faq.svg"
+                                            alt="">
+                                        {{ trans("devMlt::Basket.Cat14") }}
+                                    </b>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                     fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path d="M6 9l6 6 6-6"/>
+                                </svg>
+                            </div>
+                            <div class="collapse my-3" id="collapse-hilfe">
+                                <div class="telephone_info mb-2">
+                                    <p class="mb-0 ">{{ trans("devMlt::Basket.Cat15") }}</p>
+                                    <a href="tel:+494038632775"
+                                       class="text-dark font-weight-bold text-small"><p class="mb-0">040 386 32 77 5</p>
+                                    </a>
+                                    <p><span class="open_time_text"> {{ trans("devMlt::Basket.Cat16") }}</span></p>
+                                </div>
+                                <p class="mb-0 "> {{ trans("devMlt::Basket.Cat17") }}</p>
+                                <a href="mailto:mail@morgenland-teppiche.de"
+                                   class="text-dark font-weight-bold text-small">mail@morgenland-teppiche.de</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                {% set productlist = LayoutContainer.show("Ceres::Homepage.Container1") %}
+                {{ productlist }}
+            </diV>
+        </div>
+        <div class="row elem to-fade-in mb-5 pb-4">
+            <div class="col-12">
+                <div class="newsletter-homepage">
+                    <div class="content">
+                        <div>
+                            <span class="h1 d-block font-weight-bold mb-2">{{ trans("devMlt::Template.HomepageNewsletter1") }}*</span>
+                            <span class="h5 d-block font-weight-normal mb-4">{{ trans("devMlt::Template.HomepageNewsletter2") }}</span>
+                            <div class="col-xs-12" {{ WidgetHelper.makeEditable("hintText", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+                                {{ hintText | raw }}
+                            </div>
+                            <newsletter-input :show-name-inputs="{{ showNameInputs }}"
+                                              :show-privacy-policy-checkbox="{{ showPrivacyPolicyCheckbox }}"
+                                              :email-folder="{{ emailFolder }}"></newsletter-input>
+                            <span class="d-block small">*{{ trans("devMlt::Template.HomepageNewsletter4") }} {{ trans("devMlt::Template.HomepageNewsletter3") }}</span>
+                        </div>
+                    </div>
+                    <img src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/news_letter_01/newsletter.jpg"
+                         class="d-none d-sm-none d-md-none d-lg-block d-xl-block img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
