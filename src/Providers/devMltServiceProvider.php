@@ -59,48 +59,10 @@ class  devMltServiceProvider extends TemplateServiceProvider
             $container->addScriptTemplate('devMlt::Item.Components.SingleItem');
         }, 0);
 
-        $dispatcher->listen('IO.tpl.basket', function (TemplateContainer $container)
+        $dispatcher->listen('IO.tpl.wish-list', function (TemplateContainer $container)
         {
-            $container->setTemplate('devMlt::Basket.Basket');
+            $container->setTemplate('devMlt::WishList.WishListView');
             return false;
-        },0);
-
-//        override checkout page
-        $dispatcher->listen("IO.tpl.checkout", function(TemplateContainer $container)
-        {
-            $container->setTemplate('devMlt::Checkout.Macros.CheckoutView');
-            return false;
-        },0);
-
-        $dispatcher->listen("IO.tpl.checkout", function(TemplateContainer $container)
-        {
-            $container->setTemplate('devMlt::MyAccount.MyAccountView');
-            return false;
-        },0);
-
-        $dispatcher->listen("IO.Resources.Import", function(ResourceContainer $container)
-        {
-            $container->addScriptTemplate('devMlt::Basket.Components.AddToBasket');
-        },0);
-
-        $dispatcher->listen("IO.Resources.Import", function(ResourceContainer $container)
-        {
-            $container->addScriptTemplate('devMlt::Basket.Components.BasketPreview');
-        },0);
-
-        $dispatcher->listen("IO.Resources.Import", function(ResourceContainer $container)
-        {
-            $container->addScriptTemplate('devMlt::Basket.Components.BasketTotalsPreview');
-        },0);
-
-        $dispatcher->listen("IO.Resources.Import", function(ResourceContainer $container)
-        {
-            $container->addScriptTemplate('devMlt::Basket.Components.BasketTotals');
-        },0);
-
-        $dispatcher->listen("IO.Resources.Import", function(ResourceContainer $container)
-        {
-            $container->addScriptTemplate('devMlt::Basket.Components.BasketListItem');
         },0);
 
         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
@@ -163,6 +125,16 @@ class  devMltServiceProvider extends TemplateServiceProvider
         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
             $container->addScriptTemplate('devMlt::Item.Components.VariationSelect');
         }, 0);
+
+        $dispatcher->listen("IO.Resources.Import", function(ResourceContainer $container)
+        {
+           $container->addScriptTemplate('devMlt::WishList.WishListItem');
+        },0);
+
+        $dispatcher->listen("IO.Resources.Import", function(ResourceContainer $container)
+        {
+           $container->addScriptTemplate('devMlt::WishList.AddToBasketInWishList');
+        },0);
 
         {
             $this->overrideTemplate("Ceres::PageDesign.Partials.PageMetadata", "devMlt::PageDesign.Partials.PageMetadata");

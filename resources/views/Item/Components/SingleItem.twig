@@ -12,8 +12,7 @@
                                      v-if="prop.id == 690 && prop.values.value"
                                      class="border_video">
                                     <a href="#videostory" class="button button_video more" id="videolink">
-                                        {{ trans("devMlt::SingleItem.Video") }} <i class="fa fa-play-circle video-icon"
-                                                                                   aria-hidden="true">&nbsp;</i>
+                                        Video <i class="fa fa-play-circle video-icon" aria-hidden="true">&nbsp;</i>
                                     </a>
                                     <div id="videostory" class="mfp-hide" style="max-width: 100%; margin: 0 auto;">
                                         <iframe width="550" height="550"
@@ -29,19 +28,19 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-5 mt-0 mt-sm-5 mt-md-3 mt-lg-5 pl-lg-4">
                         <div>
-                            {# #}{# custom header #}
-                            {# <div v-if="ceresStore.getters.breadcrumbs[1]"> #}
-                            {# <a :href="ceresStore.getters.breadcrumbs[1].url" #}
-                            {# class="mb-3 item"> #}
-                            {# ${ ceresStore.getters.breadcrumbs[1].details[0].name } #}
-                            {# </a> #}
-                            {# </div> #}
-                            {# <div v-else> #}
-                            {# <a :href="ceresStore.getters.breadcrumbs[0].details[0].canonicalLink" #}
-                            {# class="mb-3 item"> #}
-                            {# ${ ceresStore.getters.breadcrumbs[0].details[0].name } #}
-                            {# </a> #}
-                            {# </div> #}
+                            {# custom header #}
+                            <div v-if="ceresStore.getters.breadcrumbs[1]">
+                                <a :href="ceresStore.getters.breadcrumbs[1].url"
+                                   class="mb-3 item">
+                                    ${ ceresStore.getters.breadcrumbs[1].details[0].name }
+                                </a>
+                            </div>
+                            <div v-else>
+                                <a :href="ceresStore.getters.breadcrumbs[0].details[0].canonicalLink"
+                                   class="mb-3 item">
+                                    ${ ceresStore.getters.breadcrumbs[0].details[0].name }
+                                </a>
+                            </div>
 
                             <h1 class="h1 title mb-3 mt-2">
                                 ${ currentVariation | itemName }
@@ -110,9 +109,10 @@
                                 </div>
                                 <div v-if="!currentVariation.filter.isSalable">
                                     <div class="col-12 mt-3 email_form">
-                                        <p class="h4">
-                                            {{ trans("devMlt::SingleItem.Cat1") }}</p>
-                                        <p> {{ trans("devMlt::SingleItem.Cat2") }}</p>
+                                        <p class="h4">Der Artikel wird bald wieder verfügbar sein, jetzt
+                                            vorbestellen.</p>
+                                        <p>Sobald der Artikel wieder verfügbar ist, bekommst du von uns eine
+                                            E-Mail.</p>
                                         <a class="btn btn-dark text-white" href="tel:+494038632775"></a>
                                         <a class="btn btn-dark text-white"
                                            :href="'mailto:mail@morgenland-teppiche.de?subject=Verfügbarkeitsanfrage - Artikelnummer: '+currentVariation.variation.id+
@@ -158,13 +158,13 @@
                                                     >
                                                         <span class="font-weight-bold">${ currentVariation.variation.availability.names.name }</span>
                                                         <span class="font-weight-bold col-green"
-                                                              v-if="currentVariation.variation.availability.names.availabilityId <= 3 "> {{ trans("devMlt::SingleItem.Property1") }}</span>
+                                                              v-if="currentVariation.variation.availability.names.availabilityId <= 3 "> sofort versandfertig</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mb-1">
                                                     <div class="d-flex justify-content-between">
-                                                        <span>{{ trans("devMlt::SingleItem.Property2") }}</span>
-                                                        <span class="font-weight-bold"> {{ trans("devMlt::SingleItem.Property3") }}</span>
+                                                        <span>Standard-Lieferung</span>
+                                                        <span class="font-weight-bold"> kostenlos</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,18 +174,18 @@
                                                  src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/single-item-icons/package.svg"
                                                  width="22" height="22">
 
-                                            <span class="ml-2">{{ trans("devMlt::SingleItem.Property4") }}</span>{{ trans("devMlt::SingleItem.Property5") }}
+                                            <span class="ml-2">Kostenloser Versand &</span> Rückversand
                                         </li>
                                         <li class="list-group-item mb-1">
                                             <img class="lazyload"
                                                  src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/single-item-icons/backarrow.svg"
                                                  width="22" height="22">
-                                            <span class="ml-2">{{ trans("devMlt::Template.TopBarAdv1") }}</span></li>
+                                            <span class="ml-2">31 Tage Rückgaberecht</span></li>
                                         <li class="list-group-item mb-1">
                                             <img class="lazyload"
                                                  src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/single-item-icons/feather.svg"
                                                  width="22" height="22">
-                                            <span class="ml-2">{{ trans("devMlt::Template.TopBarAdv2") }}</span></li>
+                                            <span class="ml-2">Direkt vom Hersteller</span></li>
                                     </ul>
                                 </div>
 
@@ -193,131 +193,131 @@
                                 {% include "devMlt::Item.Components.SingleItem.SingleItemProperty" %}
 
                                 {# andere formen #}
-                                <div v-for="var_prop in currentVariation.variationProperties[0].properties"
-                                     v-if="var_prop.id == 692" class="h3 font-weight-bold mt-5 mb-3 ml-3">
-                                    {{ trans("devMlt::Template.Cat3") }}
-                                </div>
-                                <div v-for="var_prop in currentVariation.variationProperties"
-                                     v-if="var_prop.id == 30" class="row d-flex container_cross">
-                                    <div v-for="sub_prop in var_prop.properties" class="mb-5">
-                                        <div v-if="sub_prop.id == 693">
-                                            {% for prop in  item.documents[0].data.variationProperties %}
-                                                {% if prop.id == 30 %}
-                                                    {% for sub_prop in prop.properties %}
-                                                        {% if sub_prop.id == 693 %}
-                                                            {% set  artid = sub_prop.values.value %}
-                                                        {% endif %}
-                                                        {% if sub_prop.id == 694 and sub_prop.values.value|length>0 %}
-                                                            {% set url = services.url.getVariationURL(artid,sub_prop.values.value).toAbsoluteUrl() %}
-                                                            {% set urlToUse =   url|split('_') %}
-                                                            <div>
-                                                                <div
-                                                                        v-for="sub_prop in var_prop.properties"
-                                                                        v-if="sub_prop.id == 694">
-                                                                    <a :href="'{{ urlToUse[0] }}'+'_'+'{{ artid }}'+'_'+sub_prop.values.value">
-                                                                        <div class="pic_fit_container"
-                                                                             v-for="sub_prop in var_prop.properties"
-                                                                             v-if="sub_prop.id == 692">
-                                                                            <img class="lazyload"
-                                                                                 :src="sub_prop.values.value" alt="">
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                        <div v-if="sub_prop.id == 695">
-                                            {% for prop in  item.documents[0].data.variationProperties %}
-                                                {% if prop.id == 30 %}
-                                                    {% for sub_prop in prop.properties %}
-                                                        {% if sub_prop.id == 695 %}
-                                                            {% set  artid = sub_prop.values.value %}
-                                                        {% endif %}
-                                                        {% if sub_prop.id == 699 and sub_prop.values.value|length>0 %}
-                                                            {% set url = services.url.getVariationURL(artid,sub_prop.values.value).toAbsoluteUrl() %}
-                                                            {% set urlToUse =   url|split('_') %}
-                                                            <div>
-                                                                <div
-                                                                        v-for="sub_prop in var_prop.properties"
-                                                                        v-if="sub_prop.id == 699">
-                                                                    <a :href="'{{ urlToUse[0] }}'+'_'+'{{ artid }}'+'_'+sub_prop.values.value">
-                                                                        <div class="pic_fit_container"
-                                                                             v-for="sub_prop in var_prop.properties"
-                                                                             v-if="sub_prop.id == 703">
-                                                                            <img class="lazyload"
-                                                                                 :src="sub_prop.values.value" alt="">
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                        <div v-if="sub_prop.id == 696">
-                                            {% for prop in  item.documents[0].data.variationProperties %}
-                                                {% if prop.id == 30 %}
-                                                    {% for sub_prop in prop.properties %}
-                                                        {% if sub_prop.id == 696 %}
-                                                            {% set  artid = sub_prop.values.value %}
-                                                        {% endif %}
-                                                        {% if sub_prop.id == 700 and sub_prop.values.value|length>0 %}
-                                                            {% set url = services.url.getVariationURL(artid,sub_prop.values.value).toAbsoluteUrl() %}
-                                                            {% set urlToUse =   url|split('_') %}
-                                                            <div>
-                                                                <div
-                                                                        v-for="sub_prop in var_prop.properties"
-                                                                        v-if="sub_prop.id == 700">
-                                                                    <a :href="'{{ urlToUse[0] }}'+'_'+'{{ artid }}'+'_'+sub_prop.values.value">
-                                                                        <div class="pic_fit_container"
-                                                                             v-for="sub_prop in var_prop.properties"
-                                                                             v-if="sub_prop.id == 704">
-                                                                            <img class="lazyload"
-                                                                                 :src="sub_prop.values.value" alt="">
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                        <div v-if="sub_prop.id == 697">
-                                            {% for prop in  item.documents[0].data.variationProperties %}
-                                                {% if prop.id == 30 %}
-                                                    {% for sub_prop in prop.properties %}
-                                                        {% if sub_prop.id == 697 %}
-                                                            {% set  artid = sub_prop.values.value %}
-                                                        {% endif %}
-                                                        {% if sub_prop.id == 701 and sub_prop.values.value|length>0 %}
-                                                            {# {% set url = services.url.getVariationURL(artid,sub_prop.values.value).toAbsoluteUrl() %} #}
-                                                            {# {% set urlToUse =   url|split('_') %} #}
-                                                            <div>
-                                                                <div
-                                                                        v-for="sub_prop in var_prop.properties"
-                                                                        v-if="sub_prop.id == 701">
-                                                                    <a :href="'{{ urlToUse[0] }}'+'_'+'{{ artid }}'+'_'+sub_prop.values.value">
-                                                                        <div
-                                                                                v-for="sub_prop in var_prop.properties"
-                                                                                v-if="sub_prop.id == 705">
-                                                                            <img class="lazyload"
-                                                                                 :src="sub_prop.values.value" alt="">
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
+                                {# <div v-for="var_prop in currentVariation.variationProperties[0].properties" #}
+                                {# v-if="var_prop.id == 692" class="h3 font-weight-bold mt-5 mb-3 ml-3"> #}
+                                {# Andere Formen #}
+                                {# </div> #}
+                                {# <div v-for="var_prop in currentVariation.variationProperties" #}
+                                {# v-if="var_prop.id == 30" class="row d-flex container_cross"> #}
+                                {# <div v-for="sub_prop in var_prop.properties" class="mb-5"> #}
+                                {# <div v-if="sub_prop.id == 693"> #}
+                                {# {% for prop in  item.documents[0].data.variationProperties %} #}
+                                {# {% if prop.id == 30 %} #}
+                                {# {% for sub_prop in prop.properties %} #}
+                                {# {% if sub_prop.id == 693 %} #}
+                                {# {% set  artid = sub_prop.values.value %} #}
+                                {# {% endif %} #}
+                                {# {% if sub_prop.id == 694 and sub_prop.values.value|length>0 %} #}
+                                {# {% set url = services.url.getVariationURL(artid,sub_prop.values.value).toAbsoluteUrl() %} #}
+                                {# {% set urlToUse =   url|split('_') %} #}
+                                {# <div> #}
+                                {# <div #}
+                                {# v-for="sub_prop in var_prop.properties" #}
+                                {# v-if="sub_prop.id == 694"> #}
+                                {# <a :href="'{{ urlToUse[0] }}'+'_'+'{{ artid }}'+'_'+sub_prop.values.value"> #}
+                                {# <div class="pic_fit_container" #}
+                                {# v-for="sub_prop in var_prop.properties" #}
+                                {# v-if="sub_prop.id == 692"> #}
+                                {# <img class="lazyload" #}
+                                {# :src="sub_prop.values.value" alt=""> #}
+                                {# </div> #}
+                                {# </a> #}
+                                {# </div> #}
+                                {# </div> #}
+                                {# {% endif %} #}
+                                {# {% endfor %} #}
+                                {# {% endif %} #}
+                                {# {% endfor %} #}
+                                {# </div> #}
+                                {# <div v-if="sub_prop.id == 695"> #}
+                                {# {% for prop in  item.documents[0].data.variationProperties %} #}
+                                {# {% if prop.id == 30 %} #}
+                                {# {% for sub_prop in prop.properties %} #}
+                                {# {% if sub_prop.id == 695 %} #}
+                                {# {% set  artid = sub_prop.values.value %} #}
+                                {# {% endif %} #}
+                                {# {% if sub_prop.id == 699 and sub_prop.values.value|length>0 %} #}
+                                {# {% set url = services.url.getVariationURL(artid,sub_prop.values.value).toAbsoluteUrl() %} #}
+                                {# {% set urlToUse =   url|split('_') %} #}
+                                {# <div> #}
+                                {# <div #}
+                                {# v-for="sub_prop in var_prop.properties" #}
+                                {# v-if="sub_prop.id == 699"> #}
+                                {# <a :href="'{{ urlToUse[0] }}'+'_'+'{{ artid }}'+'_'+sub_prop.values.value"> #}
+                                {# <div class="pic_fit_container" #}
+                                {# v-for="sub_prop in var_prop.properties" #}
+                                {# v-if="sub_prop.id == 703"> #}
+                                {# <img class="lazyload" #}
+                                {# :src="sub_prop.values.value" alt=""> #}
+                                {# </div> #}
+                                {# </a> #}
+                                {# </div> #}
+                                {# </div> #}
+                                {# {% endif %} #}
+                                {# {% endfor %} #}
+                                {# {% endif %} #}
+                                {# {% endfor %} #}
+                                {# </div> #}
+                                {# <div v-if="sub_prop.id == 696"> #}
+                                {# {% for prop in  item.documents[0].data.variationProperties %} #}
+                                {# {% if prop.id == 30 %} #}
+                                {# {% for sub_prop in prop.properties %} #}
+                                {# {% if sub_prop.id == 696 %} #}
+                                {# {% set  artid = sub_prop.values.value %} #}
+                                {# {% endif %} #}
+                                {# {% if sub_prop.id == 700 and sub_prop.values.value|length>0 %} #}
+                                {# {% set url = services.url.getVariationURL(artid,sub_prop.values.value).toAbsoluteUrl() %} #}
+                                {# {% set urlToUse =   url|split('_') %} #}
+                                {# <div> #}
+                                {# <div #}
+                                {# v-for="sub_prop in var_prop.properties" #}
+                                {# v-if="sub_prop.id == 700"> #}
+                                {# <a :href="'{{ urlToUse[0] }}'+'_'+'{{ artid }}'+'_'+sub_prop.values.value"> #}
+                                {# <div class="pic_fit_container" #}
+                                {# v-for="sub_prop in var_prop.properties" #}
+                                {# v-if="sub_prop.id == 704"> #}
+                                {# <img class="lazyload" #}
+                                {# :src="sub_prop.values.value" alt=""> #}
+                                {# </div> #}
+                                {# </a> #}
+                                {# </div> #}
+                                {# </div> #}
+                                {# {% endif %} #}
+                                {# {% endfor %} #}
+                                {# {% endif %} #}
+                                {# {% endfor %} #}
+                                {# </div> #}
+                                {# <div v-if="sub_prop.id == 697"> #}
+                                {# {% for prop in  item.documents[0].data.variationProperties %} #}
+                                {# {% if prop.id == 30 %} #}
+                                {# {% for sub_prop in prop.properties %} #}
+                                {# {% if sub_prop.id == 697 %} #}
+                                {# {% set  artid = sub_prop.values.value %} #}
+                                {# {% endif %} #}
+                                {# {% if sub_prop.id == 701 and sub_prop.values.value|length>0 %} #}
+                                {# #}{# {% set url = services.url.getVariationURL(artid,sub_prop.values.value).toAbsoluteUrl() %} #}
+                                {# #}{# {% set urlToUse =   url|split('_') %} #}
+                                {# <div> #}
+                                {# <div #}
+                                {# v-for="sub_prop in var_prop.properties" #}
+                                {# v-if="sub_prop.id == 701"> #}
+                                {# <a :href="'{{ urlToUse[0] }}'+'_'+'{{ artid }}'+'_'+sub_prop.values.value"> #}
+                                {# <div #}
+                                {# v-for="sub_prop in var_prop.properties" #}
+                                {# v-if="sub_prop.id == 705"> #}
+                                {# <img class="lazyload" #}
+                                {# :src="sub_prop.values.value" alt=""> #}
+                                {# </div> #}
+                                {# </a> #}
+                                {# </div> #}
+                                {# </div> #}
+                                {# {% endif %} #}
+                                {# {% endfor %} #}
+                                {# {% endif %} #}
+                                {# {% endfor %} #}
+                                {# </div> #}
+                                {# </div> #}
+                                {# </div> #}
                                 {# beratung anfodern #}
                                 <div class="collapse-hilfe-outer d-block bg-white mb-3 beratung_container mb-5 mx-3 mt-1">
                                     <div class="d-flex justify-content-between w-100 frage_produkt"
@@ -326,7 +326,7 @@
                                          aria-controls="collapse-frage_produkt">
                                         <div>
                                             <b><img src="https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/faq.svg"
-                                                    alt="">{{ trans("devMlt::Template.Cat4") }}</b>
+                                                    alt="">Beratung anfordern</b>
                                         </div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                              viewBox="0 0 24 24"
@@ -359,7 +359,7 @@
                         <div class="row">
                             <div class="col-12 col-md-12 text-center">
             					<span class="h4 d-block mb-5 font-weight-bold">
-                         {{ trans("devMlt::SingleItem.Cat5") }}
+                         Beschreibung
                       </span>
                                 <span v-html="currentVariation.texts.shortDescription"></span>
                             </div>
@@ -383,7 +383,7 @@
                     <div class="crossselling">
                         <div class="crossselling-section-header">
                             <h3>
-                                {{ trans("devMlt::Template.Cat6") }}
+                                Das könnte dir gefallen
                             </h3>
                         </div>
                         <carousel>
@@ -411,7 +411,7 @@
                     <div class="crossselling">
                         <div class="crossselling-section-header">
                             <h3>
-                                {{ trans("devMlt::Template.Cat7") }}
+                                Zuletzt angesehen
                             </h3>
                         </div>
                         <carousel>
