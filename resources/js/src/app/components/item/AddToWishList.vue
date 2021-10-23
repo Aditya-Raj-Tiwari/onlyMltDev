@@ -1,13 +1,13 @@
 <template>
-    <a class="btn btn-link btn-sm text-muted"
-        @click.prevent="switchState()"
-        data-toggle="tooltip"
-        data-placement="top"
-        ref="addToWishList"
-        title="">
-        <icon icon="heart" class="default-float" :class="{'text-appearance text-danger': isVariationInWishList}" :loading="isLoading"></icon>
-        {{ $translate("Ceres::Template.singleItemWishList") }}
-    </a>
+  <a class="btn btn-outline-primary btn-lg px-4 py-3"
+     @click.prevent="switchState()"
+     data-toggle="tooltip"
+     data-placement="top"
+     ref="addToWishList"
+     title="">
+    <icon icon="heart-o" class="default-float" :class="{'text-appearance text-danger': isVariationInWishList}"
+          :loading="isLoading"></icon>
+  </a>
 </template>
 
 <script>

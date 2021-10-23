@@ -17,7 +17,8 @@ import UserLoginHandler from "./app/components/customer/login/UserLoginHandler.v
 
 import CategoryItem from "./app/components/itemList/CategoryItem.vue";
 import ItemSearch from "./app/components/itemList/ItemSearch.vue";
-
+import DetailedProp from "./app/components/item/DetailedProp.vue";
+import ItemDescription from "./app/components/item/ItemDescription.vue";
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
 import Carousel from "./app/components/pageDesign/Carousel.vue";
 import Icon from "./app/components/pageDesign/Icon.vue";
@@ -97,8 +98,7 @@ import "./app/filters/propertyFileUrl.filter";
 import "./app/filters/translate.filter";
 import "./app/filters/truncate.filter";
 
-export function beforeCreate(context)
-{
+export function beforeCreate(context) {
     // =========================
     // COMPONENTS
     // =========================
@@ -167,6 +167,8 @@ export function beforeCreate(context)
     Vue.component("set-quantity-input", () => import("./app/components/item/SetQuantityInput.vue"));
     Vue.component("single-item", SingleItem);
     Vue.component("single-item-set-component", SingleItemSetComponent);
+    Vue.component("detailed-prop", DetailedProp);
+    Vue.component("item-description", ItemDescription);
     Vue.component("form-attachment", () => import("./app/components/form/FormAttachment.vue"));
     Vue.component("client-only", ClientOnly);
     Vue.component("background-img", () => import("./app/components/common/BackgroundImg.vue"));
@@ -179,8 +181,7 @@ export function beforeCreate(context)
     Vue.prototype.$ceres = App;
 }
 
-export function createApp(options, store)
-{
+export function createApp(options, store) {
     const defaultOptions = {
         store,
         ...options

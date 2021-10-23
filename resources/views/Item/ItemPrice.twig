@@ -5,9 +5,11 @@
 
 <script type="x/template" data-component="item-price">
     <div>
-        <div v-if="showCrossPrice && hasCrossPrice" class="badge badge-danger mb-3 h5 px-2 py-1" style="background-color: rgb(255, 86, 80); font-size: 1em">-{{ calc4|number_format(0) }}%</div>
+        <div v-if="showCrossPrice && hasCrossPrice" class="badge badge-danger mb-3 h5 px-2 py-1"
+             style="background-color: rgb(255, 86, 80); font-size: 1em">-{{ calc4|number_format(0) }}%
+        </div>
         <div class="d-flex price" :class="{ 'has-crossprice': hasCrossPrice }">
-            <div class="price price-gross-net d-flex mb-4" >
+            <div class="price price-gross-net d-flex mb-4">
                 <template v-if="showDynamicPrice">
                     ${ $translate("Ceres::Template.dynamicVariationPrice",
                     {
@@ -21,7 +23,8 @@
                     <div class="d-flex">
                         <span class="h1 d-block w-100">${ variationTotalPrice | currency }</span>
                         <span v-if="showCrossPrice && hasCrossPrice" class="h1 d-block w-100">${ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }</span>
-                        <span class="vat text-muted w-100 pl-2 py-1 font-weight-normal text-nowrap" style="line-height: 1.5em"> {{ trans("devMlt::Template.Cat5") }}</span>
+                        <span class="vat text-muted w-100 pl-2 py-1 font-weight-normal text-nowrap"
+                              style="line-height: 1.5em"> {{ trans("devMlt::Template.Cat5") }}</span>
                     </div>
                 </template>
             </div>

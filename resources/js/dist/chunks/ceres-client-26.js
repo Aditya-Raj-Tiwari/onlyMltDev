@@ -314,7 +314,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              return _vm.validatePassword($event)
+              return _vm.validatePassword.apply(null, arguments)
             }
           }
         },

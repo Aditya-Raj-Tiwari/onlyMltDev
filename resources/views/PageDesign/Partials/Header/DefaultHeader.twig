@@ -95,47 +95,47 @@
                                 </div>
                             {% endif %}
 
-                            <div id="countrySettings" class="cmp cmp-country-settings collapse">
-                                <div class="container-max">
-                                    <div class="row py-3">
-                                        <div class="col-12 col-lg-6">
+{#                            <div id="countrySettings" class="cmp cmp-country-settings collapse">#}
+{#                                <div class="container-max">#}
+{#                                    <div class="row py-3">#}
+{#                                        <div class="col-12 col-lg-6">#}
 
-                                            <div class="language-settings">
-                                                <div class="list-title">
-                                                    <strong>{{ trans("Ceres::Template.headerSelectLanguage") }}</strong>
-                                                    <hr>
-                                                </div>
+{#                                            <div class="language-settings">#}
+{#                                                <div class="list-title">#}
+{#                                                    <strong>{{ trans("Ceres::Template.headerSelectLanguage") }}</strong>#}
+{#                                                    <hr>#}
+{#                                                </div>#}
 
-                                                {% set languageList = services.webstoreConfigurationRepository.getActiveLanguageList() %}
-                                                {% set languageUrls = services.url.getLanguageURLs() %}
-                                                <ul class="row">
-                                                    {% for language in languageList %}
-                                                        {% set languageISO = services.localizationRepository.getLanguageCode(language) %}
-                                                        <li class="col-6 col-sm-4 px-0{% if lang == language %} active{% endif %}">
-                                                            <a class="nav-link"
-                                                               href="{% if languageUrls[languageISO] is defined %}{{ languageUrls[languageISO] ~ queryString() }}{% elseif language != defaultLanguage %}/{{ language }}{{ urls.trailingSlashSuffix }}{% else %}/{% endif %}"
-                                                               data-update-url>
-                                                                <i class="flag-icon flag-icon-{{ language }}"></i>
-                                                                {{ trans("Ceres::Template.header" ~ language | capitalize) }}
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-lg-6">
-                                            <div class="shipping-settings">
-                                                <div class="list-title">
-                                                    <strong>{{ trans("Ceres::Template.headerSelectShippingCountry") }}</strong>
-                                                    <hr>
-                                                </div>
-                                                <shipping-country-select
-                                                        :disable-input="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{#                                                {% set languageList = services.webstoreConfigurationRepository.getActiveLanguageList() %}#}
+{#                                                {% set languageUrls = services.url.getLanguageURLs() %}#}
+{#                                                <ul class="row">#}
+{#                                                    {% for language in languageList %}#}
+{#                                                        {% set languageISO = services.localizationRepository.getLanguageCode(language) %}#}
+{#                                                        <li class="col-6 col-sm-4 px-0{% if lang == language %} active{% endif %}">#}
+{#                                                            <a class="nav-link"#}
+{#                                                               href="{% if languageUrls[languageISO] is defined %}{{ languageUrls[languageISO] ~ queryString() }}{% elseif language != defaultLanguage %}/{{ language }}{{ urls.trailingSlashSuffix }}{% else %}/{% endif %}"#}
+{#                                                               data-update-url>#}
+{#                                                                <i class="flag-icon flag-icon-{{ language }}"></i>#}
+{#                                                                {{ trans("Ceres::Template.header" ~ language | capitalize) }}#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    {% endfor %}#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div class="col-12 col-lg-6">#}
+{#                                            <div class="shipping-settings">#}
+{#                                                <div class="list-title">#}
+{#                                                    <strong>{{ trans("Ceres::Template.headerSelectShippingCountry") }}</strong>#}
+{#                                                    <hr>#}
+{#                                                </div>#}
+{#                                                <shipping-country-select#}
+{#                                                        :disable-input="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
                         </div>
                     </div>
                 </div>

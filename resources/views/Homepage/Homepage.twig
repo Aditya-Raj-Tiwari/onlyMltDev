@@ -508,294 +508,294 @@
     </div>
 
     {# flash sale #}
-    {% if flash1itemid|length > 1 %}
-        {% set item1config = services.item.getVariation(flash1itemid) %}
-        {% set calc1 = item1config.documents[0].data.prices.default.price.value * 100 %}
-        {% set calc2 = item1config.documents[0].data.prices.rrp.data.price %}
-        {% set calc3 = calc1 / calc2 %}
-        {% set calc4 = 100 - calc3 %}
-        {% if item1config|length > 1 %}
-            <div id="beliebte_teppich" class="row mt-4 pb-5 elem">
-                <div class="container-max">
-                    <div class="col-12 mt-1">
-                        <span class="h3 font-weight-bold flash_deal">{{ trans("devMlt::Template.FlashSale") }}</span>
-                        {% if leftDays > 0 %}
+{#    {% if flash1itemid|length > 1 %}#}
+{#        {% set item1config = services.item.getVariation(flash1itemid) %}#}
+{#        {% set calc1 = item1config.documents[0].data.prices.default.price.value * 100 %}#}
+{#        {% set calc2 = item1config.documents[0].data.prices.rrp.data.price %}#}
+{#        {% set calc3 = calc1 / calc2 %}#}
+{#        {% set calc4 = 100 - calc3 %}#}
+{#        {% if item1config|length > 1 %}#}
+{#            <div id="beliebte_teppich" class="row mt-4 pb-5 elem">#}
+{#                <div class="container-max">#}
+{#                    <div class="col-12 mt-1">#}
+{#                        <span class="h3 font-weight-bold flash_deal">{{ trans("devMlt::Template.FlashSale") }}</span>#}
+{#                        {% if leftDays > 0 %}#}
 
-                            <div id="flash_sale" style="background: {{ cdbg }}; color: {{ cdtxtcolor }}">
-                                <div class="flash_sale_div">
-                                    <div class="text-white mr-1">
-                                        {{ trans("devMlt::Template.FlashSaleEnds") }}
-                                    </div>
-                                    <div id="tb1-days">00</div>
-                                    <span>:</span>
-                                    <div id="tb1-hours">00</div>
-                                    <span>:</span>
-                                    <div id="tb1-minutes">00</div>
-                                    <span>:</span>
-                                    <div id="tb1-seconds">00</div>
-                                </div>
-                            </div>
-                            <script2>
-                                var start_date1 = new Date("{{ flash1itemtime|date("Y-m-d") }}T00:00:00+02:00"),
-                                countDown2;
-                                var today = new Date();
-                                var Difference_In_Time = start_date1.getTime() - today.getTime();
-                                var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-                                if (Difference_In_Days > 0) {
-                                $('#flash_sale').show();
-                                $('#beliebte_teppich').show();
-                                }
-                                (function ($) {
-                                $(document).ready(function () {
-                                waitForElementToDisplay1_2('#tb1-days', 40, 200, startCountDown_1);
-                                });
-                                })(jQuery);
+{#                            <div id="flash_sale" style="background: {{ cdbg }}; color: {{ cdtxtcolor }}">#}
+{#                                <div class="flash_sale_div">#}
+{#                                    <div class="text-white mr-1">#}
+{#                                        {{ trans("devMlt::Template.FlashSaleEnds") }}#}
+{#                                    </div>#}
+{#                                    <div id="tb1-days">00</div>#}
+{#                                    <span>:</span>#}
+{#                                    <div id="tb1-hours">00</div>#}
+{#                                    <span>:</span>#}
+{#                                    <div id="tb1-minutes">00</div>#}
+{#                                    <span>:</span>#}
+{#                                    <div id="tb1-seconds">00</div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <script2>#}
+{#                                var start_date1 = new Date("{{ flash1itemtime|date("Y-m-d") }}T00:00:00+02:00"),#}
+{#                                countDown2;#}
+{#                                var today = new Date();#}
+{#                                var Difference_In_Time = start_date1.getTime() - today.getTime();#}
+{#                                var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);#}
+{#                                if (Difference_In_Days > 0) {#}
+{#                                $('#flash_sale').show();#}
+{#                                $('#beliebte_teppich').show();#}
+{#                                }#}
+{#                                (function ($) {#}
+{#                                $(document).ready(function () {#}
+{#                                waitForElementToDisplay1_2('#tb1-days', 40, 200, startCountDown_1);#}
+{#                                });#}
+{#                                })(jQuery);#}
 
-                                function waitForElementToDisplay1_2(selector, time, tries, callFunc) {
-                                if (document.querySelector(selector) !== null) {
-                                callFunc();
-                                } else {
-                                if (tries >= 1) {
-                                setTimeout(function () {
-                                waitForElementToDisplay1_2(selector, time, tries - 1, callFunc);
-                                }, time);
-                                } else {
-                                return;
-                                }
-                                }
-                                }
+{#                                function waitForElementToDisplay1_2(selector, time, tries, callFunc) {#}
+{#                                if (document.querySelector(selector) !== null) {#}
+{#                                callFunc();#}
+{#                                } else {#}
+{#                                if (tries >= 1) {#}
+{#                                setTimeout(function () {#}
+{#                                waitForElementToDisplay1_2(selector, time, tries - 1, callFunc);#}
+{#                                }, time);#}
+{#                                } else {#}
+{#                                return;#}
+{#                                }#}
+{#                                }#}
+{#                                }#}
 
-                                function startCountDown_1() {
-                                countDown_1 = setInterval(function () {
-                                countDownTimer_1((start_date1 - new Date()) / 1000);
-                                }, 500);
-                                }
+{#                                function startCountDown_1() {#}
+{#                                countDown_1 = setInterval(function () {#}
+{#                                countDownTimer_1((start_date1 - new Date()) / 1000);#}
+{#                                }, 500);#}
+{#                                }#}
 
-                                var last_day,
-                                last_hour,
-                                last_minute,
-                                last_second;
+{#                                var last_day,#}
+{#                                last_hour,#}
+{#                                last_minute,#}
+{#                                last_second;#}
 
-                                function countDownTimer_1(seconds) {
-                                var rem_days = Math.floor((seconds / 86400) % 60),
-                                days = (rem_days * 86400),
-                                rem_hours = Math.floor(((seconds - days) / 3600) % 60),
-                                hours = (rem_days * 86400) + (rem_hours * 3600),
-                                rem_minutes = Math.floor((seconds - hours) / 60),
-                                rem_seconds = Math.floor(seconds % 60);
-                                $('#tb1-days').text(pad(rem_days));
-                                $('#tb1-hours').text(pad(rem_hours));
-                                $('#tb1-minutes').text(pad(rem_minutes));
-                                $('#tb1-seconds').text(pad(rem_seconds));
-                                countDownSet_1(pad(rem_days), pad(rem_hours), pad(rem_minutes), pad(rem_seconds));
-                                if (seconds <= 0) {
-                                clearInterval(countDown_1);
-                                $('#flash_sale>div').html('');
-                                }
-                                }
+{#                                function countDownTimer_1(seconds) {#}
+{#                                var rem_days = Math.floor((seconds / 86400) % 60),#}
+{#                                days = (rem_days * 86400),#}
+{#                                rem_hours = Math.floor(((seconds - days) / 3600) % 60),#}
+{#                                hours = (rem_days * 86400) + (rem_hours * 3600),#}
+{#                                rem_minutes = Math.floor((seconds - hours) / 60),#}
+{#                                rem_seconds = Math.floor(seconds % 60);#}
+{#                                $('#tb1-days').text(pad(rem_days));#}
+{#                                $('#tb1-hours').text(pad(rem_hours));#}
+{#                                $('#tb1-minutes').text(pad(rem_minutes));#}
+{#                                $('#tb1-seconds').text(pad(rem_seconds));#}
+{#                                countDownSet_1(pad(rem_days), pad(rem_hours), pad(rem_minutes), pad(rem_seconds));#}
+{#                                if (seconds <= 0) {#}
+{#                                clearInterval(countDown_1);#}
+{#                                $('#flash_sale>div').html('');#}
+{#                                }#}
+{#                                }#}
 
-                                function countDownSet_1(days, hours, minutes, seconds) {
-                                if (last_second != seconds) {
-                                $('#tb1-seconds').addClass('cd-pop');
-                                last_second = seconds;
-                                } else {
-                                $('#tb1-seconds').removeClass('cd-pop');
-                                }
-                                if (last_minute != minutes) {
-                                $('#tb1-minutes').addClass('cd-pop');
-                                last_minute = minutes;
-                                } else {
-                                $('#tb1-minutes').removeClass('cd-pop');
-                                }
-                                if (last_hour != hours) {
-                                $('#tb1-hours').addClass('cd-pop');
-                                last_hour = hours;
-                                } else {
-                                $('#tb1-hours').removeClass('cd-pop');
-                                }
-                                if (last_day != days) {
-                                $('#tb1-days').addClass('cd-pop');
-                                last_day = days;
-                                } else {
-                                $('#tb1-days').removeClass('cd-pop');
-                                }
-                                }
+{#                                function countDownSet_1(days, hours, minutes, seconds) {#}
+{#                                if (last_second != seconds) {#}
+{#                                $('#tb1-seconds').addClass('cd-pop');#}
+{#                                last_second = seconds;#}
+{#                                } else {#}
+{#                                $('#tb1-seconds').removeClass('cd-pop');#}
+{#                                }#}
+{#                                if (last_minute != minutes) {#}
+{#                                $('#tb1-minutes').addClass('cd-pop');#}
+{#                                last_minute = minutes;#}
+{#                                } else {#}
+{#                                $('#tb1-minutes').removeClass('cd-pop');#}
+{#                                }#}
+{#                                if (last_hour != hours) {#}
+{#                                $('#tb1-hours').addClass('cd-pop');#}
+{#                                last_hour = hours;#}
+{#                                } else {#}
+{#                                $('#tb1-hours').removeClass('cd-pop');#}
+{#                                }#}
+{#                                if (last_day != days) {#}
+{#                                $('#tb1-days').addClass('cd-pop');#}
+{#                                last_day = days;#}
+{#                                } else {#}
+{#                                $('#tb1-days').removeClass('cd-pop');#}
+{#                                }#}
+{#                                }#}
 
-                                function pad(str) {
-                                str = str.toString();
-                                return str.length < 2 ? pad("0" + str, 2) : str;
-                                }
-                            </script2>
-                        {% endif %}
-                    </div>
+{#                                function pad(str) {#}
+{#                                str = str.toString();#}
+{#                                return str.length < 2 ? pad("0" + str, 2) : str;#}
+{#                                }#}
+{#                            </script2>#}
+{#                        {% endif %}#}
+{#                    </div>#}
 
-                    <div class="row">
-                        <div class=" col-12">
-                            <div class="beliebte-teppich-carousel-cell row">
+{#                    <div class="row">#}
+{#                        <div class=" col-12">#}
+{#                            <div class="beliebte-teppich-carousel-cell row">#}
 
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="bel_teppich_1 mt-4 pb-4 elem row align-items-center">
-                                        {% for item_data in item1config.documents %}
-                                            {% set url1 = services.url.getVariationURL(item_data.data.item.id , item_data.data.variation.id).toAbsoluteUrl() %}
-                                            <div class="col-12 pb-2">
-                                                <a href="{{ url1 }}">
-                                                    <span class="h3 font-weight-bold">{{ item_data.data.texts.name3 }}</span>
-                                                </a>
-                                            </div>
-                                            <div class="row pb-3 d-flex">
-                                                <div class="col-lg-4 col-md-5 col-sm-12">
-                                                    <a class="img_container"
-                                                       href="{{ url1 }}">
-                                                        {% if item1config.documents[0].data.prices.rrp.data.price|length > 0 %}
-                                                            <div class="badge badge-danger mb-3 h5 px-2 py-1"
-                                                                 style="background-color: rgb(255, 86, 80); font-size: 1em">
-                                                                -{{ calc4|number_format(0) }}%
-                                                            </div>
-                                                        {% endif %}
-                                                        <img class="img-fluid lazyload lazyload"
-                                                             data-src="{{ item_data.data.images.variation[0].url }}"
-                                                             alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-lg-8 col-md-7 col-sm-12 pt-3">
-                                                    <ul class="headings pb-3">
-                                                        {% for article_prop in item_data.data.variationProperties %}
-                                                            {% if article_prop.id == 30 %}
-                                                                {% for heading in article_prop.properties %}
-                                                                    {% if heading.id == 660 %}
-                                                                        <li class="li">{{ heading.values.value }}</li>
-                                                                    {% endif %}
-                                                                    {% if heading.id == 661 %}
-                                                                        <li class="li">{{ heading.values.value }}</li>
-                                                                    {% endif %}
-                                                                    {% if heading.id == 662 %}
-                                                                        <li class="li">{{ heading.values.value }}</li>
-                                                                    {% endif %}
-                                                                    {% if heading.id == 663 %}
-                                                                        <li class="li">{{ heading.values.value }}</li>
-                                                                    {% endif %}
-                                                                    {% if heading.id == 664 %}
-                                                                        <li class="li">{{ heading.values.value }}</li>
-                                                                    {% endif %}
+{#                                <div class="col-sm-12 col-md-6">#}
+{#                                    <div class="bel_teppich_1 mt-4 pb-4 elem row align-items-center">#}
+{#                                        {% for item_data in item1config.documents %}#}
+{#                                            {% set url1 = services.url.getVariationURL(item_data.data.item.id , item_data.data.variation.id).toAbsoluteUrl() %}#}
+{#                                            <div class="col-12 pb-2">#}
+{#                                                <a href="{{ url1 }}">#}
+{#                                                    <span class="h3 font-weight-bold">{{ item_data.data.texts.name3 }}</span>#}
+{#                                                </a>#}
+{#                                            </div>#}
+{#                                            <div class="row pb-3 d-flex">#}
+{#                                                <div class="col-lg-4 col-md-5 col-sm-12">#}
+{#                                                    <a class="img_container"#}
+{#                                                       href="{{ url1 }}">#}
+{#                                                        {% if item1config.documents[0].data.prices.rrp.data.price|length > 0 %}#}
+{#                                                            <div class="badge badge-danger mb-3 h5 px-2 py-1"#}
+{#                                                                 style="background-color: rgb(255, 86, 80); font-size: 1em">#}
+{#                                                                -{{ calc4|number_format(0) }}%#}
+{#                                                            </div>#}
+{#                                                        {% endif %}#}
+{#                                                        <img class="img-fluid lazyload lazyload"#}
+{#                                                             data-src="{{ item_data.data.images.variation[0].url }}"#}
+{#                                                             alt="">#}
+{#                                                    </a>#}
+{#                                                </div>#}
+{#                                                <div class="col-lg-8 col-md-7 col-sm-12 pt-3">#}
+{#                                                    <ul class="headings pb-3">#}
+{#                                                        {% for article_prop in item_data.data.variationProperties %}#}
+{#                                                            {% if article_prop.id == 30 %}#}
+{#                                                                {% for heading in article_prop.properties %}#}
+{#                                                                    {% if heading.id == 660 %}#}
+{#                                                                        <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                    {% endif %}#}
+{#                                                                    {% if heading.id == 661 %}#}
+{#                                                                        <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                    {% endif %}#}
+{#                                                                    {% if heading.id == 662 %}#}
+{#                                                                        <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                    {% endif %}#}
+{#                                                                    {% if heading.id == 663 %}#}
+{#                                                                        <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                    {% endif %}#}
+{#                                                                    {% if heading.id == 664 %}#}
+{#                                                                        <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                    {% endif %}#}
 
-                                                                {% endfor %}
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </ul>
-                                                    <div class="price_details">
-                                                        <div class="item_price">
-                                                            <p class="h4"><span
-                                                                        class="price_line_through">
-                                                                    {{ item_data.data.prices.rrp.price.formatted }}
-                                                                    </span>
-                                                            </p>
-                                                            <span class="h3 font-weight-bold">
-                                                     <span class="text-muted h5 red_color">{{ trans("devMlt::Template.Cat4") }}
-                                                     </span>
-                                                        {{ item_data.data.prices.default.price.formatted }}
-                                                         <span class="text-muted h5 ">{{ trans("devMlt::Template.Cat5") }}
-                                                         </span>
-                                                     </span>
-                                                        </div>
-                                                    </div>
-                                                    <a href="{{ url1 }}"
-                                                       class="btn btn-light mt-3 w-100">
-                                                        <span class="font-weight-bold">{{ trans("devMlt::Template.Cat6") }}</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
+{#                                                                {% endfor %}#}
+{#                                                            {% endif %}#}
+{#                                                        {% endfor %}#}
+{#                                                    </ul>#}
+{#                                                    <div class="price_details">#}
+{#                                                        <div class="item_price">#}
+{#                                                            <p class="h4"><span#}
+{#                                                                        class="price_line_through">#}
+{#                                                                    {{ item_data.data.prices.rrp.price.formatted }}#}
+{#                                                                    </span>#}
+{#                                                            </p>#}
+{#                                                            <span class="h3 font-weight-bold">#}
+{#                                                     <span class="text-muted h5 red_color">{{ trans("devMlt::Template.Cat4") }}#}
+{#                                                     </span>#}
+{#                                                        {{ item_data.data.prices.default.price.formatted }}#}
+{#                                                         <span class="text-muted h5 ">{{ trans("devMlt::Template.Cat5") }}#}
+{#                                                         </span>#}
+{#                                                     </span>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <a href="{{ url1 }}"#}
+{#                                                       class="btn btn-light mt-3 w-100">#}
+{#                                                        <span class="font-weight-bold">{{ trans("devMlt::Template.Cat6") }}</span>#}
+{#                                                    </a>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        {% endfor %}#}
+{#                                    </div>#}
+{#                                </div>#}
 
-                                {% if flash2itemid|length > 1 %}
-                                    {% set item2config = services.item.getVariation(flash2itemid) %}
-                                    {% set calc1 = item2config.documents[0].data.prices.default.price.value * 100 %}
-                                    {% set calc2 = item2config.documents[0].data.prices.rrp.data.price %}
-                                    {% set calc3 = calc1 / calc2 %}
-                                    {% set calc4 = 100 - calc3 %}
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="bel_teppich_1  mt-4 pb-4 elem row align-items-center">
-                                            {% for item_data1 in item2config.documents %}
-                                                {% set url2 = services.url.getVariationURL(item_data1.data.item.id , item_data1.data.variation.id).toAbsoluteUrl() %}
-                                                <div class="col-12 pb-2">
-                                                    <a href="{{ url2 }}">
-                                                        <span class="h3 font-weight-bold">{{ item_data1.data.texts.name3 }}</span>
-                                                    </a>
-                                                </div>
-                                                <div class="row pb-3 d-flex">
-                                                    <div class="col-lg-4 col-md-5 col-sm-12">
-                                                        <a class="img_container"
-                                                           href="{{ url2 }}">
-                                                            {% if item2config.documents[0].data.prices.rrp.data.price|length > 0 %}
-                                                                <div class="badge badge-danger mb-3 h5 px-2 py-1"
-                                                                     style="background-color: rgb(255, 86, 80); font-size: 1em">
-                                                                    -{{ calc4|number_format(0) }}%
-                                                                </div>
-                                                            {% endif %}
-                                                            <img class="img-fluid lazyload lazyload"
-                                                                 data-src="{{ item_data1.data.images.variation[0].url }}"
-                                                                 alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-7 col-sm-12 pt-3">
-                                                        <ul class="headings pb-3">
-                                                            {% for article_prop in item_data1.data.variationProperties %}
-                                                                {% if article_prop.id == 30 %}
-                                                                    {% for heading in article_prop.properties %}
-                                                                        {% if heading.id == 660 %}
-                                                                            <li class="li">{{ heading.values.value }}</li>
-                                                                        {% endif %}
-                                                                        {% if heading.id == 661 %}
-                                                                            <li class="li">{{ heading.values.value }}</li>
-                                                                        {% endif %}
-                                                                        {% if heading.id == 662 %}
-                                                                            <li class="li">{{ heading.values.value }}</li>
-                                                                        {% endif %}
-                                                                        {% if heading.id == 663 %}
-                                                                            <li class="li">{{ heading.values.value }}</li>
-                                                                        {% endif %}
-                                                                        {% if heading.id == 664 %}
-                                                                            <li class="li">{{ heading.values.value }}</li>
-                                                                        {% endif %}
-                                                                    {% endfor %}
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        </ul>
-                                                        <div class="price_details">
-                                                            <div class="item_price">
-                                                                <p class="h4"><span
-                                                                            class="price_line_through">
-                                                                    {{ item_data1.data.prices.rrp.price.formatted }}
-                                                                    </span>
-                                                                </p>
-                                                                <span class="h3 font-weight-bold">
-                                                     <span class="text-muted h5 red_color">{{ trans("devMlt::Template.Cat4") }}
-                                                     </span>
-                                                        {{ item_data1.data.prices.default.price.formatted }}
-                                                         <span class="text-muted h5 ">{{ trans("devMlt::Template.Cat5") }}
-                                                         </span>
-                                                     </span>
-                                                            </div>
-                                                        </div>
-                                                        <a href="{{ url2 }}"
-                                                           class="btn btn-light mt-3 w-100">
-                                                            <span class="font-weight-bold">{{ trans("devMlt::Template.Cat6") }}</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                {% endif %}
+{#                                {% if flash2itemid|length > 1 %}#}
+{#                                    {% set item2config = services.item.getVariation(flash2itemid) %}#}
+{#                                    {% set calc1 = item2config.documents[0].data.prices.default.price.value * 100 %}#}
+{#                                    {% set calc2 = item2config.documents[0].data.prices.rrp.data.price %}#}
+{#                                    {% set calc3 = calc1 / calc2 %}#}
+{#                                    {% set calc4 = 100 - calc3 %}#}
+{#                                    <div class="col-sm-12 col-md-6">#}
+{#                                        <div class="bel_teppich_1  mt-4 pb-4 elem row align-items-center">#}
+{#                                            {% for item_data1 in item2config.documents %}#}
+{#                                                {% set url2 = services.url.getVariationURL(item_data1.data.item.id , item_data1.data.variation.id).toAbsoluteUrl() %}#}
+{#                                                <div class="col-12 pb-2">#}
+{#                                                    <a href="{{ url2 }}">#}
+{#                                                        <span class="h3 font-weight-bold">{{ item_data1.data.texts.name3 }}</span>#}
+{#                                                    </a>#}
+{#                                                </div>#}
+{#                                                <div class="row pb-3 d-flex">#}
+{#                                                    <div class="col-lg-4 col-md-5 col-sm-12">#}
+{#                                                        <a class="img_container"#}
+{#                                                           href="{{ url2 }}">#}
+{#                                                            {% if item2config.documents[0].data.prices.rrp.data.price|length > 0 %}#}
+{#                                                                <div class="badge badge-danger mb-3 h5 px-2 py-1"#}
+{#                                                                     style="background-color: rgb(255, 86, 80); font-size: 1em">#}
+{#                                                                    -{{ calc4|number_format(0) }}%#}
+{#                                                                </div>#}
+{#                                                            {% endif %}#}
+{#                                                            <img class="img-fluid lazyload lazyload"#}
+{#                                                                 data-src="{{ item_data1.data.images.variation[0].url }}"#}
+{#                                                                 alt="">#}
+{#                                                        </a>#}
+{#                                                    </div>#}
+{#                                                    <div class="col-lg-8 col-md-7 col-sm-12 pt-3">#}
+{#                                                        <ul class="headings pb-3">#}
+{#                                                            {% for article_prop in item_data1.data.variationProperties %}#}
+{#                                                                {% if article_prop.id == 30 %}#}
+{#                                                                    {% for heading in article_prop.properties %}#}
+{#                                                                        {% if heading.id == 660 %}#}
+{#                                                                            <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                        {% endif %}#}
+{#                                                                        {% if heading.id == 661 %}#}
+{#                                                                            <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                        {% endif %}#}
+{#                                                                        {% if heading.id == 662 %}#}
+{#                                                                            <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                        {% endif %}#}
+{#                                                                        {% if heading.id == 663 %}#}
+{#                                                                            <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                        {% endif %}#}
+{#                                                                        {% if heading.id == 664 %}#}
+{#                                                                            <li class="li">{{ heading.values.value }}</li>#}
+{#                                                                        {% endif %}#}
+{#                                                                    {% endfor %}#}
+{#                                                                {% endif %}#}
+{#                                                            {% endfor %}#}
+{#                                                        </ul>#}
+{#                                                        <div class="price_details">#}
+{#                                                            <div class="item_price">#}
+{#                                                                <p class="h4"><span#}
+{#                                                                            class="price_line_through">#}
+{#                                                                    {{ item_data1.data.prices.rrp.price.formatted }}#}
+{#                                                                    </span>#}
+{#                                                                </p>#}
+{#                                                                <span class="h3 font-weight-bold">#}
+{#                                                     <span class="text-muted h5 red_color">{{ trans("devMlt::Template.Cat4") }}#}
+{#                                                     </span>#}
+{#                                                        {{ item_data1.data.prices.default.price.formatted }}#}
+{#                                                         <span class="text-muted h5 ">{{ trans("devMlt::Template.Cat5") }}#}
+{#                                                         </span>#}
+{#                                                     </span>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                        <a href="{{ url2 }}"#}
+{#                                                           class="btn btn-light mt-3 w-100">#}
+{#                                                            <span class="font-weight-bold">{{ trans("devMlt::Template.Cat6") }}</span>#}
+{#                                                        </a>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            {% endfor %}#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-    {% endif %}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#    {% endif %}#}
 
 
     {% if recomendationHeading1|length > 0 %}
@@ -855,88 +855,88 @@
 
 
 {#     recomendation category #}
-    {% if recomendationHeadingOne|length > 0 %}
-        {% set url_category = services.category.getURLById(recomendationLink) %}
-        <div class="wrap_container" style="background: {{ wrap_color }}">
-            <div class="container-max">
-                {% if recomendationButtonLink|length>0 %}
-                    <div class="padding_selector row pt-5" style="color: {{ text_color }}">
-                        <div class="col-sm-12 col-lg-6 pr-4">
-                            <h2 class="header_text_recommendation mt-4" style="color: {{ text_header_color }}">
-                                {{ recomendationHeadingOne }}
-                            </h2>
-                            <br>
-                            <h2 class="header_text_recommendation" style="color: {{ text_header_color }}">
-                                {{ recomendationHeadingTwo }}
-                            </h2>
-                            <h3 class="h4 mt-4 pt-4" style="color: {{ text_two_color }}">
-                                {{ recomendationText }}
-                            </h3>
-                            <a href="{{ recomendationButtonLink }}" class="btn my-4 py-3"
-                               style="background: {{ button_rec_color }}">
-                                <span style="color: {{ button_text_rec_color }}">JETZT ENTDECKEN</span>
-                            </a>
-                        </div>
-                        <div class="col-sm-12 col-lg-6">
-                            <a href="{{ recomendationButtonLink }}">
-                                <img data-src="{{ recomendationImageLink }}" alt="" class="img-fluid lazyload">
-                            </a>
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="padding_selector row pt-5" style="color: {{ text_color }}">
-                        <div class="col-sm-12 col-lg-6 pr-4">
-                            <h2 class="header_text_recommendation mt-4" style="color: {{ text_header_color }}">
-                                {{ recomendationHeadingOne }}
-                            </h2>
-                            <br>
-                            <h2 class="header_text_recommendation" style="color: {{ text_header_color }}">
-                                {{ recomendationHeadingTwo }}
-                            </h2>
-                            <h3 class="h4 mt-4 pt-4" style="color: {{ text_two_color }}">
-                                {{ recomendationText }}
-                            </h3>
-                            <a href="{{ url_category }}" class="btn my-4 py-3"
-                               style="background: {{ button_rec_color }}">
-                                <span style="color: {{ button_text_rec_color }}">JETZT ENTDECKEN</span>
-                            </a>
-                        </div>
-                        <div class="col-sm-12 col-lg-6">
-                            <a href="{{ url_category }}">
-                                <img data-src="{{ recomendationImageLink }}" alt="" class="img-fluid lazyload">
-                            </a>
-                        </div>
-                    </div>
-                {% endif %}
+{#    {% if recomendationHeadingOne|length > 0 %}#}
+{#        {% set url_category = services.category.getURLById(recomendationLink) %}#}
+{#        <div class="wrap_container" style="background: {{ wrap_color }}">#}
+{#            <div class="container-max">#}
+{#                {% if recomendationButtonLink|length>0 %}#}
+{#                    <div class="padding_selector row pt-5" style="color: {{ text_color }}">#}
+{#                        <div class="col-sm-12 col-lg-6 pr-4">#}
+{#                            <h2 class="header_text_recommendation mt-4" style="color: {{ text_header_color }}">#}
+{#                                {{ recomendationHeadingOne }}#}
+{#                            </h2>#}
+{#                            <br>#}
+{#                            <h2 class="header_text_recommendation" style="color: {{ text_header_color }}">#}
+{#                                {{ recomendationHeadingTwo }}#}
+{#                            </h2>#}
+{#                            <h3 class="h4 mt-4 pt-4" style="color: {{ text_two_color }}">#}
+{#                                {{ recomendationText }}#}
+{#                            </h3>#}
+{#                            <a href="{{ recomendationButtonLink }}" class="btn my-4 py-3"#}
+{#                               style="background: {{ button_rec_color }}">#}
+{#                                <span style="color: {{ button_text_rec_color }}">JETZT ENTDECKEN</span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div class="col-sm-12 col-lg-6">#}
+{#                            <a href="{{ recomendationButtonLink }}">#}
+{#                                <img data-src="{{ recomendationImageLink }}" alt="" class="img-fluid lazyload">#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% else %}#}
+{#                    <div class="padding_selector row pt-5" style="color: {{ text_color }}">#}
+{#                        <div class="col-sm-12 col-lg-6 pr-4">#}
+{#                            <h2 class="header_text_recommendation mt-4" style="color: {{ text_header_color }}">#}
+{#                                {{ recomendationHeadingOne }}#}
+{#                            </h2>#}
+{#                            <br>#}
+{#                            <h2 class="header_text_recommendation" style="color: {{ text_header_color }}">#}
+{#                                {{ recomendationHeadingTwo }}#}
+{#                            </h2>#}
+{#                            <h3 class="h4 mt-4 pt-4" style="color: {{ text_two_color }}">#}
+{#                                {{ recomendationText }}#}
+{#                            </h3>#}
+{#                            <a href="{{ url_category }}" class="btn my-4 py-3"#}
+{#                               style="background: {{ button_rec_color }}">#}
+{#                                <span style="color: {{ button_text_rec_color }}">JETZT ENTDECKEN</span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div class="col-sm-12 col-lg-6">#}
+{#                            <a href="{{ url_category }}">#}
+{#                                <img data-src="{{ recomendationImageLink }}" alt="" class="img-fluid lazyload">#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endif %}#}
 
-            </div>
-        </div>
-        <div class="container-max mt-3 hide_first">
-            <div class="lazyload modal-cross-selling_random cross_selling_homepage">
-                <div class="container-max">
-                    {% set crossSellingItemsCollection2 = services.itemList.getItemList("category", recomendationLink ,null,12,null).documents %}
-                    {# {{ crossSellingItemsCollection2 | json_encode }} #}
-                    {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
-                    {% if crossSellingItemsCollection2 | length > 0 %}
-                        <div class="crossselling lazyload">
-                            <carousel>
-                                {% for item in crossSellingItemsCollection2 %}
-                                    {{ item | json_encode }}
-                                    <template slot="items">
-                                        <category-item
-                                                :item-data="{{ item.data | json_encode }}"
-                                                :decimal-count="{{ ceresConfig.item.storeSpecial }}"
-                                                :disable-carousel-on-mobile="true">
-                                        </category-item>
-                                    </template>
-                                {% endfor %}
-                            </carousel>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="container-max mt-3 hide_first">#}
+{#            <div class="lazyload modal-cross-selling_random cross_selling_homepage">#}
+{#                <div class="container-max">#}
+{#                    {% set crossSellingItemsCollection2 = services.itemList.getItemList("category", recomendationLink ,null,12,null).documents %}#}
+{#                    #}{# {{ crossSellingItemsCollection2 | json_encode }} #}
+{#                    {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}#}
+{#                    {% if crossSellingItemsCollection2 | length > 0 %}#}
+{#                        <div class="crossselling lazyload">#}
+{#                            <carousel>#}
+{#                                {% for item in crossSellingItemsCollection2 %}#}
+{#                                    {{ item | json_encode }}#}
+{#                                    <template slot="items">#}
+{#                                        <category-item#}
+{#                                                :item-data="{{ item.data | json_encode }}"#}
+{#                                                :decimal-count="{{ ceresConfig.item.storeSpecial }}"#}
+{#                                                :disable-carousel-on-mobile="true">#}
+{#                                        </category-item>#}
+{#                                    </template>#}
+{#                                {% endfor %}#}
+{#                            </carousel>#}
+{#                        </div>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    {% endif %}#}
 
 
 

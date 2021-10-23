@@ -35,31 +35,46 @@
                                    v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)"
                             >${
                                 value.name }
-                                {# <div class="price-variation">{% set itemid = item.documents[0].data.item.id %} #}
-                                {# {% for variation in services.item.getVariationIds(itemid) %} #}
-                                {# {% set itemData = services.item.getVariation(variation) %} #}
-                                {# <div #}
-                                {# v-if="{{ loop.index0 }} == index"> #}
-                                {# {% if itemData.documents[0].data.prices.rrp.price.formatted|length > 0 %} #}
-                                {# <span style="color: #FF5650"> #}
-                                {# {{ itemData.documents[0].data.prices.default.price.formatted }} #}
-                                {# </span> #}
-                                {# <span style="text-decoration: line-through;margin-left: 10px"> #}
-                                {# {{ itemData.documents[0].data.prices.rrp.price.formatted }} #}
-                                {# </span> #}
-                                {# {% else %} #}
-                                {# <span> #}
-                                {# {{ itemData.documents[0].data.prices.default.price.formatted }} #}
-                                {# </span> #}
-                                {# {% endif %} #}
-                                {# </div> #}
-
-                                {# {% endfor %} #}
-                                {# </div> #}
                             </label>
                         </div>
                     </div>
                 </div>
+                <div class="custom-dropdown" v-if="attribute.type === 'dropdown'">
+                    <label class="hide_if-follow" v-if="addPleaseSelectOption || !hasSelection">
+                        <div class="text-muted" v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip"
+                             data-placement="top" :title="attribute.name">
+                            Select
+                        </div>
+                    </label>
+                    <label class="hide_if-follow" v-else-if="currentSelection.attributes.length > 0">
+                        <div v-for="value in attribute.values"
+                        >
+                            <div v-for="attributes_in_current_variation in currentSelection.attributes"
+                                 v-if="value.attributeValueId === attributes_in_current_variation.attributeValueId"
+                            >
+                                {{value.name}}
+                            </div>
+                        </div>
+                    </label>
+                    <label class="hide_if" else>
+                        SAelect
+                    </label>
+                    <div class="custom-dropdown-list" ref="attributesContaner"
+                         v-if="attribute.type === 'dropdown' && attribute.values.length > 0">
+                        <div v-for="(value, index) in attribute.values" class="d-block w-100">
+                            <input type="radio" class="d-none" :id="value.attributeValueId"
+                                   :name="attribute.attributeId" :value="value.attributeValueId"
+                                   :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]"
+                                   @change="selectAttribute(attribute.attributeId, $event.target.value)">
+                            <label class="d-flex justify-content-between w-100" :for="value.attributeValueId"
+                                   v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId)"
+                            >
+                                {{value.name}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- /dropdown -->
 
                 <!-- for farbe of the variation -->

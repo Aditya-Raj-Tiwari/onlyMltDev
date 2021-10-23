@@ -192,7 +192,11 @@ var render = function() {
     _c(
       "div",
       { ref: "handle", staticClass: "popper-handle" },
-      [_vm._t("handle", [_vm._m(0)])],
+      [
+        _vm._t("handle", function() {
+          return [_vm._m(0)]
+        })
+      ],
       2
     ),
     _vm._v(" "),

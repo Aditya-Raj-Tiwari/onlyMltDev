@@ -49,15 +49,15 @@ class  devMltServiceProvider extends TemplateServiceProvider
         }, 0);
 
         // Override Category View
-        $dispatcher->listen('IO.tpl.category.item', function (TemplateContainer $container) {
-            $container->setTemplate('devMlt::Category.Item.CategoryItem');
-            return false;
-        }, 0);
+//         $dispatcher->listen('IO.tpl.category.item', function (TemplateContainer $container) {
+//             $container->setTemplate('devMlt::Category.Item.CategoryItem');
+//             return false;
+//         }, 0);
 
         // Override Single Item
-        $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
-            $container->addScriptTemplate('devMlt::Item.Components.SingleItem');
-        }, 0);
+//         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
+//             $container->addScriptTemplate('devMlt::Item.Components.SingleItem');
+//         }, 0);
 
         $dispatcher->listen('IO.tpl.wish-list', function (TemplateContainer $container)
         {
@@ -69,22 +69,22 @@ class  devMltServiceProvider extends TemplateServiceProvider
             $container->addScriptTemplate('devMlt::Category.Item.Partials.FilterAssets');
         }, 0);
 
-        $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
-            $container->addScriptTemplate('devMlt::ItemList.Components.CategoryItem');
-        }, 0);
+//         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
+//             $container->addScriptTemplate('devMlt::ItemList.Components.CategoryItem');
+//         }, 0);
 
 
-        $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
-            $container->addScriptTemplate('devMlt::Item.Components.ItemPrice');
-        }, 0);
+//         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
+//             $container->addScriptTemplate('devMlt::Item.Components.ItemPrice');
+//         }, 0);
 
         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
             $container->addScriptTemplate('devMlt::Item.Components.ItemAvailability');
         }, 0);
 
-        $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
-            $container->addScriptTemplate('devMlt::Item.Components.QuantityInput');
-        }, 0);
+//         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
+//             $container->addScriptTemplate('devMlt::Item.Components.QuantityInput');
+//         }, 0);
 
         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
             $container->addScriptTemplate('devMlt::PageDesign.Partials.Header.WishListCount');
@@ -98,13 +98,13 @@ class  devMltServiceProvider extends TemplateServiceProvider
             $container->addScriptTemplate('devMlt::ItemList.Components.ItemStoreSpecial');
         }, 0);
 
-        $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
-            $container->addScriptTemplate('devMlt::ItemList.Components.Filter.ItemFilterList');
-        }, 0);
-
-        $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
-            $container->addScriptTemplate('devMlt::ItemList.Components.Filter.ItemFilterPrice');
-        }, 0);
+//         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
+//             $container->addScriptTemplate('devMlt::ItemList.Components.Filter.ItemFilterList');
+//         }, 0);
+//
+//         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
+//             $container->addScriptTemplate('devMlt::ItemList.Components.Filter.ItemFilterPrice');
+//         }, 0);
 
         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
             $container->addScriptTemplate('devMlt::ItemList.Components.ItemSearch');

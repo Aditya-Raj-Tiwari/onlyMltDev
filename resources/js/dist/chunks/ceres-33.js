@@ -22,6 +22,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     paddingClasses: String,
@@ -63,13 +106,116 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.availability
-    ? _c("span", { class: _vm.classes, style: _vm.paddingStyles }, [
-        _c("span", [_vm._v("\n        " + _vm._s(_vm.name) + "\n    ")])
-      ])
-    : _vm._e()
+  return _c("div", { staticClass: "single-item-info-card my-4" }, [
+    _c("ul", { staticClass: "list-group list-group-flush" }, [
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("div", { staticClass: "row mb-1" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 mb-1" }, [
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _c("span", { staticClass: "font-weight-bold" }, [
+                _vm._v(_vm._s(_vm.name))
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
+      _vm._m(4)
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 mb-2" }, [
+      _c("img", {
+        attrs: {
+          src:
+            "https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/single-item-icons/truck.svg",
+          width: "22",
+          height: "22"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 mb-1" }, [
+      _c("div", { staticClass: "d-flex justify-content-between" }, [
+        _c("span", [_vm._v("Standard-Lieferung")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "font-weight-bold" }, [_vm._v(" kostenlos")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-group-item mb-1" }, [
+      _c("img", {
+        staticClass: "lazyload",
+        attrs: {
+          src:
+            "https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/single-item-icons/package.svg",
+          width: "22",
+          height: "22"
+        }
+      }),
+      _vm._v(" "),
+      _c("span", { staticClass: "ml-2" }, [_vm._v("Kostenloser Versand &")]),
+      _vm._v(" Rückversand\n    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-group-item mb-1" }, [
+      _c("img", {
+        staticClass: "lazyload",
+        attrs: {
+          src:
+            "https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/single-item-icons/backarrow.svg",
+          width: "22",
+          height: "22"
+        }
+      }),
+      _vm._v(" "),
+      _c("span", { staticClass: "ml-2" }, [_vm._v("31 Tage Rückgaberecht")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-group-item mb-1" }, [
+      _c("img", {
+        staticClass: "lazyload",
+        attrs: {
+          src:
+            "https://cdn02.plentymarkets.com/6wg68w8zahno/frontend/assets/img/single-item-icons/feather.svg",
+          width: "22",
+          height: "22"
+        }
+      }),
+      _vm._v(" "),
+      _c("span", { staticClass: "ml-2" }, [_vm._v("Direkt vom Hersteller")])
+    ])
+  }
+]
 render._withStripped = true
 
 
