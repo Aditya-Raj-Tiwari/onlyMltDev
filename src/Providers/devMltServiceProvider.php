@@ -98,13 +98,13 @@ class  devMltServiceProvider extends TemplateServiceProvider
             $container->addScriptTemplate('devMlt::ItemList.Components.ItemStoreSpecial');
         }, 0);
 
-//         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
-//             $container->addScriptTemplate('devMlt::ItemList.Components.Filter.ItemFilterList');
-//         }, 0);
+        $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
+            $container->addScriptTemplate('devMlt::ItemList.Components.Filter.ItemFilterList');
+        }, 0);
 //
-//         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
-//             $container->addScriptTemplate('devMlt::ItemList.Components.Filter.ItemFilterPrice');
-//         }, 0);
+        $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
+            $container->addScriptTemplate('devMlt::ItemList.Components.Filter.ItemFilterPrice');
+        }, 0);
 
         $dispatcher->listen("IO.Resources.Import", function (ResourceContainer $container) {
             $container->addScriptTemplate('devMlt::ItemList.Components.ItemSearch');
